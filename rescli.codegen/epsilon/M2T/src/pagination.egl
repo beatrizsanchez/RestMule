@@ -1,0 +1,49 @@
+package org.epsilonlabs.rescli.[%= name %].page;
+
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PAGE_INCREMENT;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PAGE_LABEL;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PAGE_MAX_VALUE;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PAGE_START_VALUE;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PER_ITERATION_LABEL;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PER_ITERATION_VALUE;
+
+import org.epsilonlabs.rescli.core.data.IDataSet;
+import org.epsilonlabs.rescli.core.page.AbstractPagination;
+import org.epsilonlabs.rescli.[%= name %].callback.[%= R.name %]Callback;
+import org.epsilonlabs.rescli.[%= name %].data.[%= R.name %]DataSet;
+import org.epsilonlabs.rescli.[%= name %].util.[%= R.name %]PropertiesUtil;
+
+import io.reactivex.annotations.NonNull;
+
+public class [%= R.name %]Pagination extends AbstractPagination{
+
+	private static [%= R.name %]Pagination instance;
+
+	public static [%= R.name %]Pagination get(){
+		if (instance == null){
+			instance = new [%= R.name %]Pagination();
+		}
+		return instance;
+	}
+
+	private [%= R.name %]Pagination() {
+		super(	[%= R.name %]PropertiesUtil.get(PAGE_LABEL),
+				[%= R.name %]PropertiesUtil.get(PER_ITERATION_LABEL), 
+				Integer.valueOf([%= R.name %]PropertiesUtil.get(PER_ITERATION_VALUE)),
+				Integer.valueOf([%= R.name %]PropertiesUtil.get(PAGE_MAX_VALUE)), 
+				Integer.valueOf([%= R.name %]PropertiesUtil.get(PAGE_START_VALUE)),
+				Integer.valueOf([%= R.name %]PropertiesUtil.get(PAGE_INCREMENT)));
+	}
+
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public <T, WRAP extends [%= R.name %]Paged<T>, END> IDataSet<T> traverse(
+			@NonNull String methodName, 
+			@NonNull Class<?>[] types, 
+			@NonNull Object[] vals, 
+			@NonNull END client)
+	{
+		return super.<T, WRAP, END, [%= R.name %]DataSet<T>, [%= R.name %]Callback>
+		traverse(new [%= R.name %]Callback<T, WRAP>(), methodName, types, vals, client);
+	}
+
+}

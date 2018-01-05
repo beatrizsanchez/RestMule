@@ -1,0 +1,48 @@
+package org.epsilonlabs.rescli.[%= name %].interceptor;
+
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.ACCEPT;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.RATE_LIMIT_LIMIT;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.RATE_LIMIT_REMAINING;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.RATE_LIMIT_RESET;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.USER_AGENT;
+
+import org.epsilonlabs.rescli.core.interceptor.AbstractInterceptor;
+import org.epsilonlabs.rescli.[%= name %].cache.[%= R.name %]CacheManager;
+import org.epsilonlabs.rescli.[%= name %].session.[%= R.name %]Session;
+import org.epsilonlabs.rescli.[%= name %].util.[%= R.name %]PropertiesUtil;
+
+import okhttp3.Interceptor;
+
+public class [%= R.name %]Interceptor extends AbstractInterceptor {
+	
+	public [%= R.name %]Interceptor(String session){
+		this.sessionId = session;
+	}
+
+	static {
+		sessionClass = [%= R.name %]Session.class;
+		headerLimit = [%= R.name %]PropertiesUtil.get(RATE_LIMIT_LIMIT);
+		headerRemaining = [%= R.name %]PropertiesUtil.get(RATE_LIMIT_REMAINING);
+		headerReset = [%= R.name %]PropertiesUtil.get(RATE_LIMIT_RESET);
+		userAgent = [%= R.name %]PropertiesUtil.get(USER_AGENT);
+		accept = [%= R.name %]PropertiesUtil.get(ACCEPT);
+		cache = [%= R.name %]CacheManager.getInstance();
+	}
+
+	public Interceptor requestInterceptor(){
+		return requestInterceptor(userAgent, accept, sessionId);
+	}
+	
+	public Interceptor sessionResponseInterceptor(){
+		return sessionResponseInterceptor(headerLimit, headerRemaining, headerReset, sessionId);
+	}
+
+	public Interceptor cacheRequestInterceptor(){
+		return cacheRequestInterceptor(cache, sessionId);
+	}
+	
+	public Interceptor cacheResponseInterceptor(){
+		return cacheResponseInterceptor(cache, sessionId); 
+	}
+	
+}

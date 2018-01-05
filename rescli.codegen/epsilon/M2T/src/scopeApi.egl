@@ -1,0 +1,64 @@
+[% import "../templates/templates.egl"; %]
+package org.epsilonlabs.rescli.[%= name.toLowerCase() %].client;
+
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.API_BASE_URL;
+
+import java.util.concurrent.ExecutorService;
+
+import org.epsilonlabs.rescli.core.client.AbstractClient;
+import org.epsilonlabs.rescli.core.client.IClientBuilder;
+import org.epsilonlabs.rescli.core.data.IData;
+import org.epsilonlabs.rescli.core.data.Data;
+import org.epsilonlabs.rescli.core.data.IDataSet;
+import org.epsilonlabs.rescli.core.session.ISession;
+import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].interceptor.[%= name %]Interceptor;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].model.*;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].page.[%= name %]Paged;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].page.[%= name %]Pagination;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].session.[%= name %]Session;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].util.[%= name %]PropertiesUtil;
+
+public class [%= scope %]Api  {
+
+	[%= creators(scope, name) %]
+	
+	/** BUILDER */
+	[%= builder(scope) %]
+	
+	/** CLIENT */
+	private static class [%= scope %]Client extends AbstractClient<I[%= scope %]Endpoint> 
+	implements I[%= scope %]Api 
+	{
+		private [%= name %]Pagination paginationPolicy;
+		
+		[%= scope %]Client(String sessionId) {
+			super();
+
+			ExecutorService executor = RateLimitExecutor.create(30, [%= name %]Session.class, sessionId);
+			[%= name %]Interceptor interceptors = new [%= name %]Interceptor(sessionId);
+			String baseurl = [%= name %]PropertiesUtil.get(API_BASE_URL);
+
+			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 
+
+			this.client = AbstractClient.okHttp(executor)
+					.addInterceptor(interceptors.cacheRequestInterceptor())
+					.addInterceptor(interceptors.requestInterceptor())
+					.addNetworkInterceptor(interceptors.sessionResponseInterceptor())
+					.addNetworkInterceptor(interceptors.cacheResponseInterceptor())
+					.build();
+
+			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(I[%= scope %]Endpoint.class);
+			this.paginationPolicy = [%= name %]Pagination.get();
+		}
+
+		/** WRAPED METHODS FOR PAGINATION */
+	
+		[% for (r in responses) { %]
+		@Override
+		[%= r.wrappedRequest(name, scope) %]
+		
+		[% } %]
+		
+	}
+}

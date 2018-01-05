@@ -1,0 +1,128 @@
+package org.epsilonlabs.rescli.[%= name %].session;
+
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.OAUTH2_AUTH_URL;
+import static org.epsilonlabs.rescli.core.util.PropertiesUtil.OAUTH2_TOKEN_URL;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.annotation.Nonnull;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.epsilonlabs.rescli.core.session.AbstractSession;
+import org.epsilonlabs.rescli.core.session.ISession;
+import org.epsilonlabs.rescli.[%= name %].util.[%= R.name %]PropertiesUtil;
+
+@SuppressWarnings("unused")
+public class [%= R.name %]Session extends AbstractSession {
+
+	private static final Logger LOG = LogManager.getLogger([%= R.name %]Session.class);
+
+	public static final String CLIENT = "[%= name %]";
+	private static final String AUTHORIZATION_URL = [%= R.name %]PropertiesUtil.get(OAUTH2_AUTH_URL);
+	private static final String ACCESS_TOKEN_URL = [%= R.name %]PropertiesUtil.get(OAUTH2_TOKEN_URL);
+
+	/** STATIC SESSION MANAGEMENT */
+	
+	private static HashMap<String, ISession> sessions;
+	
+	private static HashMap<String, ISession> getSessions(){
+		if (sessions == null)
+			sessions = new HashMap<String, ISession>();
+		return sessions;
+	}
+
+	private static void addSession([%= R.name %]Session session){
+		[%= R.name %]Session.getSessions().put(session.id() , session);
+	}
+	
+	public static ISession get(String id) {
+		return [%= R.name %]Session.getSessions().get(id);
+	}
+	
+	/** PREDEFINED SESSION TYPES */
+	
+	public static String createPublic(){
+		[%= R.name %]Session session = new [%= R.name %]Session();
+		[%= R.name %]Session.addSession(session);
+		return session.id();
+	}
+
+	public static String createWithBasicAuth(String username, String password){
+		[%= R.name %]Session session = new [%= R.name %]Session(username, password);
+		[%= R.name %]Session.addSession(session);
+		return session.id();
+	}
+
+	public static String createWithBasicAuth(String token){
+		[%= R.name %]Session session = new [%= R.name %]Session(token);
+		[%= R.name %]Session.addSession(session);
+		return session.id();
+	}
+
+	public static String createWithOAuth(
+			String clientId, 
+			String clientSecret, 
+			List<String> scopes, 
+			String username) {
+		[%= R.name %]Session session = new [%= R.name %]Session(clientId, clientSecret, scopes, username);
+		[%= R.name %]Session.addSession(session);
+		return session.id();
+	}
+
+	/** TYPE CONSTRUCTORS */
+	
+	private [%= R.name %]Session(){
+		super(); 
+	}
+
+	private [%= R.name %]Session(String username, String password){
+		super(username, password);
+	}
+
+	private [%= R.name %]Session(String token){
+		super(token);
+	}
+
+	private [%= R.name %]Session(String clientId, 
+			String clientSecret, 
+			List<String> scopes,
+			String username	) {
+		super();
+		setOAuthToken(ACCESS_TOKEN_URL, AUTHORIZATION_URL, clientId, clientSecret, scopes, username);
+	}
+	
+	/** METHODS FROM ISESSION */
+
+	@Override
+	public void setRateLimit(@Nonnull String rateLimit){
+		this.rateLimit = Integer.valueOf(rateLimit);
+	}
+
+	@Override
+	public void setRateLimitRemaining(@Nonnull String rateLimitRemaining){
+		this.rateLimitRemaining = new AtomicInteger(Integer.valueOf(rateLimitRemaining));
+	}
+
+	@Override
+	public void setRateLimitReset(@Nonnull String rateLimitReset){
+		this.rateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
+	}
+	
+	/** METHODS FROM ABSTRACT */
+	
+	@Override
+	protected void setOAuthToken(String clientId, String clientSecret, List<String> scopes, String username) {
+		super.setOAuthToken(ACCESS_TOKEN_URL, AUTHORIZATION_URL, clientId, clientSecret, scopes, username);		
+	}
+	
+	@Override 
+	public String toString() {
+		return CLIENT + super.toString();
+	}
+
+}

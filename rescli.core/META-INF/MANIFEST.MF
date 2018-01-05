@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: rescli.core
+Bundle-SymbolicName: org.epsilonlabs.rescli.core
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: org.epsilonlabs.rescli.core.cache,
+ org.epsilonlabs.rescli.core.callback,
+ org.epsilonlabs.rescli.core.client,
+ org.epsilonlabs.rescli.core.data,
+ org.epsilonlabs.rescli.core.interceptor,
+ org.epsilonlabs.rescli.core.page,
+ org.epsilonlabs.rescli.core.session,
+ org.epsilonlabs.rescli.core.util
+ 
