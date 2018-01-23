@@ -2,8 +2,12 @@ package org.epsilonlabs.rescli.core.client;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
+import java.io.File;
 import java.util.concurrent.ExecutorService;
 
+import org.epsilonlabs.rescli.core.cache.AbstractCacheManager;
+
+import okhttp3.Cache;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -20,9 +24,11 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
  *
  */
 public abstract class AbstractClient<T> {
-	
+
 	protected OkHttpClient client;
 	protected T callbackEndpoint;
+
+	// These are just utility methods (library)
 
 	protected static OkHttpClient.Builder okHttp(final Dispatcher dispatcher) {
 		return new OkHttpClient.Builder()
@@ -39,9 +45,9 @@ public abstract class AbstractClient<T> {
 				.readTimeout(0, SECONDS)
 				.connectTimeout(0, SECONDS) 
 				.writeTimeout(0, SECONDS)
-				.retryOnConnectionFailure(true); 
+				.retryOnConnectionFailure(true);
 	}
-	
+
 	protected static Retrofit retrofit(OkHttpClient client, String baseUrl){
 		return new Retrofit.Builder()
 				.addCallAdapterFactory(RxJava2CallAdapterFactory.createAsync()) 
@@ -50,5 +56,5 @@ public abstract class AbstractClient<T> {
 				.baseUrl(baseUrl)
 				.build();
 	}	
-		
+
 }

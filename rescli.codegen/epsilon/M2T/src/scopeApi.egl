@@ -46,6 +46,7 @@ public class [%= scope %]Api  {
 					.addInterceptor(interceptors.requestInterceptor())
 					.addNetworkInterceptor(interceptors.sessionResponseInterceptor())
 					.addNetworkInterceptor(interceptors.cacheResponseInterceptor())
+					.cache([%= name %]CacheManager.getInstance().getOkHttpCache()) // FIXME Use Lucene Instead
 					.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(I[%= scope %]Endpoint.class);

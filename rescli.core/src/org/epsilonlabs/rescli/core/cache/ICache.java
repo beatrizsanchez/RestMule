@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.epsilonlabs.rescli.core.session.ISession;
 
+import okhttp3.Cache;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -27,6 +28,6 @@ public interface ICache {
 	Response put(Response response, ISession session) throws IOException;
 	
 	void clear();
-	
-	
+
+	Cache getOkHttpCache(); // TODO Use lucene instead
 }

@@ -37,6 +37,7 @@ import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.util.OkHttpUtil;
 
 import io.reactivex.annotations.NonNull;
+import okhttp3.Cache;
 import okhttp3.Headers;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -60,10 +61,24 @@ public abstract class AbstractCacheManager implements ICache {
 
 	private String indexDir;
 
+	/** OkHttp Properties */
+	private final static int cacheSize = 10 * 1024 * 1024; // 10 MiB
+	private static Cache cache;
+	
+	// FIXME for testing purposes
+	
+	public Cache getOkHttpCache(){
+		if (cache == null) {
+			cache = new Cache(new File(this.indexDir), cacheSize);
+		}
+		return cache;
+	}
+	
 	/** CONSTRUCTOR */
 
 	protected AbstractCacheManager(@NonNull String agentName){
 		this.indexDir = BASEPATH + agentName;
+		this.getOkHttpCache();
 		File file = new File(this.indexDir);
 		if (!file.exists()) file.mkdirs();
 	}

@@ -11,6 +11,7 @@ import org.epsilonlabs.rescli.core.data.IData;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
 import org.epsilonlabs.rescli.github.model.Asset;
 import org.epsilonlabs.rescli.github.model.Assets;
@@ -143,6 +144,7 @@ public class EntityApi  {
 					.addInterceptor(interceptors.requestInterceptor())
 					.addNetworkInterceptor(interceptors.sessionResponseInterceptor())
 					.addNetworkInterceptor(interceptors.cacheResponseInterceptor())
+					.cache(GitHubCacheManager.getInstance().getOkHttpCache()) // FIXME Use Lucene Instead
 					.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(IEntityEndpoint.class);

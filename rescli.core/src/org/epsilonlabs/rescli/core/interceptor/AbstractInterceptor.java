@@ -44,6 +44,11 @@ public abstract class AbstractInterceptor {
 	protected static final Interceptor cacheRequestInterceptor(final ICache cache, final String sessionId){
 		return new Interceptor(){
 			@Override public Response intercept(Chain chain) throws IOException {
+				// TODO remove. It is a temporary fix 
+				return chain.proceed(chain.request());
+
+				// TODO uncomment
+				/*
 				Request request = chain.request();
 				LOG.info(request.url());
 				ISession session = AbstractSession.getSession(sessionClass, sessionId);
@@ -53,7 +58,8 @@ public abstract class AbstractInterceptor {
 					LOG.info("RETURNING RESPONSE FROM CACHE");
 					return response;
 				}
-				return chain.proceed(request);		
+				return chain.proceed(request);
+				*/		
 			}
 		};
 	}
@@ -90,7 +96,13 @@ public abstract class AbstractInterceptor {
 	protected static final Interceptor cacheResponseInterceptor(final ICache cache, final String sessionId){
 		return new Interceptor(){
 			@Override public Response intercept(Chain chain) throws IOException {
-				Request request = chain.request();
+				
+				// TODO comment this section. This is a temporary fix 
+				return chain.proceed(chain.request());
+				
+				// TODO Delegate this to an entity to do this asynchronously and DONT wait until the cache persistence is finished
+				
+				/*Request request = chain.request();
 				Response response = chain.proceed(request);
 				ISession session = AbstractSession.getSession(sessionClass, sessionId);
 
@@ -108,7 +120,7 @@ public abstract class AbstractInterceptor {
 				} else {
 					LOG.error("Something went wrong : " +response.code() + " " + response.message() ) ;
 					return response;
-				}
+				}*/
 			}
 		};
 	}

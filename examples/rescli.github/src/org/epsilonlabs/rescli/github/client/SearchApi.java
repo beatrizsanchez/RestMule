@@ -9,6 +9,7 @@ import org.epsilonlabs.rescli.core.client.IClientBuilder;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
 import org.epsilonlabs.rescli.github.model.SearchCode;
 import org.epsilonlabs.rescli.github.model.SearchIssues;
@@ -73,6 +74,7 @@ public class SearchApi  {
 					.addInterceptor(interceptors.requestInterceptor())
 					.addNetworkInterceptor(interceptors.sessionResponseInterceptor())
 					.addNetworkInterceptor(interceptors.cacheResponseInterceptor())
+					.cache(GitHubCacheManager.getInstance().getOkHttpCache()) // FIXME Use Lucene Instead
 					.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(ISearchEndpoint.class);

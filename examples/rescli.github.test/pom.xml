@@ -31,6 +31,19 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.epsilonlabs.rescli</groupId>
+			<artifactId>org.epsilonlabs.rescli.github</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.epsilonlabs.rescli</groupId>
+			<artifactId>org.epsilonlabs.rescli.core</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
 		<dependency>
 			<groupId>io.reactivex.rxjava2</groupId>
@@ -67,6 +80,12 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpasyncclient</artifactId>
 			<version>4.1.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.8.0</version>
 		</dependency>
 
 	</dependencies>
