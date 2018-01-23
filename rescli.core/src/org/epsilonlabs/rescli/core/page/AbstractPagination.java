@@ -240,10 +240,7 @@ public abstract class AbstractPagination implements IPaged {
 					((CALL) callback).handleTotal(response);
 					((CALL) callback).handleResponse(response);
 					Integer limit = callback.totalIterations(response);
-					LOG.info("LIMIT: " + limit);
-					if (limit == null) limit = 1;
-					
-					if (limit != null && limit != start ){
+					if (limit != null && limit != start){
 						for (int iteration = start + increment; iteration <= limit; iteration = iteration + increment){
 							try {
 								listVals[argsLength + pagedParams - 1] = iteration;
