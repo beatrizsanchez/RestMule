@@ -34,22 +34,16 @@ public class EntityApi  {
 	public static class EntityBuilder 
 	implements IClientBuilder<IEntityApi> { 
 	
-		private String sessionId;
+		private ISession session;
 	
 		@Override
 		public IEntityApi build() {
-			return (IEntityApi) new EntityClient(sessionId);
-		}
-	
-		@Override
-		public IClientBuilder<IEntityApi> setSession(String sessionId){
-			this.sessionId = sessionId;
-			return this;
+			return (IEntityApi) new EntityClient(session);
 		}
 	
 		@Override
 		public IClientBuilder<IEntityApi> setSession(ISession session){
-			this.sessionId = session.id();
+			this.session = session;
 			return this;
 		}
 	}
@@ -60,11 +54,11 @@ public class EntityApi  {
 	{
 		private GitHubPagination paginationPolicy;
 		
-		EntityClient(String sessionId) {
+		EntityClient(ISession session) {
 			super();
 
-			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, sessionId);
-			GitHubInterceptor interceptors = new GitHubInterceptor(sessionId);
+			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, session.id());
+			GitHubInterceptor interceptors = new GitHubInterceptor(session.id());
 			String baseurl = GitHubPropertiesUtil.get(API_BASE_URL);
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 

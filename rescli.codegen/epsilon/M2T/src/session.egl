@@ -46,32 +46,32 @@ public class [%= R.name %]Session extends AbstractSession {
 	
 	/** PREDEFINED SESSION TYPES */
 	
-	public static String createPublic(){
+	public static ISession createPublic(){
 		[%= R.name %]Session session = new [%= R.name %]Session();
 		[%= R.name %]Session.addSession(session);
-		return session.id();
+		return session;
 	}
 
-	public static String createWithBasicAuth(String username, String password){
+	public static ISession createWithBasicAuth(String username, String password){
 		[%= R.name %]Session session = new [%= R.name %]Session(username, password);
 		[%= R.name %]Session.addSession(session);
-		return session.id();
+		return session;
 	}
 
-	public static String createWithBasicAuth(String token){
+	public static ISession createWithBasicAuth(String token){
 		[%= R.name %]Session session = new [%= R.name %]Session(token);
 		[%= R.name %]Session.addSession(session);
-		return session.id();
+		return session;
 	}
 
-	public static String createWithOAuth(
+	public static ISession createWithOAuth(
 			String clientId, 
 			String clientSecret, 
 			List<String> scopes, 
 			String username) {
 		[%= R.name %]Session session = new [%= R.name %]Session(clientId, clientSecret, scopes, username);
 		[%= R.name %]Session.addSession(session);
-		return session.id();
+		return session;
 	}
 
 	/** TYPE CONSTRUCTORS */

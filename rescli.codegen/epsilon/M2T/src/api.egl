@@ -26,9 +26,12 @@ public class [%= R.name %]Api  {
 		private I[%= c.scope.firstToUpperCase() %]Api [%= c.scope.firstToLowerCase() %]Client;
 		[% } %]
 		
-		[%= R.name %]Client(String sessionId) {
+		[%= R.name %]Client(ISession session) {
+			if (session == null) {
+				session = [%= R.name %]Session.createPublic(); 
+			}	
 			[% for (c in scopes) { %]
-			[%= c.scope.firstToLowerCase() %]Client = [%= c.scope.firstToUpperCase() %]Api.create().setSession(sessionId).build();
+			[%= c.scope.firstToLowerCase() %]Client = [%= c.scope.firstToUpperCase() %]Api.create().setSession(session).build();
 			[% } %]
 		}
 

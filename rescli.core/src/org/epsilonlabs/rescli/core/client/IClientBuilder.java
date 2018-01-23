@@ -14,7 +14,6 @@ import org.epsilonlabs.rescli.core.session.ISession;
 public interface IClientBuilder<T> {
 
 	T build();
-	IClientBuilder<T> setSession(String session);
 	IClientBuilder<T> setSession(ISession session);
 
 }

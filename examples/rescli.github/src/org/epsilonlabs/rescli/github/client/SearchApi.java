@@ -34,22 +34,16 @@ public class SearchApi  {
 	public static class SearchBuilder 
 	implements IClientBuilder<ISearchApi> { 
 	
-		private String sessionId;
+		private ISession session;
 	
 		@Override
 		public ISearchApi build() {
-			return (ISearchApi) new SearchClient(sessionId);
-		}
-	
-		@Override
-		public IClientBuilder<ISearchApi> setSession(String sessionId){
-			this.sessionId = sessionId;
-			return this;
+			return (ISearchApi) new SearchClient(session);
 		}
 	
 		@Override
 		public IClientBuilder<ISearchApi> setSession(ISession session){
-			this.sessionId = session.id();
+			this.session = session;
 			return this;
 		}
 	}
@@ -60,11 +54,11 @@ public class SearchApi  {
 	{
 		private GitHubPagination paginationPolicy;
 		
-		SearchClient(String sessionId) {
+		SearchClient(ISession session) {
 			super();
 
-			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, sessionId);
-			GitHubInterceptor interceptors = new GitHubInterceptor(sessionId);
+			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, session.id());
+			GitHubInterceptor interceptors = new GitHubInterceptor(session.id());
 			String baseurl = GitHubPropertiesUtil.get(API_BASE_URL);
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 

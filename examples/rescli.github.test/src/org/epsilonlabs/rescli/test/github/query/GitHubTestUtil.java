@@ -6,6 +6,7 @@ import static org.epsilonlabs.rescli.core.util.PropertiesUtil.USERNAME;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.github.api.GitHubApi;
 import org.epsilonlabs.rescli.github.api.IGitHubApi;
 import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
@@ -24,12 +25,13 @@ public class GitHubTestUtil {
 	private static IGitHubApi basicApi;
 	private static IGitHubApi oauthApi;
 	
-	protected static String publicSession;
-	protected static String OAuthSessionWithToken;
-	protected static String basicSession;
+	protected static ISession publicSession;
+	protected static ISession OAuthSessionWithToken;
+	protected static ISession basicSession;
 	
 	protected static void setup(){
 		LOG.info("setting up properties");
+		
 		token = PrivateProperties.get(PERSONAL_ACCESS_TOKEN);
 		username = PrivateProperties.get(USERNAME);
 		password = PrivateProperties.get(PASSWORD);

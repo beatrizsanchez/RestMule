@@ -34,11 +34,11 @@ public class [%= scope %]Api  {
 	{
 		private [%= name %]Pagination paginationPolicy;
 		
-		[%= scope %]Client(String sessionId) {
+		[%= scope %]Client(ISession session) {
 			super();
 
-			ExecutorService executor = RateLimitExecutor.create(30, [%= name %]Session.class, sessionId);
-			[%= name %]Interceptor interceptors = new [%= name %]Interceptor(sessionId);
+			ExecutorService executor = RateLimitExecutor.create(30, [%= name %]Session.class, session.id());
+			[%= name %]Interceptor interceptors = new [%= name %]Interceptor(session.id());
 			String baseurl = [%= name %]PropertiesUtil.get(API_BASE_URL);
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 

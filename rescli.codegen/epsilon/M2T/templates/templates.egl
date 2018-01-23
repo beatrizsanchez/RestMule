@@ -17,22 +17,16 @@ operation builder(name : String) { %]
 public static class [%= name %]Builder 
 implements IClientBuilder<I[%= name %]Api> { 
 
-	private String sessionId;
+	private ISession session;
 
 	@Override
 	public I[%= name %]Api build() {
-		return (I[%= name %]Api) new [%= name %]Client(sessionId);
-	}
-
-	@Override
-	public IClientBuilder<I[%= name %]Api> setSession(String sessionId){
-		this.sessionId = sessionId;
-		return this;
+		return (I[%= name %]Api) new [%= name %]Client(session);
 	}
 
 	@Override
 	public IClientBuilder<I[%= name %]Api> setSession(ISession session){
-		this.sessionId = session.id();
+		this.session = session;
 		return this;
 	}
 }

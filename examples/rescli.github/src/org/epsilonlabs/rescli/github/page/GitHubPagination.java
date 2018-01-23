@@ -56,6 +56,5 @@ public class GitHubPagination extends AbstractPagination{
 		return super.<T, END, GitHubDataSet<T>, GitHubCallback<T>>
 		traversePages(new GitHubCallback<T>(), methodName, types, vals, client);		
 	}
-	
 
 }

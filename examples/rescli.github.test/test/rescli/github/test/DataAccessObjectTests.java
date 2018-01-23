@@ -51,6 +51,7 @@ public class DataAccessObjectTests extends GitHubTestUtil {
 	}
 	
 	@Test
+	@Ignore
 	public void testDataSetFromArray() {
 		IDataSet<Commits> reposCommits = api.getReposCommits("epsilonlabs", "emc-json", null, null, null, null, null);
 		assertEquals(Status.CREATED, reposCommits.status());
