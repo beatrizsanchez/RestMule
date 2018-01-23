@@ -2,6 +2,7 @@ package org.epsilonlabs.rescli.github.client;
 
 import static org.epsilonlabs.rescli.core.util.PropertiesUtil.API_BASE_URL;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import org.epsilonlabs.rescli.core.client.AbstractClient;
@@ -11,6 +12,7 @@ import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
 import org.epsilonlabs.rescli.github.model.*;
 import org.epsilonlabs.rescli.github.page.GitHubPaged;

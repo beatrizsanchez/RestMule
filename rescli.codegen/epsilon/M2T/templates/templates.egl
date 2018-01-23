@@ -64,10 +64,10 @@ operation Response endpointRequest(paged : PaginationPolicy, name : String) { %]
 [% var request = self.request; 
 	   var params;
 	   if (self.isPaged()){
-		   params =  new Sequence;
-		   params.addAll(request.parameters); 
-		   params.add(paged.perIteration); 
-		   params.add(paged.page);
+			params =  new Sequence;
+			params.addAll(request.parameters); 
+			params.add(paged.perIteration); 
+			params.add(paged.page);
 	   }  else {
 	   		params = request.parameters;
 	   }
@@ -96,18 +96,20 @@ operation Response innerWrappedResponse(api : String, scope : String) { %]
 [% var request = self.request; 
    var params = request.parameters; 
 %]
-[% if (self.pageWrapped){%]
+[% if (self.pageWrapped or self.responseType.instanceOf(ListType)){%]
 Class<?>[] types = [% if (params.size() > 0) {%]{ [% for (param in params) {
-%][%= param.type.getType() %].class[%if (param <> params.last()){ %], [% } %][% } %]};[% } else { %]new Class<?>[];[% } %]
+%][%= param.type.getType() %].class[%if (param <> params.last()){ %], [% } %][% } %]};[% } else { %]null;[% } %]
 
 Object[] vals = [% if (params.size() > 0) {%]{ [% for (param in params) {
-%][%= param.type.name.firstToLowerCase() %][%if (param <> params.last()){ %], [% } %][% } %]};[% } else { %]new Object[];[% } %]
+%][%= param.type.name.firstToLowerCase() %][%if (param <> params.last()){ %], [% } %][% } %]};[% } else { %]null;[% } %]
 
+[% if (self.pageWrapped) { %]
 return paginationPolicy.<[%= self.responseType.name %], [%= api %]Paged<[%= self.responseType.name %]>, I[%= scope%]Endpoint> 
 	traverse("[%= self.methodName() %]", types, vals, callbackEndpoint);
-[% } else if (self.responseType.instanceOf(ListType)){%]
-throw new NullPointerException("Method is undefined");
-//return null; // TODO (FIXME) Add support for arrays!! 
+[% } else {%]
+return paginationPolicy.<[%= self.getApiInnerType() %], I[%= scope%]Endpoint> 
+	traverseList("[%= self.methodName() %]", types, vals, callbackEndpoint);
+[% } %]
 [% } else { %]
 Data<[%= self.responseType.getType() %]> data = new Data<[%= self.responseType.getType() %]>();
 data.addElement(callbackEndpoint.[%= self.methodName() %]([% if (params.size() == 0){ %]));

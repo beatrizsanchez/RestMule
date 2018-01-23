@@ -3,6 +3,7 @@ package org.epsilonlabs.rescli.[%= name.toLowerCase() %].client;
 
 import static org.epsilonlabs.rescli.core.util.PropertiesUtil.API_BASE_URL;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import org.epsilonlabs.rescli.core.client.AbstractClient;
@@ -12,6 +13,7 @@ import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.[%= name.toLowerCase() %].cache.[%= name %]CacheManager;
 import org.epsilonlabs.rescli.[%= name.toLowerCase() %].interceptor.[%= name %]Interceptor;
 import org.epsilonlabs.rescli.[%= name.toLowerCase() %].model.*;
 import org.epsilonlabs.rescli.[%= name.toLowerCase() %].page.[%= name %]Paged;
