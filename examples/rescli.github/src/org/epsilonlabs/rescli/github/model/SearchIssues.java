@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchIssues {
 
+	public SearchIssues(){}
+
 	@JsonProperty("closed_at") 
 	private Object closedAt;
 	
@@ -175,7 +177,9 @@ public class SearchIssues {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class PullRequest {
+	public static class PullRequest {
+	
+		public PullRequest(){}
 	
 		@JsonProperty("patch_url") 
 		private Object patchUrl;
@@ -209,7 +213,9 @@ public class SearchIssues {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("gists_url") 
 		private String gistsUrl;
@@ -347,7 +353,9 @@ public class SearchIssues {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Labels {
+	public static class Labels {
+	
+		public Labels(){}
 	
 		@JsonProperty("color") 
 		private String color;

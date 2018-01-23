@@ -10,6 +10,7 @@ import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PER_ITERATION_VALU
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.page.AbstractPagination;
 import org.epsilonlabs.rescli.github.callback.GitHubCallback;
+import org.epsilonlabs.rescli.github.callback.GitHubWrappedCallback;
 import org.epsilonlabs.rescli.github.data.GitHubDataSet;
 import org.epsilonlabs.rescli.github.util.GitHubPropertiesUtil;
 
@@ -42,8 +43,19 @@ public class GitHubPagination extends AbstractPagination{
 			@NonNull Object[] vals, 
 			@NonNull END client)
 	{
-		return super.<T, WRAP, END, GitHubDataSet<T>, GitHubCallback>
-		traverse(new GitHubCallback<T, WRAP>(), methodName, types, vals, client);
+		return super.<T, WRAP, END, GitHubDataSet<T>, GitHubWrappedCallback>
+		traverse(new GitHubWrappedCallback<T, WRAP>(), methodName, types, vals, client);
 	}
+	
+	public <T, END> IDataSet<T> traverseList(
+			@NonNull String methodName, 
+			@NonNull Class<?>[] types, 
+			@NonNull Object[] vals, 
+			@NonNull END client)
+	{
+		return super.<T, END, GitHubDataSet<T>, GitHubCallback<T>>
+		traversePages(new GitHubCallback<T>(), methodName, types, vals, client);		
+	}
+	
 
 }

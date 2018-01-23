@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Issue {
 
+	public Issue(){}
+
 	@JsonProperty("milestone") 
 	private Float milestone;
 	

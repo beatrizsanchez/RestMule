@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Assignees {
 
+	public Assignees(){}
+
 	@JsonProperty("avatar_url") 
 	private Integer avatarUrl;
 	

@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RepoDeployments {
 
+	public RepoDeployments(){}
+
 	@JsonProperty("updated_at") 
 	private String updatedAt;
 	
@@ -84,7 +86,9 @@ public class RepoDeployments {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Creator {
+	public static class Creator {
+	
+		public Creator(){}
 	
 		@JsonProperty("gists_url") 
 		private String gistsUrl;

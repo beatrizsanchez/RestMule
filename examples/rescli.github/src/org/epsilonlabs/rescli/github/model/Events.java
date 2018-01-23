@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Events {
 
+	public Events(){}
+
 	@JsonProperty("public") 
 	private Boolean publicSanitized;
 	
@@ -76,7 +78,9 @@ public class Events {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Actor {
+	public static class Actor {
+	
+		public Actor(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -126,7 +130,9 @@ public class Events {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Org {
+	public static class Org {
+	
+		public Org(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -176,7 +182,9 @@ public class Events {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Payload {
+	public static class Payload {
+	
+		public Payload(){}
 	
 		@Override
 		public String toString() {
@@ -186,7 +194,9 @@ public class Events {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Repo {
+	public static class Repo {
+	
+		public Repo(){}
 	
 		@JsonProperty("name") 
 		private String name;
@@ -220,7 +230,9 @@ public class Events {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class CreatedAt {
+	public static class CreatedAt {
+	
+		public CreatedAt(){}
 	
 		@Override
 		public String toString() {

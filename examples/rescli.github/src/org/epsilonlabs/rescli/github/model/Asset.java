@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Asset {
 
+	public Asset(){}
+
 	@JsonProperty("content_type") 
 	private String contentType;
 	
@@ -100,7 +102,9 @@ public class Asset {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Uploader {
+	public static class Uploader {
+	
+		public Uploader(){}
 	
 		@JsonProperty("gists_url") 
 		private String gistsUrl;

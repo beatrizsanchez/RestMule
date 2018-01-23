@@ -1,8 +1,10 @@
 package org.epsilonlabs.rescli.core.page;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 
 import org.epsilonlabs.rescli.core.callback.AbstractCallback;
+import org.epsilonlabs.rescli.core.callback.AbstractWrappedCallback;
 import org.epsilonlabs.rescli.core.data.AbstractDataSet;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.util.RetrofitUtil;
@@ -101,7 +103,7 @@ public abstract class AbstractPagination implements IPaged {
 	/** UTILS FOR SUBCLASSES */
 
 	protected <
-		T, WRAP extends IWrap<T>, END, DATA extends AbstractDataSet<T>, CALL extends AbstractCallback<T,WRAP,DATA> 	
+		T, WRAP extends IWrap<T>, END, DATA extends AbstractDataSet<T>, CALL extends AbstractWrappedCallback<T,WRAP,DATA> 	
 	> 
 	IDataSet<T> traverse(
 			CALL callback,			
@@ -145,7 +147,7 @@ public abstract class AbstractPagination implements IPaged {
 							try {
 								listVals[vals.length + pagedParams - 1] = iteration;
 								Call<WRAP> pageCall = RetrofitUtil.<WRAP, END>
-								getCall(methodName, listClass, listVals, client);
+									getCall(methodName, listClass, listVals, client);
 								pageCall.enqueue((Callback<WRAP>) callback);
 							} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 									| NoSuchMethodException | SecurityException e) {
@@ -159,16 +161,15 @@ public abstract class AbstractPagination implements IPaged {
 		} catch (Exception e) { e.printStackTrace(); }
 		return callback.getDataset();		
 	}
-	/*
+	
+	
 	protected <
 		T, 
-		WRAP extends IPage<T>, 
 		END, 
-		DATA extends AbstractDataSet<T>, 
-		CALL extends AbstractCallback<T, WRAP,DATA>
+		DATA extends AbstractDataSet<T>,
+		CALL extends AbstractCallback<T, List<T>, DATA>
 	> 
-	
-	IDataSet<T> traverseList(
+	IDataSet<T> traversePages(
 			CALL callback,			
 			String methodName, 
 			Class<?>[] types, 
@@ -207,20 +208,21 @@ public abstract class AbstractPagination implements IPaged {
 			listClass[vals.length + pagedParams - 1] = Integer.class;
 			listVals[vals.length + pagedParams - 1] = start;
 
-
-			Call<WRAP> call = RetrofitUtil.<WRAP, END>getCall(methodName, listClass, listVals, (END) client);
-			call.enqueue(new Callback<WRAP>() {
-				@Override public void onResponse(Call<WRAP> call, Response<WRAP> response) {
-					callback.handleTotal(response);
-					callback.handleResponse(response);
-					Integer limit = callback.totalIterations(response); // FIXME
+			Call<List<T>> call = RetrofitUtil.<List<T>, END>getCall(methodName, listClass, listVals, (END) client);
+			call.enqueue(new Callback<List<T>>() {
+				@Override public void onResponse(Call<List<T>> call, Response<List<T>> response) {
+					//callback.handleTotal(response);
+					//callback.handleResponse(response);
+					Integer limit = callback.totalIterations(response);
 					if (limit != null && limit != start ){
 						for (int iteration = start + increment; iteration <= limit; iteration = iteration + increment){
 							try {
 								listVals[vals.length + pagedParams - 1] = iteration;
-								Call<WRAP> pageCall = RetrofitUtil.<WRAP, END>
+								Call<List<T>> pageCall = RetrofitUtil.<List<T>, END>
+								
 								getCall(methodName, listClass, listVals, client);
-								pageCall.enqueue((Callback<WRAP>) callback);
+								
+								pageCall.enqueue((Callback<List<T>>) callback);
 							} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 									| NoSuchMethodException | SecurityException e) {
 								e.printStackTrace();
@@ -228,7 +230,7 @@ public abstract class AbstractPagination implements IPaged {
 						}
 					}
 				}
-				@Override public void onFailure(Call<WRAP> call, Throwable t) {
+				@Override public void onFailure(Call<List<T>> call, Throwable t) {
 					t.printStackTrace();
 				}
 			});
@@ -237,6 +239,5 @@ public abstract class AbstractPagination implements IPaged {
 		}
 		return callback.getDataset();		
 	}
-	 */
 	
 }

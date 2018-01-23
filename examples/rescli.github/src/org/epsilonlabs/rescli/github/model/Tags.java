@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tags {
 
+	public Tags(){}
+
 	@JsonProperty("tag") 
 	private String tag;
 	
@@ -52,7 +54,9 @@ public class Tags {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Tagger {
+	public static class Tagger {
+	
+		public Tagger(){}
 	
 		@JsonProperty("date") 
 		private String date;

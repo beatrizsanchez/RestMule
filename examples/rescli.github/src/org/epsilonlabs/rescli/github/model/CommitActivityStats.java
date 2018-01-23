@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CommitActivityStats {
 
+	public CommitActivityStats(){}
+
 	@JsonProperty("total") 
 	private Integer total;
 	

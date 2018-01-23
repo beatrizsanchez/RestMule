@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Ref {
 
+	public Ref(){}
+
 	@JsonProperty("updated_at") 
 	private String updatedAt;
 	
@@ -76,7 +78,9 @@ public class Ref {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Creator {
+	public static class Creator {
+	
+		public Creator(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

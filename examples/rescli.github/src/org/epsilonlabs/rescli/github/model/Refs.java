@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Refs {
 
+	public Refs(){}
+
 	@JsonProperty("ref") 
 	private String ref;
 	
@@ -36,7 +38,9 @@ public class Refs {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Object {
+	public static class Object {
+	
+		public Object(){}
 	
 		@JsonProperty("type") 
 		private String type;

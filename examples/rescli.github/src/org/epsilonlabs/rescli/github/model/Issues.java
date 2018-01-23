@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Issues {
 
+	public Issues(){}
+
 	@JsonProperty("closed_at") 
 	private String closedAt;
 	
@@ -135,7 +137,9 @@ public class Issues {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class PullRequest {
+	public static class PullRequest {
+	
+		public PullRequest(){}
 	
 		@JsonProperty("patch_url") 
 		private String patchUrl;
@@ -169,7 +173,9 @@ public class Issues {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Milestone {
+	public static class Milestone {
+	
+		public Milestone(){}
 	
 		@JsonProperty("number") 
 		private Integer number;
@@ -257,7 +263,9 @@ public class Issues {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Creator {
+		public static class Creator {
+		
+			public Creator(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -309,7 +317,9 @@ public class Issues {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Assignee {
+	public static class Assignee {
+	
+		public Assignee(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -359,7 +369,9 @@ public class Issues {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -409,7 +421,9 @@ public class Issues {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Labels {
+	public static class Labels {
+	
+		public Labels(){}
 	
 		@JsonProperty("color") 
 		private String color;

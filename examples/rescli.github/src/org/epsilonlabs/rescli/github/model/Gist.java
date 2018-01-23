@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Gist {
 
+	public Gist(){}
+
 	@JsonProperty("comments") 
 	private Integer comments;
 	
@@ -127,7 +129,9 @@ public class Gist {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Files {
+	public static class Files {
+	
+		public Files(){}
 	
 		@JsonProperty("ring.erl") 
 		private RingErl ringErl;
@@ -143,7 +147,9 @@ public class Gist {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class RingErl {
+		public static class RingErl {
+		
+			public RingErl(){}
 		
 			@JsonProperty("filename") 
 			private String filename;
@@ -179,7 +185,9 @@ public class Gist {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -229,91 +237,9 @@ public class Gist {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Forks {
+	public static class History {
 	
-		@JsonProperty("created_at") 
-		private String createdAt;
-		
-		@JsonProperty("url") 
-		private String url;
-		
-		@JsonProperty("user") 
-		private UserInner userInner;
-		
-		public String getCreatedAt() {
-			return this.createdAt;
-		}
-		
-		public String getUrl() {
-			return this.url;
-		}
-		
-		public UserInner getUserInner() {
-			return this.userInner;
-		}
-		
-		@Override
-		public String toString() {
-			return "Forks [ "
-				+ "createdAt = " + this.createdAt + ", "
-				+ "url = " + this.url + ", "
-				+ "userInner = " + this.userInner + ", "
-				+ "]"; 
-		}	
-		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class UserInner {
-		
-			@JsonProperty("avatar_url") 
-			private String avatarUrl;
-			
-			@JsonProperty("id") 
-			private Integer id;
-			
-			@JsonProperty("login") 
-			private String login;
-			
-			@JsonProperty("gravatar_id") 
-			private String gravatarId;
-			
-			@JsonProperty("url") 
-			private String url;
-			
-			public String getAvatarUrl() {
-				return this.avatarUrl;
-			}
-			
-			public Integer getId() {
-				return this.id;
-			}
-			
-			public String getLogin() {
-				return this.login;
-			}
-			
-			public String getGravatarId() {
-				return this.gravatarId;
-			}
-			
-			public String getUrl() {
-				return this.url;
-			}
-			
-			@Override
-			public String toString() {
-				return "UserInner [ "
-					+ "avatarUrl = " + this.avatarUrl + ", "
-					+ "id = " + this.id + ", "
-					+ "login = " + this.login + ", "
-					+ "gravatarId = " + this.gravatarId + ", "
-					+ "url = " + this.url + ", "
-					+ "]"; 
-			}	
-		}
-		
-	}
-	
-	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class History {
+		public History(){}
 	
 		@JsonProperty("committed_at") 
 		private String committedAt;
@@ -361,7 +287,9 @@ public class Gist {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class ChangeStatus {
+		public static class ChangeStatus {
+		
+			public ChangeStatus(){}
 		
 			@JsonProperty("total") 
 			private Integer total;
@@ -395,7 +323,9 @@ public class Gist {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class UserInnerInner {
+		public static class UserInnerInner {
+		
+			public UserInnerInner(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -435,6 +365,94 @@ public class Gist {
 			@Override
 			public String toString() {
 				return "UserInnerInner [ "
+					+ "avatarUrl = " + this.avatarUrl + ", "
+					+ "id = " + this.id + ", "
+					+ "login = " + this.login + ", "
+					+ "gravatarId = " + this.gravatarId + ", "
+					+ "url = " + this.url + ", "
+					+ "]"; 
+			}	
+		}
+		
+	}
+	
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static class Forks {
+	
+		public Forks(){}
+	
+		@JsonProperty("created_at") 
+		private String createdAt;
+		
+		@JsonProperty("url") 
+		private String url;
+		
+		@JsonProperty("user") 
+		private UserInner userInner;
+		
+		public String getCreatedAt() {
+			return this.createdAt;
+		}
+		
+		public String getUrl() {
+			return this.url;
+		}
+		
+		public UserInner getUserInner() {
+			return this.userInner;
+		}
+		
+		@Override
+		public String toString() {
+			return "Forks [ "
+				+ "createdAt = " + this.createdAt + ", "
+				+ "url = " + this.url + ", "
+				+ "userInner = " + this.userInner + ", "
+				+ "]"; 
+		}	
+		@JsonIgnoreProperties(ignoreUnknown = true)
+		public static class UserInner {
+		
+			public UserInner(){}
+		
+			@JsonProperty("avatar_url") 
+			private String avatarUrl;
+			
+			@JsonProperty("id") 
+			private Integer id;
+			
+			@JsonProperty("login") 
+			private String login;
+			
+			@JsonProperty("gravatar_id") 
+			private String gravatarId;
+			
+			@JsonProperty("url") 
+			private String url;
+			
+			public String getAvatarUrl() {
+				return this.avatarUrl;
+			}
+			
+			public Integer getId() {
+				return this.id;
+			}
+			
+			public String getLogin() {
+				return this.login;
+			}
+			
+			public String getGravatarId() {
+				return this.gravatarId;
+			}
+			
+			public String getUrl() {
+				return this.url;
+			}
+			
+			@Override
+			public String toString() {
+				return "UserInner [ "
 					+ "avatarUrl = " + this.avatarUrl + ", "
 					+ "id = " + this.id + ", "
 					+ "login = " + this.login + ", "

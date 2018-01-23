@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Labels {
 
+	public Labels(){}
+
 	@JsonProperty("color") 
 	private String color;
 	

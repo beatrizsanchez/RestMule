@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Branches {
 
+	public Branches(){}
+
 	@JsonProperty("name") 
 	private String name;
 	
@@ -28,7 +30,9 @@ public class Branches {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Commit {
+	public static class Commit {
+	
+		public Commit(){}
 	
 		@JsonProperty("sha") 
 		private String sha;

@@ -5,13 +5,13 @@ import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PAGE_INFO;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.epsilonlabs.rescli.core.callback.AbstractCallback;
+import org.epsilonlabs.rescli.core.callback.AbstractWrappedCallback;
+import org.epsilonlabs.rescli.core.page.IWrap;
 import org.epsilonlabs.rescli.github.data.GitHubDataSet;
 import org.epsilonlabs.rescli.github.page.GitHubPagination;
 import org.epsilonlabs.rescli.github.util.GitHubPropertiesUtil;
@@ -20,30 +20,30 @@ import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class GitHubCallback<D> extends AbstractCallback<D,List<D>, GitHubDataSet<D>>  {
+public class GitHubWrappedCallback<D,R extends IWrap<D>> extends AbstractWrappedCallback<D,R, GitHubDataSet<D>>  {
 
-	private static final Logger LOG = LogManager.getLogger(GitHubCallback.class);
+	private static final Logger LOG = LogManager.getLogger(GitHubWrappedCallback.class);
 	
-	//private static GitHubPagination paginationPolicy = GitHubPagination.get();
+	private static GitHubPagination paginationPolicy = GitHubPagination.get();
 	
-	public GitHubCallback() {
+	public GitHubWrappedCallback() {
 		super(new GitHubDataSet<D>());
 	}
 
 	// FIXME move these methods to super abstract class <--
 	
 	@Override
-	public void handleResponse(Response<List<D>> response) {
-		this.dataset.addElements(response.body());
+	public void handleResponse(Response<R> response) {
+		this.dataset.addElements(response.body().getItems());
 	}
 
 	@Override
-	public void handleTotal(Response<List<D>> response) {
-		// Ignore for the moment
+	public void handleTotal(Response<R> response) {
+		this.dataset.setTotal(response.body().getTotalCount());
 	}
 
 	@Override
-	public void handleError(Call<List<D>> call, Throwable t) {
+	public void handleError(Call<R> call, Throwable t) {
 		LOG.error(t.getMessage());
 		LOG.error(call.request().url()); // TODO RETRY
 	}
@@ -51,7 +51,7 @@ public class GitHubCallback<D> extends AbstractCallback<D,List<D>, GitHubDataSet
 	// --->
 	
 	@Override
-	public Integer totalIterations(Response<List<D>> response) { // FIXME
+	public Integer totalIterations(Response<R> response) { // FIXME
 		Headers headers = response.headers();
 		String pagination = GitHubPropertiesUtil.get(PAGE_INFO);
 		String headerValue;

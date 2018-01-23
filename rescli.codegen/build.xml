@@ -3,8 +3,8 @@
 		
 	<!--Variables -->
 	<property name="json.model.file" value="schemas/github_v3.json"/>
-	<property name="target" value="target.project.name"/>		
-	<property name="output" value="../target.project.name"/>
+	<property name="target" value="rescli.github"/>		
+	<property name="output" value="../examples/rescli.github"/>
 	<property name="fix" value="epsilon/util/github/fix.eol"/>
 		
 	<!--Properties -->

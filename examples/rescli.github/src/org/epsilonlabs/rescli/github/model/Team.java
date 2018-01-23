@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Team {
 
+	public Team(){}
+
 	@JsonProperty("repos_count") 
 	private Integer reposCount;
 	

@@ -1,4 +1,4 @@
-package rescli.test.generated;
+package rescli.github.test;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.runners.MethodSorters.NAME_ASCENDING;

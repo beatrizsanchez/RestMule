@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Repo {
 
+	public Repo(){}
+
 	@JsonProperty("private") 
 	private Boolean privateSanitized;
 	
@@ -276,7 +278,9 @@ public class Repo {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Parent {
+	public static class Parent {
+	
+		public Parent(){}
 	
 		@JsonProperty("private") 
 		private Boolean privateSanitized;
@@ -500,7 +504,9 @@ public class Repo {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class OwnerInner {
+		public static class OwnerInner {
+		
+			public OwnerInner(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -552,7 +558,9 @@ public class Repo {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Source {
+	public static class Source {
+	
+		public Source(){}
 	
 		@JsonProperty("private") 
 		private Boolean privateSanitized;
@@ -776,7 +784,9 @@ public class Repo {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class OwnerInnerInner {
+		public static class OwnerInnerInner {
+		
+			public OwnerInnerInner(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -828,7 +838,9 @@ public class Repo {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Owner {
+	public static class Owner {
+	
+		public Owner(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -878,7 +890,9 @@ public class Repo {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Organization {
+	public static class Organization {
+	
+		public Organization(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

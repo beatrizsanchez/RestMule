@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Emojis {
 
+	public Emojis(){}
+
 	@JsonProperty("100") 
 	private String sanitized100;
 	

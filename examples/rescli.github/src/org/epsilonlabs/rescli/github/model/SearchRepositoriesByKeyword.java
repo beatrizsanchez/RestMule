@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchRepositoriesByKeyword {
 
+	public SearchRepositoriesByKeyword(){}
+
 	@JsonProperty("repositories") 
 	private List<Repositories> repositories = new ArrayList<Repositories>();
 	
@@ -23,7 +25,9 @@ public class SearchRepositoriesByKeyword {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Repositories {
+	public static class Repositories {
+	
+		public Repositories(){}
 	
 		@JsonProperty("forks") 
 		private Integer forks;

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchIssuesByKeyword {
 
+	public SearchIssuesByKeyword(){}
+
 	@JsonProperty("issues") 
 	private List<Issues> issues = new ArrayList<Issues>();
 	
@@ -23,7 +25,9 @@ public class SearchIssuesByKeyword {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Issues {
+	public static class Issues {
+	
+		public Issues(){}
 	
 		@JsonProperty("comments") 
 		private Integer comments;

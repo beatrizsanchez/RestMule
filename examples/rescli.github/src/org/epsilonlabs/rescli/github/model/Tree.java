@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Tree {
 
+	public Tree(){}
+
 	@JsonProperty("sha") 
 	private String sha;
 	
@@ -39,7 +41,9 @@ public class Tree {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class TreeInner {
+	public static class TreeInner {
+	
+		public TreeInner(){}
 	
 		@JsonProperty("mode") 
 		private String mode;

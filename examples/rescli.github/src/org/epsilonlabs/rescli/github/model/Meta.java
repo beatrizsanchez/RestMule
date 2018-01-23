@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Meta {
 
+	public Meta(){}
+
 	@JsonProperty("git") 
 	private List<String> git = new ArrayList<String>();
 	

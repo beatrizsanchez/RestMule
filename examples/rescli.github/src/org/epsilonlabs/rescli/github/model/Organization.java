@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Organization {
 
+	public Organization(){}
+
 	@JsonProperty("created_at") 
 	private String createdAt;
 	

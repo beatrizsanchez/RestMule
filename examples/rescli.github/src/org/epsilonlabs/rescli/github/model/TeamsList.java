@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TeamsList {
 
+	public TeamsList(){}
+
 	@JsonProperty("repos_count") 
 	private Integer reposCount;
 	
@@ -68,7 +70,9 @@ public class TeamsList {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Organization {
+	public static class Organization {
+	
+		public Organization(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

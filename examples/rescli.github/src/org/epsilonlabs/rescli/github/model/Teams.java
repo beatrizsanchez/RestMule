@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Teams {
 
+	public Teams(){}
+
 	@JsonProperty("name") 
 	private String name;
 	

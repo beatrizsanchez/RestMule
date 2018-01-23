@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PullRequest {
 
+	public PullRequest(){}
+
 	@JsonProperty("issue_url") 
 	private String issueUrl;
 	
@@ -220,7 +222,9 @@ public class PullRequest {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Links {
+	public static class Links {
+	
+		public Links(){}
 	
 		@JsonProperty("comments") 
 		private Comments comments;
@@ -260,7 +264,9 @@ public class PullRequest {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Comments {
+		public static class Comments {
+		
+			public Comments(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -278,7 +284,9 @@ public class PullRequest {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class ReviewComments {
+		public static class ReviewComments {
+		
+			public ReviewComments(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -296,7 +304,9 @@ public class PullRequest {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Self {
+		public static class Self {
+		
+			public Self(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -314,7 +324,9 @@ public class PullRequest {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Html {
+		public static class Html {
+		
+			public Html(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -334,7 +346,9 @@ public class PullRequest {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class MergedBy {
+	public static class MergedBy {
+	
+		public MergedBy(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -384,7 +398,9 @@ public class PullRequest {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Head {
+	public static class Head {
+	
+		public Head(){}
 	
 		@JsonProperty("ref") 
 		private String ref;
@@ -432,7 +448,9 @@ public class PullRequest {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Repo {
+		public static class Repo {
+		
+			public Repo(){}
 		
 			@JsonProperty("private") 
 			private Boolean privateSanitized;
@@ -656,7 +674,9 @@ public class PullRequest {
 					+ "]"; 
 			}	
 			@JsonIgnoreProperties(ignoreUnknown = true)
-			public class OwnerInner {
+			public static class OwnerInner {
+			
+				public OwnerInner(){}
 			
 				@JsonProperty("avatar_url") 
 				private String avatarUrl;
@@ -708,7 +728,9 @@ public class PullRequest {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class UserInner {
+		public static class UserInner {
+		
+			public UserInner(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -760,7 +782,9 @@ public class PullRequest {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -810,7 +834,9 @@ public class PullRequest {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Base {
+	public static class Base {
+	
+		public Base(){}
 	
 		@JsonProperty("ref") 
 		private String ref;
@@ -858,7 +884,9 @@ public class PullRequest {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class RepoInner {
+		public static class RepoInner {
+		
+			public RepoInner(){}
 		
 			@JsonProperty("private") 
 			private Boolean privateSanitized;
@@ -1082,7 +1110,9 @@ public class PullRequest {
 					+ "]"; 
 			}	
 			@JsonIgnoreProperties(ignoreUnknown = true)
-			public class Owner {
+			public static class Owner {
+			
+				public Owner(){}
 			
 				@JsonProperty("avatar_url") 
 				private String avatarUrl;
@@ -1134,7 +1164,9 @@ public class PullRequest {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class UserInnerInner {
+		public static class UserInnerInner {
+		
+			public UserInnerInner(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;

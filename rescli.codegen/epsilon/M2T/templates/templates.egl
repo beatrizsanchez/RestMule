@@ -72,11 +72,12 @@ operation Response endpointRequest(paged : PaginationPolicy, name : String) { %]
 	   		params = request.parameters;
 	   }
 	%]
+	// FIXME using endocde=true caused Lucene (cache) to break
 	@[%= request.method %]("[%= request.parent.path %]")
 	[%= self.getEndpointType(name) %] [%= self.methodName() 
 	%]([% if (params.size() == 0){ %]);
 	[% } else { %][% for (param in params) { %]
-	
+			
 			@[%= param.paramType() %][%if (not param.instanceOf(Body)) {%](value="[%= param.type.label %]", encoded=true)[% } %] [%= param.type.getType() %] [%= param.type.name.firstToLowerCase() %][% 
 			if (param.type.name == params.last.type.name) { %]);
 			[% } else {%],[% } %][% } %][% } %]
@@ -163,13 +164,31 @@ operation ObjectType nestTemplate() { %]
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class [%= self.getType() %] {
 
+	public [%= self.getType() %](){}
+
 [%= self.fieldsTemplate()%]	
 [%  for (nested in self.inner()){ %]
-	[%= nested.nestTemplate() %]
+	[%= nested.nestInnerTemplate() %]
 	
 [%  } %]
 }
 [%  } %]
+
+[% 	@template 
+operation ObjectType nestInnerTemplate() { %]
+@JsonIgnoreProperties(ignoreUnknown = true)
+public static class [%= self.getType() %] {
+
+	public [%= self.getType() %](){}
+
+[%= self.fieldsTemplate()%]	
+[%  for (nested in self.inner()){ %]
+	[%= nested.nestInnerTemplate() %]
+	
+[%  } %]
+}
+[%  } %]
+
 
 [% 	@template 
 operation ObjectType fieldsTemplate() { %]

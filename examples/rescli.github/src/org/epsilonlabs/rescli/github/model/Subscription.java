@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Subscription {
 
+	public Subscription(){}
+
 	@JsonProperty("ignored") 
 	private Boolean ignored;
 	

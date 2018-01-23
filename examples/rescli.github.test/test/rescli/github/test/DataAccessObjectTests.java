@@ -1,4 +1,4 @@
-package rescli.test.generated;
+package rescli.github.test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

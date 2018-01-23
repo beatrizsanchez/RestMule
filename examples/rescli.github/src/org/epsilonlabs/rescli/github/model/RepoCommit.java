@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RepoCommit {
 
+	public RepoCommit(){}
+
 	@JsonProperty("message") 
 	private String message;
 	
@@ -71,7 +73,9 @@ public class RepoCommit {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Committer {
+	public static class Committer {
+	
+		public Committer(){}
 	
 		@JsonProperty("date") 
 		private String date;
@@ -105,7 +109,9 @@ public class RepoCommit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Author {
+	public static class Author {
+	
+		public Author(){}
 	
 		@JsonProperty("date") 
 		private String date;
@@ -139,7 +145,9 @@ public class RepoCommit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Tree {
+	public static class Tree {
+	
+		public Tree(){}
 	
 		@JsonProperty("sha") 
 		private String sha;
@@ -165,7 +173,9 @@ public class RepoCommit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Parents {
+	public static class Parents {
+	
+		public Parents(){}
 	
 		@JsonProperty("sha") 
 		private String sha;

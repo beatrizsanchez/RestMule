@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Milestone {
 
+	public Milestone(){}
+
 	@JsonProperty("number") 
 	private Integer number;
 	
@@ -92,7 +94,9 @@ public class Milestone {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Creator {
+	public static class Creator {
+	
+		public Creator(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

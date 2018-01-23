@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Comments {
 
+	public Comments(){}
+
 	@JsonProperty("created_at") 
 	private String createdAt;
 	
@@ -52,7 +54,9 @@ public class Comments {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

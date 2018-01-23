@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Repositories {
 
+	public Repositories(){}
+
 	@JsonProperty("fork") 
 	private Boolean fork;
 	
@@ -84,7 +86,9 @@ public class Repositories {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Owner {
+	public static class Owner {
+	
+		public Owner(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

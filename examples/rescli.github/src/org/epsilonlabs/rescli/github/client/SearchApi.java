@@ -6,15 +6,13 @@ import java.util.concurrent.ExecutorService;
 
 import org.epsilonlabs.rescli.core.client.AbstractClient;
 import org.epsilonlabs.rescli.core.client.IClientBuilder;
+import org.epsilonlabs.rescli.core.data.IData;
+import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
-import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
-import org.epsilonlabs.rescli.github.model.SearchCode;
-import org.epsilonlabs.rescli.github.model.SearchIssues;
-import org.epsilonlabs.rescli.github.model.SearchRepositories;
-import org.epsilonlabs.rescli.github.model.SearchUsers;
+import org.epsilonlabs.rescli.github.model.*;
 import org.epsilonlabs.rescli.github.page.GitHubPaged;
 import org.epsilonlabs.rescli.github.page.GitHubPagination;
 import org.epsilonlabs.rescli.github.session.GitHubSession;

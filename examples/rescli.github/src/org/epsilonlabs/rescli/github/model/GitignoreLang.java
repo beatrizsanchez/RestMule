@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GitignoreLang {
 
+	public GitignoreLang(){}
+
 	@JsonProperty("name") 
 	private String name;
 	

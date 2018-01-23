@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Gists {
 
+	public Gists(){}
+
 	@JsonProperty("comments") 
 	private Integer comments;
 	
@@ -108,7 +110,9 @@ public class Gists {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Files {
+	public static class Files {
+	
+		public Files(){}
 	
 		@JsonProperty("ring.erl") 
 		private RingErl ringErl;
@@ -124,7 +128,9 @@ public class Gists {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class RingErl {
+		public static class RingErl {
+		
+			public RingErl(){}
 		
 			@JsonProperty("filename") 
 			private String filename;
@@ -160,7 +166,9 @@ public class Gists {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

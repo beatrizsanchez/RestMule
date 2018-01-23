@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TeamMembership {
 
+	public TeamMembership(){}
+
 	@JsonProperty("state") 
 	private String state;
 	

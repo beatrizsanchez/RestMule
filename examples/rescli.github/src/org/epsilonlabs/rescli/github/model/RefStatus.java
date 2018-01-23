@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RefStatus {
 
+	public RefStatus(){}
+
 	@JsonProperty("commit_url") 
 	private String commitUrl;
 	
@@ -63,7 +65,9 @@ public class RefStatus {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Statuses {
+	public static class Statuses {
+	
+		public Statuses(){}
 	
 		@JsonProperty("updated_at") 
 		private String updatedAt;

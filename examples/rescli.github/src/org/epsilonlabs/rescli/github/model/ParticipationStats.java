@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ParticipationStats {
 
+	public ParticipationStats(){}
+
 	@JsonProperty("all") 
 	private List<Integer> all = new ArrayList<Integer>();
 	

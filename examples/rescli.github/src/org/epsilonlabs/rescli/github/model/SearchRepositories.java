@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchRepositories {
 
+	public SearchRepositories(){}
+
 	@JsonProperty("forks") 
 	private Integer forks;
 	
@@ -204,7 +206,9 @@ public class SearchRepositories {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Owner {
+	public static class Owner {
+	
+		public Owner(){}
 	
 		@JsonProperty("received_events_url") 
 		private String receivedEventsUrl;

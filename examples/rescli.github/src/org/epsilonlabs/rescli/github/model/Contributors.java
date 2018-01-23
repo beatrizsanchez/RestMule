@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Contributors {
 
+	public Contributors(){}
+
 	@JsonProperty("contributions") 
 	private Integer contributions;
 	

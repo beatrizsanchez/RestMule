@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserKeysKeyId {
 
+	public UserKeysKeyId(){}
+
 	@JsonProperty("id") 
 	private Integer id;
 	

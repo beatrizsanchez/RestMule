@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TeamRepos {
 
+	public TeamRepos(){}
+
 	@JsonProperty("private") 
 	private Boolean privateSanitized;
 	
@@ -228,7 +230,9 @@ public class TeamRepos {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Owner {
+	public static class Owner {
+	
+		public Owner(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Event {
 
+	public Event(){}
+
 	@JsonProperty("created_at") 
 	private String createdAt;
 	
@@ -63,7 +65,9 @@ public class Event {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Actor {
+	public static class Actor {
+	
+		public Actor(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -113,7 +117,9 @@ public class Event {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Issue {
+	public static class Issue {
+	
+		public Issue(){}
 	
 		@JsonProperty("closed_at") 
 		private String closedAt;
@@ -241,7 +247,9 @@ public class Event {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class PullRequest {
+		public static class PullRequest {
+		
+			public PullRequest(){}
 		
 			@JsonProperty("patch_url") 
 			private String patchUrl;
@@ -275,7 +283,9 @@ public class Event {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Milestone {
+		public static class Milestone {
+		
+			public Milestone(){}
 		
 			@JsonProperty("number") 
 			private Integer number;
@@ -363,7 +373,9 @@ public class Event {
 					+ "]"; 
 			}	
 			@JsonIgnoreProperties(ignoreUnknown = true)
-			public class Creator {
+			public static class Creator {
+			
+				public Creator(){}
 			
 				@JsonProperty("avatar_url") 
 				private String avatarUrl;
@@ -415,7 +427,9 @@ public class Event {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Assignee {
+		public static class Assignee {
+		
+			public Assignee(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -465,7 +479,9 @@ public class Event {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class User {
+		public static class User {
+		
+			public User(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;
@@ -515,7 +531,9 @@ public class Event {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Labels {
+		public static class Labels {
+		
+			public Labels(){}
 		
 			@JsonProperty("color") 
 			private String color;

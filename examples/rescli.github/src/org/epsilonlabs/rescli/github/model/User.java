@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
+	public User(){}
+
 	@JsonProperty("bio") 
 	private String bio;
 	
@@ -212,7 +214,9 @@ public class User {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Plan {
+	public static class Plan {
+	
+		public Plan(){}
 	
 		@JsonProperty("private_repos") 
 		private Integer privateRepos;

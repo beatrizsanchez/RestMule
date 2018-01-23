@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Comment {
 
+	public Comment(){}
+
 	@JsonProperty("body") 
 	private String body;
 	

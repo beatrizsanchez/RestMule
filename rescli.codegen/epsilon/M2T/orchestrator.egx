@@ -292,6 +292,17 @@ rule Manifest
 	target : output + "META-INF/MANIFEST.MF"
 }
 
+rule Project
+	transform R : API {
+	parameters{
+		var params : new Map;  	
+  		params.put("name", apiNameLowerCase);
+  		return params;
+	}
+	template : "project.egl"
+	target : output + ".project"
+}
+
 post { 
 	("Transformation finished").println(); 
 }

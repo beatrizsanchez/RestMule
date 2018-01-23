@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Commit {
 
+	public Commit(){}
+
 	@JsonProperty("sha") 
 	private String sha;
 	
@@ -79,7 +81,9 @@ public class Commit {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Committer {
+	public static class Committer {
+	
+		public Committer(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -129,7 +133,9 @@ public class Commit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Stats {
+	public static class Stats {
+	
+		public Stats(){}
 	
 		@JsonProperty("total") 
 		private Integer total;
@@ -163,7 +169,9 @@ public class Commit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Author {
+	public static class Author {
+	
+		public Author(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -213,7 +221,9 @@ public class Commit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class CommitInner {
+	public static class CommitInner {
+	
+		public CommitInner(){}
 	
 		@JsonProperty("message") 
 		private String message;
@@ -261,7 +271,9 @@ public class Commit {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class CommitterInner {
+		public static class CommitterInner {
+		
+			public CommitterInner(){}
 		
 			@JsonProperty("date") 
 			private String date;
@@ -295,7 +307,9 @@ public class Commit {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class AuthorInner {
+		public static class AuthorInner {
+		
+			public AuthorInner(){}
 		
 			@JsonProperty("date") 
 			private String date;
@@ -329,7 +343,9 @@ public class Commit {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Tree {
+		public static class Tree {
+		
+			public Tree(){}
 		
 			@JsonProperty("sha") 
 			private String sha;
@@ -357,7 +373,9 @@ public class Commit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Parents {
+	public static class Parents {
+	
+		public Parents(){}
 	
 		@JsonProperty("sha") 
 		private String sha;
@@ -383,7 +401,9 @@ public class Commit {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Files {
+	public static class Files {
+	
+		public Files(){}
 	
 		@JsonProperty("patch") 
 		private String patch;

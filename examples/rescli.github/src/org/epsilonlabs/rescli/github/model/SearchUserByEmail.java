@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchUserByEmail {
 
+	public SearchUserByEmail(){}
+
 	@JsonProperty("user") 
 	private User user;
 	
@@ -20,7 +22,9 @@ public class SearchUserByEmail {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("created") 
 		private String created;

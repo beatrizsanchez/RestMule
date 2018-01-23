@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ContributorsStats {
 
+	public ContributorsStats(){}
+
 	@JsonProperty("total") 
 	private Integer total;
 	
@@ -39,7 +41,9 @@ public class ContributorsStats {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Author {
+	public static class Author {
+	
+		public Author(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -89,7 +93,9 @@ public class ContributorsStats {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Weeks {
+	public static class Weeks {
+	
+		public Weeks(){}
 	
 		@JsonProperty("a") 
 		private Integer a;

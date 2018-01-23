@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Release {
 
+	public Release(){}
+
 	@JsonProperty("tag_name") 
 	private String tagName;
 	
@@ -151,7 +153,9 @@ public class Release {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Author {
+	public static class Author {
+	
+		public Author(){}
 	
 		@JsonProperty("gists_url") 
 		private String gistsUrl;
@@ -297,7 +301,9 @@ public class Release {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Assets {
+	public static class Assets {
+	
+		public Assets(){}
 	
 		@JsonProperty("content_type") 
 		private String contentType;
@@ -393,7 +399,9 @@ public class Release {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Uploader {
+		public static class Uploader {
+		
+			public Uploader(){}
 		
 			@JsonProperty("gists_url") 
 			private String gistsUrl;

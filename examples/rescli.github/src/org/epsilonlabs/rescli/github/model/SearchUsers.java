@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchUsers {
 
+	public SearchUsers(){}
+
 	@JsonProperty("repos_url") 
 	private String reposUrl;
 	

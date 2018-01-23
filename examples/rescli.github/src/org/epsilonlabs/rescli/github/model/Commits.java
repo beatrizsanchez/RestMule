@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Commits {
 
+	public Commits(){}
+
 	@JsonProperty("sha") 
 	private String sha;
 	
@@ -63,7 +65,9 @@ public class Commits {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Committer {
+	public static class Committer {
+	
+		public Committer(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -113,7 +117,9 @@ public class Commits {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Author {
+	public static class Author {
+	
+		public Author(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;
@@ -163,7 +169,9 @@ public class Commits {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Commit {
+	public static class Commit {
+	
+		public Commit(){}
 	
 		@JsonProperty("message") 
 		private String message;
@@ -211,7 +219,9 @@ public class Commits {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class CommitterInner {
+		public static class CommitterInner {
+		
+			public CommitterInner(){}
 		
 			@JsonProperty("date") 
 			private String date;
@@ -245,7 +255,9 @@ public class Commits {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class AuthorInner {
+		public static class AuthorInner {
+		
+			public AuthorInner(){}
 		
 			@JsonProperty("date") 
 			private String date;
@@ -279,7 +291,9 @@ public class Commits {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Tree {
+		public static class Tree {
+		
+			public Tree(){}
 		
 			@JsonProperty("sha") 
 			private String sha;
@@ -307,7 +321,9 @@ public class Commits {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Parents {
+	public static class Parents {
+	
+		public Parents(){}
 	
 		@JsonProperty("sha") 
 		private String sha;

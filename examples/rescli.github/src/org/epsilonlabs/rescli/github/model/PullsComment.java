@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PullsComment {
 
+	public PullsComment(){}
+
 	@JsonProperty("path") 
 	private String path;
 	
@@ -92,7 +94,9 @@ public class PullsComment {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Links {
+	public static class Links {
+	
+		public Links(){}
 	
 		@JsonProperty("pull_request") 
 		private PullRequest pullRequest;
@@ -124,7 +128,9 @@ public class PullsComment {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class PullRequest {
+		public static class PullRequest {
+		
+			public PullRequest(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -142,7 +148,9 @@ public class PullsComment {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Self {
+		public static class Self {
+		
+			public Self(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -160,7 +168,9 @@ public class PullsComment {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Html {
+		public static class Html {
+		
+			public Html(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -180,7 +190,9 @@ public class PullsComment {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class User {
+	public static class User {
+	
+		public User(){}
 	
 		@JsonProperty("avatar_url") 
 		private String avatarUrl;

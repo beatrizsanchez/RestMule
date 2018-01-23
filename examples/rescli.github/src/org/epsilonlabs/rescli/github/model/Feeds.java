@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Feeds {
 
+	public Feeds(){}
+
 	@JsonProperty("current_user_organization_url") 
 	private String currentUserOrganizationUrl;
 	
@@ -68,7 +70,9 @@ public class Feeds {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Links {
+	public static class Links {
+	
+		public Links(){}
 	
 		@JsonProperty("current_user_organization") 
 		private CurrentUserOrganization currentUserOrganization;
@@ -124,7 +128,9 @@ public class Feeds {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class CurrentUserOrganization {
+		public static class CurrentUserOrganization {
+		
+			public CurrentUserOrganization(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -150,7 +156,9 @@ public class Feeds {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class CurrentUserActor {
+		public static class CurrentUserActor {
+		
+			public CurrentUserActor(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -176,7 +184,9 @@ public class Feeds {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Timeline {
+		public static class Timeline {
+		
+			public Timeline(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -202,7 +212,9 @@ public class Feeds {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class User {
+		public static class User {
+		
+			public User(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -228,7 +240,9 @@ public class Feeds {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class CurrentUserPublic {
+		public static class CurrentUserPublic {
+		
+			public CurrentUserPublic(){}
 		
 			@JsonProperty("href") 
 			private String href;
@@ -254,7 +268,9 @@ public class Feeds {
 		}
 		
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class CurrentUser {
+		public static class CurrentUser {
+		
+			public CurrentUser(){}
 		
 			@JsonProperty("href") 
 			private String href;

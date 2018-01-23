@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SearchCode {
 
+	public SearchCode(){}
+
 	@JsonProperty("path") 
 	private String path;
 	
@@ -76,7 +78,9 @@ public class SearchCode {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Repository {
+	public static class Repository {
+	
+		public Repository(){}
 	
 		@JsonProperty("tags_url") 
 		private String tagsUrl;
@@ -428,7 +432,9 @@ public class SearchCode {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Owner {
+		public static class Owner {
+		
+			public Owner(){}
 		
 			@JsonProperty("gists_url") 
 			private String gistsUrl;

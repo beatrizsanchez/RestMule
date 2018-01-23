@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Notifications {
 
+	public Notifications(){}
+
 	@JsonProperty("reason") 
 	private String reason;
 	
@@ -76,7 +78,9 @@ public class Notifications {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Subject {
+	public static class Subject {
+	
+		public Subject(){}
 	
 		@JsonProperty("latest_comment_url") 
 		private String latestCommentUrl;
@@ -118,7 +122,9 @@ public class Notifications {
 	}
 	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Repository {
+	public static class Repository {
+	
+		public Repository(){}
 	
 		@JsonProperty("fork") 
 		private Boolean fork;
@@ -198,7 +204,9 @@ public class Notifications {
 				+ "]"; 
 		}	
 		@JsonIgnoreProperties(ignoreUnknown = true)
-		public class Owner {
+		public static class Owner {
+		
+			public Owner(){}
 		
 			@JsonProperty("avatar_url") 
 			private String avatarUrl;

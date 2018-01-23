@@ -9,6 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Hook {
 
+	public Hook(){}
+
 	@JsonProperty("updated_at") 
 	private String updatedAt;
 	
@@ -79,7 +81,9 @@ public class Hook {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Config {
+	public static class Config {
+	
+		public Config(){}
 	
 		@JsonProperty("content_type") 
 		private String contentType;

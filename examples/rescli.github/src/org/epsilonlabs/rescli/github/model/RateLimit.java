@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RateLimit {
 
+	public RateLimit(){}
+
 	@JsonProperty("rate") 
 	private Rate rate;
 	
@@ -20,7 +22,9 @@ public class RateLimit {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Rate {
+	public static class Rate {
+	
+		public Rate(){}
 	
 		@JsonProperty("limit") 
 		private Integer limit;

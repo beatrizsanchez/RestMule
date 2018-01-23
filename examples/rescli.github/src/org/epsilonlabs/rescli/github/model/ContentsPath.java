@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ContentsPath {
 
+	public ContentsPath(){}
+
 	@JsonProperty("path") 
 	private String path;
 	
@@ -100,7 +102,9 @@ public class ContentsPath {
 			+ "]"; 
 	}	
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public class Links {
+	public static class Links {
+	
+		public Links(){}
 	
 		@JsonProperty("git") 
 		private String git;

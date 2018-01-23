@@ -6,86 +6,14 @@ import java.util.concurrent.ExecutorService;
 
 import org.epsilonlabs.rescli.core.client.AbstractClient;
 import org.epsilonlabs.rescli.core.client.IClientBuilder;
-import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IData;
+import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
-import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
-import org.epsilonlabs.rescli.github.model.Asset;
-import org.epsilonlabs.rescli.github.model.Assets;
-import org.epsilonlabs.rescli.github.model.Assignees;
-import org.epsilonlabs.rescli.github.model.Blob;
-import org.epsilonlabs.rescli.github.model.Branch;
-import org.epsilonlabs.rescli.github.model.Branches;
-import org.epsilonlabs.rescli.github.model.Comment;
-import org.epsilonlabs.rescli.github.model.Comments;
-import org.epsilonlabs.rescli.github.model.Commit;
-import org.epsilonlabs.rescli.github.model.CommitActivityStats;
-import org.epsilonlabs.rescli.github.model.CommitComments;
-import org.epsilonlabs.rescli.github.model.Commits;
-import org.epsilonlabs.rescli.github.model.ContentsPath;
-import org.epsilonlabs.rescli.github.model.Contributors;
-import org.epsilonlabs.rescli.github.model.ContributorsStats;
-import org.epsilonlabs.rescli.github.model.DeploymentStatuses;
-import org.epsilonlabs.rescli.github.model.Downloads;
-import org.epsilonlabs.rescli.github.model.Emojis;
-import org.epsilonlabs.rescli.github.model.Event;
-import org.epsilonlabs.rescli.github.model.Events;
-import org.epsilonlabs.rescli.github.model.Feeds;
-import org.epsilonlabs.rescli.github.model.Forks;
-import org.epsilonlabs.rescli.github.model.Gist;
-import org.epsilonlabs.rescli.github.model.Gists;
-import org.epsilonlabs.rescli.github.model.GitignoreLang;
-import org.epsilonlabs.rescli.github.model.HeadBranch;
-import org.epsilonlabs.rescli.github.model.Hook;
-import org.epsilonlabs.rescli.github.model.Issue;
-import org.epsilonlabs.rescli.github.model.Issues;
-import org.epsilonlabs.rescli.github.model.IssuesComment;
-import org.epsilonlabs.rescli.github.model.IssuesComments;
-import org.epsilonlabs.rescli.github.model.Keys;
-import org.epsilonlabs.rescli.github.model.Label;
-import org.epsilonlabs.rescli.github.model.Labels;
-import org.epsilonlabs.rescli.github.model.Languages;
-import org.epsilonlabs.rescli.github.model.Meta;
-import org.epsilonlabs.rescli.github.model.Milestone;
-import org.epsilonlabs.rescli.github.model.Notifications;
-import org.epsilonlabs.rescli.github.model.Organization;
-import org.epsilonlabs.rescli.github.model.ParticipationStats;
-import org.epsilonlabs.rescli.github.model.PullRequest;
-import org.epsilonlabs.rescli.github.model.Pulls;
-import org.epsilonlabs.rescli.github.model.PullsComment;
-import org.epsilonlabs.rescli.github.model.RateLimit;
-import org.epsilonlabs.rescli.github.model.Ref;
-import org.epsilonlabs.rescli.github.model.RefStatus;
-import org.epsilonlabs.rescli.github.model.Refs;
-import org.epsilonlabs.rescli.github.model.Release;
-import org.epsilonlabs.rescli.github.model.Releases;
-import org.epsilonlabs.rescli.github.model.Repo;
-import org.epsilonlabs.rescli.github.model.RepoComments;
-import org.epsilonlabs.rescli.github.model.RepoCommit;
-import org.epsilonlabs.rescli.github.model.RepoDeployments;
-import org.epsilonlabs.rescli.github.model.Repos;
-import org.epsilonlabs.rescli.github.model.Repositories;
-import org.epsilonlabs.rescli.github.model.SearchIssuesByKeyword;
-import org.epsilonlabs.rescli.github.model.SearchRepositoriesByKeyword;
-import org.epsilonlabs.rescli.github.model.SearchUserByEmail;
-import org.epsilonlabs.rescli.github.model.SearchUsersByKeyword;
-import org.epsilonlabs.rescli.github.model.Subscribition;
-import org.epsilonlabs.rescli.github.model.Subscription;
-import org.epsilonlabs.rescli.github.model.Tag;
-import org.epsilonlabs.rescli.github.model.Tags;
-import org.epsilonlabs.rescli.github.model.Team;
-import org.epsilonlabs.rescli.github.model.TeamMembership;
-import org.epsilonlabs.rescli.github.model.TeamRepos;
-import org.epsilonlabs.rescli.github.model.Teams;
-import org.epsilonlabs.rescli.github.model.TeamsList;
-import org.epsilonlabs.rescli.github.model.Tree;
-import org.epsilonlabs.rescli.github.model.User;
-import org.epsilonlabs.rescli.github.model.UserKeysKeyId;
-import org.epsilonlabs.rescli.github.model.UserUserIdSubscribitions;
-import org.epsilonlabs.rescli.github.model.Users;
+import org.epsilonlabs.rescli.github.model.*;
+import org.epsilonlabs.rescli.github.page.GitHubPaged;
 import org.epsilonlabs.rescli.github.page.GitHubPagination;
 import org.epsilonlabs.rescli.github.session.GitHubSession;
 import org.epsilonlabs.rescli.github.util.GitHubPropertiesUtil;
@@ -169,27 +97,32 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Repos> getOrgsRepos(String org, String type){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getReposWatchersUsers(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Gists> getUsersGists(String username, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Repositories> getRepositories(String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Hook> getReposHooksHook(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -208,12 +141,14 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<IssuesComments> getReposIssuesComments(String owner, String repo, String direction, String sort, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<RepoDeployments> getReposDeploymentsRepoDeployments(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -225,12 +160,14 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Assets> getReposReleasesAssets(String owner, String repo, String id){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Refs> getReposGitRefs(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -284,17 +221,20 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Comments> getGistsComments(Integer id){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<RepoComments> getReposCommentsRepoComments(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Repos> getUserRepos(String type){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -320,22 +260,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<DeploymentStatuses> getReposDeploymentsStatusesDeploymentStatuses(String owner, String repo, Integer id){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Pulls> getReposPulls(String owner, String repo, String state, String head, String base){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Gists> getGists(String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getUserFollowersUsers(){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -354,7 +298,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Issues> getIssues(String filter, String state, String labels, String sort, String direction, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -373,22 +318,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Users> getTeamsMembersUsers(Integer teamId){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Labels> getReposMilestonesLabels(String owner, String repo, Integer number){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getOrgsMembersUsers(String org){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Hook> getReposHooksHookByHookId(String owner, String repo, Integer hookId){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -400,17 +349,20 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Gists> getGistsStarredGists(String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getReposSubscribersUsers(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getReposCollaboratorsUsers(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -436,7 +388,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Labels> getReposLabels(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -462,7 +415,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Commits> getReposCommits(String owner, String repo, String since, String sha, String path, String author, String until){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -481,12 +435,14 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Teams> getReposTeams(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<IssuesComments> getReposIssuesComments(String owner, String repo, Integer number){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -498,7 +454,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Users> getOrgsPublic_membersUsers(String org){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -517,22 +474,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<CommitActivityStats> getReposStatsCommit_activityCommitActivityStats(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Branches> getReposBranches(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Repos> getUsersRepos(String username, String type){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Ref> getReposStatusesRefByRef(String owner, String repo, String ref){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -565,22 +526,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Gists> getGistsPublicGists(String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Issues> getUserIssues(String filter, String state, String labels, String sort, String direction, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<TeamsList> getUserTeamsTeamsList(){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<UserUserIdSubscribitions> getUserSubscriptionsUserUserIdSubscribitions(){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -599,7 +564,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Releases> getReposReleases(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -611,22 +577,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Users> getReposStargazersUsers(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Integer> getReposStatsCode_frequencyCodeFrequencyStats(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Assignees> getReposAssignees(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getUserFollowingUsers(){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -638,7 +608,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Issues> getReposIssues(String owner, String repo, String filter, String state, String labels, String sort, String direction, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -650,7 +621,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Pulls> getReposPullsFilesPulls(String owner, String repo, Integer number){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -676,7 +648,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Integer> getReposStatsPunch_cardCodeFrequencyStats(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -688,17 +661,20 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<ContributorsStats> getReposStatsContributorsContributorsStats(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getUsersByUsername(String username){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<String> getUserEmails(){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -731,47 +707,56 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Issues> getOrgsIssues(String org, String filter, String state, String labels, String sort, String direction, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getUsersFollowersUsers(String username){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Contributors> getReposContributors(String owner, String repo, String anon){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<IssuesComments> getReposPullsCommentsIssuesComments(String owner, String repo, String direction, String sort, String since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Labels> getReposIssuesLabels(String owner, String repo, Integer number){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Commits> getReposPullsCommits(String owner, String repo, Integer number){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<RefStatus> getReposCommitsStatusRefStatus(String owner, String repo, String ref){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<RepoComments> getReposCommitsCommentsRepoComments(String owner, String repo, String shaCode){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
 		public IDataSet<Users> getUsers(Integer since){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -783,7 +768,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<TeamRepos> getTeamsReposTeamRepos(Integer teamId){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -795,7 +781,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Forks> getReposForks(String owner, String repo, String sort){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -821,7 +808,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Teams> getOrgsTeams(String org){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
@@ -833,7 +821,8 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Keys> getReposKeys(String owner, String repo){
-			return null; // TODO (FIXME) Add support for arrays!! 
+			throw new NullPointerException("Method is undefined");
+			//return null; // TODO (FIXME) Add support for arrays!! 
 		}
 		
 		@Override
