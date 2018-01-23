@@ -32,13 +32,16 @@ public class GitHubTestUtil {
 	protected static void setup(){
 		LOG.info("setting up properties");
 		
+		if(PrivateProperties.exists()){
 		token = PrivateProperties.get(PERSONAL_ACCESS_TOKEN);
 		username = PrivateProperties.get(USERNAME);
 		password = PrivateProperties.get(PASSWORD);
-		
-		publicSession = GitHubSession.createPublic();
 		OAuthSessionWithToken = GitHubSession.createWithBasicAuth(username, token);
 		basicSession = GitHubSession.createWithBasicAuth(username, password);
+		}
+		
+		publicSession = GitHubSession.createPublic();
+
 	}
 	
 	protected static void clearGitHubCache(){
@@ -48,6 +51,8 @@ public class GitHubTestUtil {
 	public static IGitHubApi getOAuthClient(){
 		if (OAuthSessionWithToken != null && oauthApi == null)
 			oauthApi = GitHubApi.create().setSession(OAuthSessionWithToken).build();
+		else if(oauthApi == null) 
+			oauthApi = GitHubApi.create().setSession(publicSession).build();
 		return oauthApi;
 	}	
 	

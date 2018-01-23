@@ -12,4 +12,8 @@ public class PrivateProperties {
 		return properties.getProperty(property);
 	}
 
+	public static boolean exists() {
+		return PrivateProperties.class.getClassLoader().getResourceAsStream(GITHUB_PRIVATE_PROPERTIES_FILE) != null;
+	}
+
 }

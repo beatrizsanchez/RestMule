@@ -63,7 +63,7 @@ public class MDEAnalysis extends GitHubTestUtil{
 				error -> LOG.error(error)
 				);
 
-		
+		/*
 		searchCode.observe()
 		.doOnNext( s -> Utils.isValid(s.getHtmlUrl(), e.getKeyword(), asyncClient))
 		.map( html -> html.getRepository())
@@ -78,6 +78,9 @@ public class MDEAnalysis extends GitHubTestUtil{
 			LOG.info("COMMIT DATE: " + commit.getCommit().getCommitterInner().getDate());
 			LOG.info("COMMIT SHA: " + commit.getSha());
 		});
+		*/
+		
+		
 		/*.map(a -> a.getCommit())
 		.subscribe(
 				a-> LOG.info(),
