@@ -3,6 +3,8 @@ package org.epsilonlabs.rescli.core.page;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.epsilonlabs.rescli.core.callback.AbstractCallback;
 import org.epsilonlabs.rescli.core.callback.AbstractWrappedCallback;
 import org.epsilonlabs.rescli.core.data.AbstractDataSet;
@@ -23,6 +25,8 @@ import retrofit2.Response;
  *
  */
 public abstract class AbstractPagination implements IPaged {
+	
+	private static final Logger LOG = LogManager.getLogger(AbstractPagination.class);
 
 	Integer startValue;
 	Integer max;
@@ -233,18 +237,19 @@ public abstract class AbstractPagination implements IPaged {
 			Call<List<T>> call = RetrofitUtil.<List<T>, END>getCall(methodName, listClass, listVals, (END) client);
 			call.enqueue(new Callback<List<T>>() {
 				@Override public void onResponse(Call<List<T>> call, Response<List<T>> response) {
-					//callback.handleTotal(response);
-					//callback.handleResponse(response);
+					((CALL) callback).handleTotal(response);
+					((CALL) callback).handleResponse(response);
 					Integer limit = callback.totalIterations(response);
+					LOG.info("LIMIT: " + limit);
+					if (limit == null) limit = 1;
+					
 					if (limit != null && limit != start ){
 						for (int iteration = start + increment; iteration <= limit; iteration = iteration + increment){
 							try {
 								listVals[argsLength + pagedParams - 1] = iteration;
 								Call<List<T>> pageCall = RetrofitUtil.<List<T>, END>
-								
 								getCall(methodName, listClass, listVals, client);
-								
-								pageCall.enqueue((Callback<List<T>>) callback);
+								pageCall.enqueue(callback);
 							} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 									| NoSuchMethodException | SecurityException e) {
 								e.printStackTrace();

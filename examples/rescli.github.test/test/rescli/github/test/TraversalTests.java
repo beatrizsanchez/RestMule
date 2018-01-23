@@ -23,8 +23,10 @@ public class TraversalTests extends GitHubTestUtil {
 
 	@Test
 	public void test() {
-		api.getReposCommits("epsilonlabs", "emc-json", null, null, null, null, null).observe()
-			.doOnNext(item -> LOG.info(item))
+		//api.getReposCommits("epsilonlabs", "emc-json", null, null, null, null, null)
+		api.getReposCommits("square", "okhttp", null, null, null, null, null)
+			.observe()
+			.doOnNext(item -> LOG.info(item.getCommit().getAuthorInner()))
 			.doOnError(e -> e.printStackTrace())
 			.blockingSubscribe();
 

@@ -3,7 +3,6 @@ package org.epsilonlabs.rescli.core.interceptor;
 import static com.google.common.net.HttpHeaders.ACCEPT;
 import static com.google.common.net.HttpHeaders.USER_AGENT;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
-import static org.apache.http.HttpStatus.SC_NOT_MODIFIED;
 
 import java.io.IOException;
 
@@ -12,10 +11,8 @@ import org.apache.logging.log4j.Logger;
 import org.epsilonlabs.rescli.core.cache.ICache;
 import org.epsilonlabs.rescli.core.session.AbstractSession;
 import org.epsilonlabs.rescli.core.session.ISession;
-import org.epsilonlabs.rescli.core.util.OkHttpUtil;
 
 import okhttp3.Interceptor;
-import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -86,7 +83,7 @@ public abstract class AbstractInterceptor {
 				session.setRateLimit(response.header(limit));
 				session.setRateLimitRemaining(response.header(remaining));
 				session.setRateLimitReset(response.header(reset));
-
+				
 				LOG.info(session);
 				return response;
 			}

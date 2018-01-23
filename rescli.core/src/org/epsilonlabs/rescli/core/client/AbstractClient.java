@@ -2,12 +2,8 @@ package org.epsilonlabs.rescli.core.client;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
-import java.io.File;
 import java.util.concurrent.ExecutorService;
 
-import org.epsilonlabs.rescli.core.cache.AbstractCacheManager;
-
-import okhttp3.Cache;
 import okhttp3.Dispatcher;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
