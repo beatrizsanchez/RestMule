@@ -1,29 +1,27 @@
-# RESCLI #
-
-Update site for Epsilon Labs drivers that can not be distributed via eclipse.
+# RestMule #
 
 ### What is this repository for? ###
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+* Summary 
+* Version 1.0.0
 
 ### How do I get set up? ###
 
 * Summary of set up
+
+1. git clone 
+2. generate
+3. use
+
 * Configuration
+ 
+once generated, fill in private properties
+
 * Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
 
-### Contribution guidelines ###
+This project uses the following dependencies:
 
-* Writing tests
-* Code review
-* Other guidelines
 
 ### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
+* Repo owner or admin: Beatriz Sanchez (beatrizsanchez)

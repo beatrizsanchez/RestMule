@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: rescli.github.test
-Bundle-SymbolicName: rescli.github.test
+Bundle-SymbolicName: org.epsilonlabs.rescli.github.test
 Bundle-Version: 1.0.0
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.epsilonlabs.rescli.core,
