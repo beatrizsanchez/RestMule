@@ -52,12 +52,22 @@ operation RESCLI!Response getEndpointType(api : String){
 }
 
 operation RESCLI!Response getApiType(){
-	if (self.responseType.instanceOf(ListType)){
-		return "IDataSet<"+self.responseType.getInnerType() + ">";
-	} else if (self.pageWrapped ){
-		return "IDataSet<"+self.responseType.getType() + ">";		
+	var type : String;
+	if (self.responseType.instanceOf(ListType) or self.pageWrapped){
+		type = "IDataSet<";
 	} else {
-		return "IData<"+self.responseType.getType() + ">";
+		type = "IData<";
+	}
+	return type +self.getApiInnerType() + ">";
+}
+
+operation RESCLI!Response getApiInnerType(){
+	if (self.responseType.instanceOf(ListType)){
+		return self.responseType.getInnerType();
+	} else if (self.pageWrapped ){
+		return self.responseType.getType();		
+	} else {
+		return self.responseType.getType();
 	}
 }
 

@@ -17,6 +17,7 @@ import io.reactivex.subjects.ReplaySubject;
  */
 public class Data<T> implements IData<T>{
 
+	@SuppressWarnings("unused")
 	private static final Logger LOG = LogManager.getLogger(Data.class);
 
 	private ReplaySubject<T> subject; 

@@ -5,26 +5,25 @@ import static org.epsilonlabs.rescli.core.util.PropertiesUtil.PAGE_INFO;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.epsilonlabs.rescli.core.callback.AbstractCallback;
-import org.epsilonlabs.rescli.core.page.IWrap;
 import org.epsilonlabs.rescli.[%= name %].data.[%= R.name %]DataSet;
-import org.epsilonlabs.rescli.[%= name %].page.[%= R.name %]Pagination;
 import org.epsilonlabs.rescli.[%= name %].util.[%= R.name %]PropertiesUtil;
 
 import okhttp3.Headers;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class [%= R.name %]Callback<D,R extends IWrap<D>> extends AbstractCallback<D,R, [%= R.name %]DataSet<D>>  {
+public class [%= R.name %]Callback<D> extends AbstractCallback<D,List<D>, [%= R.name %]DataSet<D>>  {
 
 	private static final Logger LOG = LogManager.getLogger([%= R.name %]Callback.class);
 	
-	private static [%= R.name %]Pagination paginationPolicy = [%= R.name %]Pagination.get();
+	//private static [%= R.name %]Pagination paginationPolicy = [%= R.name %]Pagination.get();
 	
 	public [%= R.name %]Callback() {
 		super(new [%= R.name %]DataSet<D>());
@@ -33,17 +32,17 @@ public class [%= R.name %]Callback<D,R extends IWrap<D>> extends AbstractCallbac
 	// FIXME move these methods to super abstract class <--
 	
 	@Override
-	public void handleResponse(Response<R> response) {
-		this.dataset.addElements(response.body().getItems());
+	public void handleResponse(Response<List<D>> response) {
+		this.dataset.addElements(response.body());
 	}
 
 	@Override
-	public void handleTotal(Response<R> response) {
-		this.dataset.setTotal(response.body().getTotalCount());
+	public void handleTotal(Response<List<D>> response) {
+		// Ignore for the moment
 	}
 
 	@Override
-	public void handleError(Call<R> call, Throwable t) {
+	public void handleError(Call<List<D>> call, Throwable t) {
 		LOG.error(t.getMessage());
 		LOG.error(call.request().url()); // TODO RETRY
 	}
@@ -51,7 +50,7 @@ public class [%= R.name %]Callback<D,R extends IWrap<D>> extends AbstractCallbac
 	// --->
 	
 	@Override
-	public Integer totalIterations(Response<R> response) { // FIXME
+	public Integer totalIterations(Response<List<D>> response) { // FIXME
 		Headers headers = response.headers();
 		String pagination = [%= R.name %]PropertiesUtil.get(PAGE_INFO);
 		String headerValue;

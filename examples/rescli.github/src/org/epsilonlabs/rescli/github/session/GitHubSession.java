@@ -46,32 +46,32 @@ public class GitHubSession extends AbstractSession {
 	
 	/** PREDEFINED SESSION TYPES */
 	
-	public static String createPublic(){
+	public static ISession createPublic(){
 		GitHubSession session = new GitHubSession();
 		GitHubSession.addSession(session);
-		return session.id();
+		return session;
 	}
 
-	public static String createWithBasicAuth(String username, String password){
+	public static ISession createWithBasicAuth(String username, String password){
 		GitHubSession session = new GitHubSession(username, password);
 		GitHubSession.addSession(session);
-		return session.id();
+		return session;
 	}
 
-	public static String createWithBasicAuth(String token){
+	public static ISession createWithBasicAuth(String token){
 		GitHubSession session = new GitHubSession(token);
 		GitHubSession.addSession(session);
-		return session.id();
+		return session;
 	}
 
-	public static String createWithOAuth(
+	public static ISession createWithOAuth(
 			String clientId, 
 			String clientSecret, 
 			List<String> scopes, 
 			String username) {
 		GitHubSession session = new GitHubSession(clientId, clientSecret, scopes, username);
 		GitHubSession.addSession(session);
-		return session.id();
+		return session;
 	}
 
 	/** TYPE CONSTRUCTORS */

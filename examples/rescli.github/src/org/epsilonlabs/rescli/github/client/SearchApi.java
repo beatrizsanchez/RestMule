@@ -2,6 +2,7 @@ package org.epsilonlabs.rescli.github.client;
 
 import static org.epsilonlabs.rescli.core.util.PropertiesUtil.API_BASE_URL;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import org.epsilonlabs.rescli.core.client.AbstractClient;
@@ -11,6 +12,7 @@ import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
 import org.epsilonlabs.rescli.github.model.*;
 import org.epsilonlabs.rescli.github.page.GitHubPaged;
@@ -32,22 +34,16 @@ public class SearchApi  {
 	public static class SearchBuilder 
 	implements IClientBuilder<ISearchApi> { 
 	
-		private String sessionId;
+		private ISession session;
 	
 		@Override
 		public ISearchApi build() {
-			return (ISearchApi) new SearchClient(sessionId);
-		}
-	
-		@Override
-		public IClientBuilder<ISearchApi> setSession(String sessionId){
-			this.sessionId = sessionId;
-			return this;
+			return (ISearchApi) new SearchClient(session);
 		}
 	
 		@Override
 		public IClientBuilder<ISearchApi> setSession(ISession session){
-			this.sessionId = session.id();
+			this.session = session;
 			return this;
 		}
 	}
@@ -58,11 +54,11 @@ public class SearchApi  {
 	{
 		private GitHubPagination paginationPolicy;
 		
-		SearchClient(String sessionId) {
+		SearchClient(ISession session) {
 			super();
 
-			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, sessionId);
-			GitHubInterceptor interceptors = new GitHubInterceptor(sessionId);
+			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, session.id());
+			GitHubInterceptor interceptors = new GitHubInterceptor(session.id());
 			String baseurl = GitHubPropertiesUtil.get(API_BASE_URL);
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 

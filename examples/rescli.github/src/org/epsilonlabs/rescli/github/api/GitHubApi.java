@@ -26,22 +26,16 @@ public class GitHubApi  {
 	public static class GitHubBuilder 
 	implements IClientBuilder<IGitHubApi> { 
 	
-		private String sessionId;
+		private ISession session;
 	
 		@Override
 		public IGitHubApi build() {
-			return (IGitHubApi) new GitHubClient(sessionId);
-		}
-	
-		@Override
-		public IClientBuilder<IGitHubApi> setSession(String sessionId){
-			this.sessionId = sessionId;
-			return this;
+			return (IGitHubApi) new GitHubClient(session);
 		}
 	
 		@Override
 		public IClientBuilder<IGitHubApi> setSession(ISession session){
-			this.sessionId = session.id();
+			this.session = session;
 			return this;
 		}
 	}
@@ -52,9 +46,12 @@ public class GitHubApi  {
 		private IEntityApi entityClient;
 		private ISearchApi searchClient;
 		
-		GitHubClient(String sessionId) {
-			entityClient = EntityApi.create().setSession(sessionId).build();
-			searchClient = SearchApi.create().setSession(sessionId).build();
+		GitHubClient(ISession session) {
+			if (session == null) {
+				session = GitHubSession.createPublic(); 
+			}	
+			entityClient = EntityApi.create().setSession(session).build();
+			searchClient = SearchApi.create().setSession(session).build();
 		}
 
 		/** WRAPED METHODS */

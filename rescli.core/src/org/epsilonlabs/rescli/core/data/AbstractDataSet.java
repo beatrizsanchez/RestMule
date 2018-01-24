@@ -33,7 +33,6 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 	public AbstractDataSet(Integer max){
 		this.status = Status.CREATED;
 		this.count = 0;
-		this.total = 0;
 		this.tester = new LoggerUtil();
 		this.max = max;
 		this.subject = ReplaySubject.create(max);
@@ -42,7 +41,6 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 	public AbstractDataSet(){
 		this.status = Status.CREATED;
 		this.count = 0;
-		this.total = 0;
 		this.tester = new LoggerUtil();
 		this.max = null;
 		this.subject = ReplaySubject.create();
@@ -51,7 +49,6 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 	public AbstractDataSet(IPaged policy){
 		this.status = Status.CREATED;
 		this.count = 0;
-		this.total = 0;
 		this.tester = new LoggerUtil();
 		this.max = policy.hasMax() ? (policy.hasPerIteration() ? policy.perIteration() : 1) * policy.increment() * policy.max() : null;
 		if (max != null){
@@ -77,7 +74,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 
 	@Override
 	public Integer total() {
-		return total;
+		return (total == null) ? count : total;
 	}
 
 	public void setTotal(int total) {
@@ -86,7 +83,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 
 	@Override
 	public synchronized Integer percentage(){
-		return ( total != null || total != 0 ) ? (count*100)/total : 0;	
+		return ( total() != 0 ) ? (count*100)/total() : 0;	
 	}
 	
 	public synchronized void addElements(List<T> elements) {
@@ -96,8 +93,8 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 			subject.onNext(element);
 			count++; 
 		}
-		LOG.info("COUNT " + count + " / " + total);
-		if (count.equals(total) || count.equals(max)) {
+		LOG.info("COUNT " + count + " / " + total());
+		if (count.equals(total()) || count.equals(max)) {
 			status = Status.COMPLETED;
 			subject.onComplete();
 		} else {
@@ -105,7 +102,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 		}
 	}
 
-	private void tester(){
+	void tester(){
 		if (tester.isEmpty()) {
 			LOG.info("SETTING UP TESTER");
 			tester.setDataSet(this);

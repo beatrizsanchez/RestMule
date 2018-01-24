@@ -2,6 +2,7 @@ package org.epsilonlabs.rescli.github.client;
 
 import static org.epsilonlabs.rescli.core.util.PropertiesUtil.API_BASE_URL;
 
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 
 import org.epsilonlabs.rescli.core.client.AbstractClient;
@@ -11,6 +12,7 @@ import org.epsilonlabs.rescli.core.data.Data;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.core.session.ISession;
 import org.epsilonlabs.rescli.core.session.RateLimitExecutor;
+import org.epsilonlabs.rescli.github.cache.GitHubCacheManager;
 import org.epsilonlabs.rescli.github.interceptor.GitHubInterceptor;
 import org.epsilonlabs.rescli.github.model.*;
 import org.epsilonlabs.rescli.github.page.GitHubPaged;
@@ -32,22 +34,16 @@ public class EntityApi  {
 	public static class EntityBuilder 
 	implements IClientBuilder<IEntityApi> { 
 	
-		private String sessionId;
+		private ISession session;
 	
 		@Override
 		public IEntityApi build() {
-			return (IEntityApi) new EntityClient(sessionId);
-		}
-	
-		@Override
-		public IClientBuilder<IEntityApi> setSession(String sessionId){
-			this.sessionId = sessionId;
-			return this;
+			return (IEntityApi) new EntityClient(session);
 		}
 	
 		@Override
 		public IClientBuilder<IEntityApi> setSession(ISession session){
-			this.sessionId = session.id();
+			this.session = session;
 			return this;
 		}
 	}
@@ -58,11 +54,11 @@ public class EntityApi  {
 	{
 		private GitHubPagination paginationPolicy;
 		
-		EntityClient(String sessionId) {
+		EntityClient(ISession session) {
 			super();
 
-			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, sessionId);
-			GitHubInterceptor interceptors = new GitHubInterceptor(sessionId);
+			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, session.id());
+			GitHubInterceptor interceptors = new GitHubInterceptor(session.id());
 			String baseurl = GitHubPropertiesUtil.get(API_BASE_URL);
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 
@@ -97,32 +93,42 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Repos> getOrgsRepos(String org, String type){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { org, type};
+			return paginationPolicy.<Repos, IEntityEndpoint> 
+				traverseList("getOrgsRepos", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getReposWatchersUsers(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getReposWatchersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Gists> getUsersGists(String username, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { username, since};
+			return paginationPolicy.<Gists, IEntityEndpoint> 
+				traverseList("getUsersGists", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Repositories> getRepositories(String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { since};
+			return paginationPolicy.<Repositories, IEntityEndpoint> 
+				traverseList("getRepositories", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Hook> getReposHooksHook(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Hook, IEntityEndpoint> 
+				traverseList("getReposHooksHook", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -141,14 +147,18 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<IssuesComments> getReposIssuesComments(String owner, String repo, String direction, String sort, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { owner, repo, direction, sort, since};
+			return paginationPolicy.<IssuesComments, IEntityEndpoint> 
+				traverseList("getReposIssuesComments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<RepoDeployments> getReposDeploymentsRepoDeployments(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<RepoDeployments, IEntityEndpoint> 
+				traverseList("getReposDeploymentsRepoDeployments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -160,14 +170,18 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Assets> getReposReleasesAssets(String owner, String repo, String id){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class};
+			Object[] vals = { owner, repo, id};
+			return paginationPolicy.<Assets, IEntityEndpoint> 
+				traverseList("getReposReleasesAssets", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Refs> getReposGitRefs(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Refs, IEntityEndpoint> 
+				traverseList("getReposGitRefs", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -221,20 +235,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Comments> getGistsComments(Integer id){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { Integer.class};
+			Object[] vals = { id};
+			return paginationPolicy.<Comments, IEntityEndpoint> 
+				traverseList("getGistsComments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<RepoComments> getReposCommentsRepoComments(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<RepoComments, IEntityEndpoint> 
+				traverseList("getReposCommentsRepoComments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Repos> getUserRepos(String type){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { type};
+			return paginationPolicy.<Repos, IEntityEndpoint> 
+				traverseList("getUserRepos", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -260,26 +280,34 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<DeploymentStatuses> getReposDeploymentsStatusesDeploymentStatuses(String owner, String repo, Integer id){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, id};
+			return paginationPolicy.<DeploymentStatuses, IEntityEndpoint> 
+				traverseList("getReposDeploymentsStatusesDeploymentStatuses", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Pulls> getReposPulls(String owner, String repo, String state, String head, String base){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { owner, repo, state, head, base};
+			return paginationPolicy.<Pulls, IEntityEndpoint> 
+				traverseList("getReposPulls", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Gists> getGists(String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { since};
+			return paginationPolicy.<Gists, IEntityEndpoint> 
+				traverseList("getGists", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getUserFollowersUsers(){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = null;
+			Object[] vals = null;
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getUserFollowersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -298,8 +326,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Issues> getIssues(String filter, String state, String labels, String sort, String direction, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { filter, state, labels, sort, direction, since};
+			return paginationPolicy.<Issues, IEntityEndpoint> 
+				traverseList("getIssues", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -318,26 +348,34 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Users> getTeamsMembersUsers(Integer teamId){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { Integer.class};
+			Object[] vals = { teamId};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getTeamsMembersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Labels> getReposMilestonesLabels(String owner, String repo, Integer number){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, number};
+			return paginationPolicy.<Labels, IEntityEndpoint> 
+				traverseList("getReposMilestonesLabels", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getOrgsMembersUsers(String org){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { org};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getOrgsMembersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Hook> getReposHooksHookByHookId(String owner, String repo, Integer hookId){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, hookId};
+			return paginationPolicy.<Hook, IEntityEndpoint> 
+				traverseList("getReposHooksHookByHookId", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -349,20 +387,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Gists> getGistsStarredGists(String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { since};
+			return paginationPolicy.<Gists, IEntityEndpoint> 
+				traverseList("getGistsStarredGists", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getReposSubscribersUsers(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getReposSubscribersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getReposCollaboratorsUsers(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getReposCollaboratorsUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -388,8 +432,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Labels> getReposLabels(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Labels, IEntityEndpoint> 
+				traverseList("getReposLabels", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -415,8 +461,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Commits> getReposCommits(String owner, String repo, String since, String sha, String path, String author, String until){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { owner, repo, since, sha, path, author, until};
+			return paginationPolicy.<Commits, IEntityEndpoint> 
+				traverseList("getReposCommits", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -435,14 +483,18 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Teams> getReposTeams(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Teams, IEntityEndpoint> 
+				traverseList("getReposTeams", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<IssuesComments> getReposIssuesComments(String owner, String repo, Integer number){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, number};
+			return paginationPolicy.<IssuesComments, IEntityEndpoint> 
+				traverseList("getReposIssuesComments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -454,8 +506,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Users> getOrgsPublic_membersUsers(String org){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { org};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getOrgsPublic_membersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -474,26 +528,34 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<CommitActivityStats> getReposStatsCommit_activityCommitActivityStats(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<CommitActivityStats, IEntityEndpoint> 
+				traverseList("getReposStatsCommit_activityCommitActivityStats", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Branches> getReposBranches(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Branches, IEntityEndpoint> 
+				traverseList("getReposBranches", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Repos> getUsersRepos(String username, String type){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { username, type};
+			return paginationPolicy.<Repos, IEntityEndpoint> 
+				traverseList("getUsersRepos", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Ref> getReposStatusesRefByRef(String owner, String repo, String ref){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class};
+			Object[] vals = { owner, repo, ref};
+			return paginationPolicy.<Ref, IEntityEndpoint> 
+				traverseList("getReposStatusesRefByRef", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -526,26 +588,34 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Gists> getGistsPublicGists(String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { since};
+			return paginationPolicy.<Gists, IEntityEndpoint> 
+				traverseList("getGistsPublicGists", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Issues> getUserIssues(String filter, String state, String labels, String sort, String direction, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { filter, state, labels, sort, direction, since};
+			return paginationPolicy.<Issues, IEntityEndpoint> 
+				traverseList("getUserIssues", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<TeamsList> getUserTeamsTeamsList(){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = null;
+			Object[] vals = null;
+			return paginationPolicy.<TeamsList, IEntityEndpoint> 
+				traverseList("getUserTeamsTeamsList", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<UserUserIdSubscribitions> getUserSubscriptionsUserUserIdSubscribitions(){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = null;
+			Object[] vals = null;
+			return paginationPolicy.<UserUserIdSubscribitions, IEntityEndpoint> 
+				traverseList("getUserSubscriptionsUserUserIdSubscribitions", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -564,8 +634,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Releases> getReposReleases(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Releases, IEntityEndpoint> 
+				traverseList("getReposReleases", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -577,26 +649,34 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Users> getReposStargazersUsers(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getReposStargazersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Integer> getReposStatsCode_frequencyCodeFrequencyStats(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Integer, IEntityEndpoint> 
+				traverseList("getReposStatsCode_frequencyCodeFrequencyStats", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Assignees> getReposAssignees(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Assignees, IEntityEndpoint> 
+				traverseList("getReposAssignees", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getUserFollowingUsers(){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = null;
+			Object[] vals = null;
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getUserFollowingUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -608,8 +688,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Issues> getReposIssues(String owner, String repo, String filter, String state, String labels, String sort, String direction, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { owner, repo, filter, state, labels, sort, direction, since};
+			return paginationPolicy.<Issues, IEntityEndpoint> 
+				traverseList("getReposIssues", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -621,8 +703,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Pulls> getReposPullsFilesPulls(String owner, String repo, Integer number){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, number};
+			return paginationPolicy.<Pulls, IEntityEndpoint> 
+				traverseList("getReposPullsFilesPulls", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -648,8 +732,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Integer> getReposStatsPunch_cardCodeFrequencyStats(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Integer, IEntityEndpoint> 
+				traverseList("getReposStatsPunch_cardCodeFrequencyStats", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -661,20 +747,26 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<ContributorsStats> getReposStatsContributorsContributorsStats(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<ContributorsStats, IEntityEndpoint> 
+				traverseList("getReposStatsContributorsContributorsStats", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getUsersByUsername(String username){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { username};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getUsersByUsername", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<String> getUserEmails(){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = null;
+			Object[] vals = null;
+			return paginationPolicy.<String, IEntityEndpoint> 
+				traverseList("getUserEmails", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -707,56 +799,74 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Issues> getOrgsIssues(String org, String filter, String state, String labels, String sort, String direction, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { org, filter, state, labels, sort, direction, since};
+			return paginationPolicy.<Issues, IEntityEndpoint> 
+				traverseList("getOrgsIssues", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getUsersFollowersUsers(String username){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { username};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getUsersFollowersUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Contributors> getReposContributors(String owner, String repo, String anon){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class};
+			Object[] vals = { owner, repo, anon};
+			return paginationPolicy.<Contributors, IEntityEndpoint> 
+				traverseList("getReposContributors", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<IssuesComments> getReposPullsCommentsIssuesComments(String owner, String repo, String direction, String sort, String since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class, String.class, String.class};
+			Object[] vals = { owner, repo, direction, sort, since};
+			return paginationPolicy.<IssuesComments, IEntityEndpoint> 
+				traverseList("getReposPullsCommentsIssuesComments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Labels> getReposIssuesLabels(String owner, String repo, Integer number){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, number};
+			return paginationPolicy.<Labels, IEntityEndpoint> 
+				traverseList("getReposIssuesLabels", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Commits> getReposPullsCommits(String owner, String repo, Integer number){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, Integer.class};
+			Object[] vals = { owner, repo, number};
+			return paginationPolicy.<Commits, IEntityEndpoint> 
+				traverseList("getReposPullsCommits", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<RefStatus> getReposCommitsStatusRefStatus(String owner, String repo, String ref){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class};
+			Object[] vals = { owner, repo, ref};
+			return paginationPolicy.<RefStatus, IEntityEndpoint> 
+				traverseList("getReposCommitsStatusRefStatus", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<RepoComments> getReposCommitsCommentsRepoComments(String owner, String repo, String shaCode){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class};
+			Object[] vals = { owner, repo, shaCode};
+			return paginationPolicy.<RepoComments, IEntityEndpoint> 
+				traverseList("getReposCommitsCommentsRepoComments", types, vals, callbackEndpoint);
 		}
 		
 		@Override
 		public IDataSet<Users> getUsers(Integer since){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { Integer.class};
+			Object[] vals = { since};
+			return paginationPolicy.<Users, IEntityEndpoint> 
+				traverseList("getUsers", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -768,8 +878,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<TeamRepos> getTeamsReposTeamRepos(Integer teamId){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { Integer.class};
+			Object[] vals = { teamId};
+			return paginationPolicy.<TeamRepos, IEntityEndpoint> 
+				traverseList("getTeamsReposTeamRepos", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -781,8 +893,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Forks> getReposForks(String owner, String repo, String sort){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class, String.class};
+			Object[] vals = { owner, repo, sort};
+			return paginationPolicy.<Forks, IEntityEndpoint> 
+				traverseList("getReposForks", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -808,8 +922,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Teams> getOrgsTeams(String org){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class};
+			Object[] vals = { org};
+			return paginationPolicy.<Teams, IEntityEndpoint> 
+				traverseList("getOrgsTeams", types, vals, callbackEndpoint);
 		}
 		
 		@Override
@@ -821,8 +937,10 @@ public class EntityApi  {
 		
 		@Override
 		public IDataSet<Keys> getReposKeys(String owner, String repo){
-			throw new NullPointerException("Method is undefined");
-			//return null; // TODO (FIXME) Add support for arrays!! 
+			Class<?>[] types = { String.class, String.class};
+			Object[] vals = { owner, repo};
+			return paginationPolicy.<Keys, IEntityEndpoint> 
+				traverseList("getReposKeys", types, vals, callbackEndpoint);
 		}
 		
 		@Override

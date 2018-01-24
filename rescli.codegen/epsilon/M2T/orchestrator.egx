@@ -234,6 +234,17 @@ rule Callback
 	target : output + baseSrcDir + "callback/" + R.name + "Callback.java"
 }
 
+rule WrappedCallback
+	transform R : API {
+	parameters{
+		var params : new Map;  	
+  		params.put("name", apiNameLowerCase);
+  		return params;
+	}
+	template : "src/wrappedCallback.egl"
+	target : output + baseSrcDir + "callback/" + R.name + "WrappedCallback.java"
+}
+
 rule PropertiesUtil
 	transform R : API {
 	parameters{

@@ -3,6 +3,8 @@ package org.epsilonlabs.rescli.core.page;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.epsilonlabs.rescli.core.callback.AbstractCallback;
 import org.epsilonlabs.rescli.core.callback.AbstractWrappedCallback;
 import org.epsilonlabs.rescli.core.data.AbstractDataSet;
@@ -23,6 +25,8 @@ import retrofit2.Response;
  *
  */
 public abstract class AbstractPagination implements IPaged {
+	
+	private static final Logger LOG = LogManager.getLogger(AbstractPagination.class);
 
 	Integer startValue;
 	Integer max;
@@ -118,24 +122,38 @@ public abstract class AbstractPagination implements IPaged {
 			int pagedParams;
 			Object[] listVals;
 			Class<?>[] listClass;
-			if (types.length != vals.length) { throw new IllegalArgumentException("Invalid parameters"); } 
+
+			int l = 0;
+			if (types != null && vals != null){				
+				if (types.length != vals.length) {
+					throw new IllegalArgumentException("Invalid parameters");
+				}
+				l = vals.length;
+			}
+			
+			final int argsLength = l;
+			
 			if (this.hasPerIteration()){
 				pagedParams = 2;
-				listVals = new Object[vals.length + pagedParams];
-				listClass = new Class<?>[vals.length + pagedParams];
-				listClass[vals.length] = Integer.class;
-				listVals[vals.length] = this.perIteration();
+
+				listVals = new Object[argsLength + pagedParams];
+				listClass = new Class<?>[argsLength + pagedParams];
+
+				listClass[argsLength] = Integer.class;
+				listVals[argsLength] = this.perIteration();
+				;
 			} else{
 				pagedParams = 1;
-				listVals = new Object[vals.length + pagedParams];
-				listClass = new Class<?>[vals.length + pagedParams];
+				listVals = new Object[argsLength + pagedParams];
+				listClass = new Class<?>[argsLength + pagedParams];
 			}
 			for (int i = 0 ; i < types.length ; i++ ){
 				listVals[i] = vals[i];
 				listClass[i] = types[i];
 			}
-			listClass[vals.length + pagedParams - 1] = Integer.class;
-			listVals[vals.length + pagedParams - 1] = start;
+
+			listClass[argsLength + pagedParams - 1] = Integer.class;
+			listVals[argsLength + pagedParams - 1] = start;
 			Call<WRAP> call = RetrofitUtil.<WRAP, END>getCall(methodName, listClass, listVals, (END) client);
 			call.enqueue(new Callback<WRAP>() {
 				@Override public void onResponse(Call<WRAP> call, Response<WRAP> response) {
@@ -145,7 +163,7 @@ public abstract class AbstractPagination implements IPaged {
 					if (limit != null && limit != start ){
 						for (int iteration = start + increment; iteration <= limit; iteration = iteration + increment){
 							try {
-								listVals[vals.length + pagedParams - 1] = iteration;
+								listVals[argsLength + pagedParams - 1] = iteration;
 								Call<WRAP> pageCall = RetrofitUtil.<WRAP, END>
 									getCall(methodName, listClass, listVals, client);
 								pageCall.enqueue((Callback<WRAP>) callback);
@@ -183,46 +201,52 @@ public abstract class AbstractPagination implements IPaged {
 			int pagedParams;
 			Object[] listVals;
 			Class<?>[] listClass;
-
-			if (types.length != vals.length) {
-				throw new IllegalArgumentException("Invalid parameters");
-			} 
+			
+			int l = 0;
+			if (types != null && vals != null){				
+				if (types.length != vals.length) {
+					throw new IllegalArgumentException("Invalid parameters");
+				}
+				l = vals.length;
+			}
+			
+			final int argsLength = l;
+			
 			if (this.hasPerIteration()){
 				pagedParams = 2;
 
-				listVals = new Object[vals.length + pagedParams];
-				listClass = new Class<?>[vals.length + pagedParams];
+				listVals = new Object[argsLength + pagedParams];
+				listClass = new Class<?>[argsLength + pagedParams];
 
-				listClass[vals.length] = Integer.class;
-				listVals[vals.length] = this.perIteration();
+				listClass[argsLength] = Integer.class;
+				listVals[argsLength] = this.perIteration();
 				;
 			} else{
 				pagedParams = 1;
-				listVals = new Object[vals.length + pagedParams];
-				listClass = new Class<?>[vals.length + pagedParams];
+				listVals = new Object[argsLength + pagedParams];
+				listClass = new Class<?>[argsLength + pagedParams];
 			}
 			for (int i = 0 ; i < types.length ; i++ ){
 				listVals[i] = vals[i];
 				listClass[i] = types[i];
 			}
-			listClass[vals.length + pagedParams - 1] = Integer.class;
-			listVals[vals.length + pagedParams - 1] = start;
+		
+			listClass[argsLength + pagedParams - 1] = Integer.class;
+			listVals[argsLength + pagedParams - 1] = start;
 
 			Call<List<T>> call = RetrofitUtil.<List<T>, END>getCall(methodName, listClass, listVals, (END) client);
 			call.enqueue(new Callback<List<T>>() {
 				@Override public void onResponse(Call<List<T>> call, Response<List<T>> response) {
-					//callback.handleTotal(response);
-					//callback.handleResponse(response);
+					((CALL) callback).handleTotal(response);
+					((CALL) callback).handleResponse(response);
 					Integer limit = callback.totalIterations(response);
-					if (limit != null && limit != start ){
+					if (limit != null && limit != start){
 						for (int iteration = start + increment; iteration <= limit; iteration = iteration + increment){
 							try {
-								listVals[vals.length + pagedParams - 1] = iteration;
+								listVals[argsLength + pagedParams - 1] = iteration;
 								Call<List<T>> pageCall = RetrofitUtil.<List<T>, END>
-								
 								getCall(methodName, listClass, listVals, client);
-								
-								pageCall.enqueue((Callback<List<T>>) callback);
+								pageCall.enqueue(callback);
 							} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException
 									| NoSuchMethodException | SecurityException e) {
 								e.printStackTrace();
