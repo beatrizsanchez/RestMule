@@ -195,8 +195,8 @@ public class GithubRepoSearchRunner {
 			for (GHContent resultItem : result) {
 				GHRepository resultRepo = resultItem.getOwner();
 				String resultItemFullRepoName = resultRepo.getFullName();
-				String resultItemPath = resultItem.getPath();
-				String resultItemDownloadUrl = resultItem.getDownloadUrl();
+				String resultItemPath = java.net.URLDecoder.decode(resultItem.getPath(),"UTF-8");
+				String resultItemDownloadUrl = java.net.URLDecoder.decode(resultItem.getDownloadUrl(),"UTF-8");
 				
 				// new query for commits
 				for (GHCommit commit : resultRepo.queryCommits().path(resultItemPath).list()) {
@@ -204,10 +204,11 @@ public class GithubRepoSearchRunner {
 //				     logger.info("commit=" + commit.getHtmlUrl());
 //				     logger.info("authorEmail=" + authorEmail);
 				     int count = 0;
-				     if ( resultTable.get(resultItemDownloadUrl, authorEmail) != null) {
-				    	 	count = resultTable.get(resultItemDownloadUrl, authorEmail);
+				     String tableKey = resultItemFullRepoName+";"+resultItemDownloadUrl;
+				     if ( resultTable.get(tableKey, authorEmail) != null) {
+				    	 	count = resultTable.get(tableKey, authorEmail);
 				     }
-				     resultTable.put(resultItemFullRepoName+";"+resultItemDownloadUrl, authorEmail, count + 1);
+				     resultTable.put(tableKey, authorEmail, count + 1);
 				 }
 								
 				SearchElement searchElement = EcssalFactory.eINSTANCE.createSearchElement();
