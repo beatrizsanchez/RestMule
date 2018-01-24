@@ -11,7 +11,7 @@ public enum MDE {
 	EGL("egl", "var"), 
 	IncQuery("eiq", "pattern"),
 	Eugenia("ecore", "gmf.diagram"),
-	GMF("gmfgraph", "gure"),
+	GMF("gmfgraph", "figure"),
 	EOL("eol", "var"), 
 	Xtext("xtext", "grammar"),
 	ETL("etl", "transform"), 
