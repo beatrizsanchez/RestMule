@@ -10,6 +10,10 @@
  ******************************************************************************/
 package org.epsilonlabs.rescli.github.test.mde;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
+import org.epsilonlabs.rescli.github.model.Commits;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -20,21 +24,32 @@ import io.reactivex.disposables.Disposable;
  * @author kb
  *
  */
-public class ConsoleOutput implements Observer<Object> {
+public class CommitDataConsumer implements Observer<Commits> {
 
+	HashMap<String, HashSet<String>> repoFileMap = new HashMap<>();
+
+	int count = 0;
 
 	@Override
-	public void onNext(Object o) {
+	public void onNext(Commits o) {
 
-		if (o instanceof Iterable<?>)
-			for (Object oo : (Iterable<?>) o) {
-				System.out.println(">>> " + oo);
+		// System.err.println(o.getPath());
+		//
+		// Repository r = o.getRepository();
+		//
+		// String reponame = r.getFullName();
+		//
+		// HashSet<String> files = repoFileMap.get(reponame);
+		//
+		// if (files == null)
+		// files = new HashSet<String>();
+		//
+		// files.add(o.getPath());
+		// repoFileMap.put(reponame, files);
 
-			}
-		else {
-			System.out.println(">>> " + o);
-
-		}
+		// o.getRepository().get
+		count++;
+		// System.out.println(">" + o);
 
 	}
 
@@ -47,7 +62,7 @@ public class ConsoleOutput implements Observer<Object> {
 	@Override
 	public void onComplete() {
 		System.out.println("DATA STREAM ENDED");
-
+		dumpData();
 	}
 
 	@Override
@@ -55,5 +70,13 @@ public class ConsoleOutput implements Observer<Object> {
 		//
 	}
 
+	public void dumpData() {
+		for (String s : repoFileMap.keySet()) {
+			System.out.println(s);
+			for (String t : repoFileMap.get(s))
+				System.out.println("\t" + t);
+		}
+		System.err.println(count);
+	}
 
 }

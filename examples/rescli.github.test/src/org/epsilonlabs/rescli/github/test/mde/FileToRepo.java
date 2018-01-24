@@ -11,6 +11,7 @@
 package org.epsilonlabs.rescli.github.test.mde;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.apache.logging.log4j.LogManager;
@@ -36,21 +37,29 @@ public class FileToRepo implements ObservableSource<Repository>, Observer<Search
 		return repoObs;
 	}
 
+	private HashSet<String> cache = new HashSet<>();
+
 	@Override
 	public void onNext(SearchCode o) {
+		if (!cache.contains(o.getPath())) {
+			try {
 
-		try {
+				Repository r = o.getRepository();
 
-			Repository r = o.getRepository();
+				// LOG.info(r.getId());
+				
+				//FIXME doing only 3 for testing
+				//
+				if(cache.size()<1)
+				//
+				repoObs.onNext(r);
 
-			//LOG.info(r.getId());
-			repoObs.onNext(r);
-
-		} catch (Exception e) {
-			System.err.println("Error in onNext() of GeneratedGithubRepoToFiles:");
-			e.printStackTrace();
+			} catch (Exception e) {
+				System.err.println("Error in onNext() of GeneratedGithubRepoToFiles:");
+				e.printStackTrace();
+			}
+			cache.add(o.getPath());
 		}
-
 	}
 
 	@Override
@@ -70,7 +79,7 @@ public class FileToRepo implements ObservableSource<Repository>, Observer<Search
 
 	@Override
 	public void subscribe(Observer<? super Repository> observer) {
-		subscribers.add(observer);		
+		subscribers.add(observer);
 	}
 
 }

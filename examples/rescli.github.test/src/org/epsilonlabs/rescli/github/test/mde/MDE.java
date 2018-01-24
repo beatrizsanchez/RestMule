@@ -10,7 +10,7 @@ public enum MDE {
 	Acceleo(" mtl", "template"),
 	EGL("egl", "var"), 
 	IncQuery("eiq", "pattern"),*/
-	Eugenia("ecore", "gmf.diagram")/*,
+	Eugenia("ecore", "\"gmf.diagram\"")/*,
 	GMF("gmfgraph", "gure"),
 	EOL("eol", "var"), 
 	Xtext("xtext", "grammar"),

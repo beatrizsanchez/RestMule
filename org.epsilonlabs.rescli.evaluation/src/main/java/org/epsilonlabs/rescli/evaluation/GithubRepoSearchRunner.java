@@ -16,6 +16,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.eclipse.emf.common.util.URI;
@@ -24,6 +27,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.kohsuke.github.AbuseLimitHandler;
+import org.kohsuke.github.GHCommit;
 import org.kohsuke.github.GHContent;
 import org.kohsuke.github.GHRateLimit;
 import org.kohsuke.github.GHRepository;
@@ -45,7 +49,8 @@ import uk.ac.york.cs.ecss.ecssal.EcssalFactory;
 import uk.ac.york.cs.ecss.ecssal.Root;
 import uk.ac.york.cs.ecss.ecssal.SearchElement;
 import uk.ac.york.cs.ecss.ecssal.SourceGrammar;
-
+import com.google.common.collect.Table;
+import com.google.common.collect.HashBasedTable;
 
 
 public class GithubRepoSearchRunner {
@@ -79,6 +84,10 @@ public class GithubRepoSearchRunner {
 	
 	private Root ecssalRoot;
 	private int totalCount;
+	
+
+	// (full repo name;file download url), github user email, number of commits for [file download url, github user email] combination
+	Table<String, String, Integer> resultTable = HashBasedTable.create();
 
 	public GithubRepoSearchRunner(String reportPath, String ecssalModelFileLocation, String githubUserName, String githubUserPass) {
 		this.reportFile = reportPath + DEFAULT_SEARCH_REPORT_FILE_NAME;
@@ -131,15 +140,15 @@ public class GithubRepoSearchRunner {
 		reset();
 		try {
 			
-			Cache cache = new Cache(DEFAULT_CACHE_DIRECTORY, DEFAULT_CACHE_SIZE); 
-			GitHub github = new GitHubBuilder().withPassword(githubUserName, githubUserPass)
-			    .withConnector(new OkHttpConnector(new OkUrlFactory(new OkHttpClient().setCache(cache))))
-			    .build();
+//			Cache cache = new Cache(DEFAULT_CACHE_DIRECTORY, DEFAULT_CACHE_SIZE); 
+//			GitHub github = new GitHubBuilder().withPassword(githubUserName, githubUserPass)
+//			    .withConnector(new OkHttpConnector(new OkUrlFactory(new OkHttpClient().setCache(cache))))
+//			    .build();
 			
-//			OkHttpClient client = new OkHttpClient();
-//			OkUrlFactory urlFactory = new OkUrlFactory(client);
-//			HttpConnector connector = new ImpatientHttpConnector(new OkHttpConnector(urlFactory), DEFAULT_CONNECTION_TIMEOUT_IN_MILLI_SECONDS, DEFAULT_READ_TIMEOUT_IN_MILLI_SECONDS);
-//			GitHub github = new GitHubBuilder().withPassword(githubUserName, githubUserPass).withConnector(connector).withAbuseLimitHandler(AbuseLimitHandler.WAIT).withRateLimitHandler(RateLimitHandler.WAIT).build();
+			OkHttpClient client = new OkHttpClient();
+			OkUrlFactory urlFactory = new OkUrlFactory(client);
+			HttpConnector connector = new ImpatientHttpConnector(new OkHttpConnector(urlFactory), DEFAULT_CONNECTION_TIMEOUT_IN_MILLI_SECONDS, DEFAULT_READ_TIMEOUT_IN_MILLI_SECONDS);
+			GitHub github = new GitHubBuilder().withPassword(githubUserName, githubUserPass).withConnector(connector).withAbuseLimitHandler(AbuseLimitHandler.WAIT).withRateLimitHandler(RateLimitHandler.WAIT).build();
 //			GitHub github = GitHub.connectUsingPassword(githubUserName, githubUserPass);
 
 			GHRateLimit rateLimit = github.getRateLimit();
@@ -185,7 +194,23 @@ public class GithubRepoSearchRunner {
 			
 			for (GHContent resultItem : result) {
 				GHRepository resultRepo = resultItem.getOwner();
+				String resultItemFullRepoName = resultRepo.getFullName();
+				String resultItemPath = java.net.URLDecoder.decode(resultItem.getPath(),"UTF-8");
+				String resultItemDownloadUrl = java.net.URLDecoder.decode(resultItem.getDownloadUrl(),"UTF-8");
 				
+				// new query for commits
+				for (GHCommit commit : resultRepo.queryCommits().path(resultItemPath).list()) {
+				     String authorEmail = commit.getCommitShortInfo().getAuthor().getEmail();
+//				     logger.info("commit=" + commit.getHtmlUrl());
+//				     logger.info("authorEmail=" + authorEmail);
+				     int count = 0;
+				     String tableKey = resultItemFullRepoName+";"+resultItemDownloadUrl;
+				     if ( resultTable.get(tableKey, authorEmail) != null) {
+				    	 	count = resultTable.get(tableKey, authorEmail);
+				     }
+				     resultTable.put(tableKey, authorEmail, count + 1);
+				 }
+								
 				SearchElement searchElement = EcssalFactory.eINSTANCE.createSearchElement();
 				SourceGrammar sourceGrammar =  EcssalFactory.eINSTANCE.createSourceGrammar();
 				searchElement.setGithubUserAndRepo(resultRepo.getFullName());
@@ -197,7 +222,7 @@ public class GithubRepoSearchRunner {
 
 					downloadElement(resultItem, localDownloadTargetFile);
 					
-					sourceGrammar.setRemoteFileLocation(resultItem.getDownloadUrl());
+					sourceGrammar.setRemoteFileLocation(resultItemDownloadUrl);
 					sourceGrammar.setLocalFileLocation(localDownloadTargetFile.toString());
 					
 					searchElement.setGrammar(sourceGrammar);
@@ -275,6 +300,10 @@ public class GithubRepoSearchRunner {
 	
 			reportLine =  "=============== FINISHED ITERATING GITHUB (" + new Date().toString() + ") =================";
 			logger.info(reportLine);
+			
+			logger.info("=============== RESULT TABLE PRINTOUT ===============");
+			logger.info(resultTable.toString());
+			logger.info("=============== RESULT TABLE PRINTOUT (END) =========");
 			
 			serializeModel();
 			
