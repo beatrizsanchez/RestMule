@@ -25,7 +25,6 @@ public class MDEAnalysis extends GitHubTestUtil {
 	private static CloseableHttpAsyncClient asyncClient;
 	private static IGitHubApi localApi;
 
-	
 	@BeforeClass
 	public static void prepareClass() {
 		setup();
@@ -39,7 +38,7 @@ public class MDEAnalysis extends GitHubTestUtil {
 	}
 
 	@Test
-	public void testMDETech() {
+	public void testMDETech() throws InterruptedException {
 
 		for (MDE mde : MDE.values()) {
 			String query = mde.query();
@@ -49,24 +48,30 @@ public class MDEAnalysis extends GitHubTestUtil {
 			// Queues
 			FileToRepo f2r = new FileToRepo();
 			RepoToFile r2f = new RepoToFile(mde);
+			//?ToCommits ?2c = new ?ToCommits();
 
 			// Subscriptions
 			searchCode.observe().subscribe(f2r);
 			f2r.repos().subscribe(r2f);
-			//...
-			
+			// ...
+
 			// Logging
-			ConsoleOutput out = new ConsoleOutput();
-			searchCode.observe().subscribe(out);
-			f2r.repos().subscribe(out);
+			RepoAndFileDataConsumer out = new RepoAndFileDataConsumer();
+			// searchCode.observe().subscribe(out);
+			// f2r.repos().subscribe(out);
+			// r2f.files().subscribe(out);
 			r2f.files().subscribe(out);
-			
-			searchCode.observe().blockingSubscribe();
-			
+
+			// searchCode.observe().blockingSubscribe();
+			Thread.sleep(10000);
+
+			out.dumpData();
+
 			// Initializing
-			//f2r.repos().doOnNext(out -> LOG.info("repo: "+out.getFullName()));
-			//r2f.files().doOnNext(out -> LOG.info("file: "+out.getName()));
-			
+			// f2r.repos().doOnNext(out -> LOG.info("repo:
+			// "+out.getFullName()));
+			// r2f.files().doOnNext(out -> LOG.info("file: "+out.getName()));
+
 		}
 
 	}

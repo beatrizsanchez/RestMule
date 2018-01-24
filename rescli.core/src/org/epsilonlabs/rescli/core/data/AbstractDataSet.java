@@ -96,7 +96,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 		LOG.info("COUNT " + count + " / " + total());
 		if (count.equals(total()) || count.equals(max)) {
 			status = Status.COMPLETED;
-			subject.onComplete();
+			//subject.onComplete();
 		} else {
 			this.status = Status.AWAITING;
 		}

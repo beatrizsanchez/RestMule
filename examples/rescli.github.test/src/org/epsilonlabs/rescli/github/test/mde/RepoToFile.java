@@ -11,6 +11,7 @@
 package org.epsilonlabs.rescli.github.test.mde;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 
 import org.apache.logging.log4j.LogManager;
@@ -45,22 +46,28 @@ public class RepoToFile implements ObservableSource<SearchCode>, Observer<Reposi
 		return fileObs;
 	}
 
+	private HashSet<String> cache = new HashSet<>();
+
 	@Override
 	public void onNext(Repository o) {
 
-		try {
+		if (!cache.contains(o.getFullName())) {
 
+			try {
 
-			String q = new CodeSearchQuery().create(mde.getKeyword()).extension(mde.getExtension())
-					.repo(o.getFullName()).build().getQuery();
-			
-			IDataSet<SearchCode> ret = GitHubTestUtil.getOAuthClient().getSearchCode("asc", q, null);
+				String q = new CodeSearchQuery().create(mde.getKeyword()).extension(mde.getExtension())
+						.repo(o.getFullName()).build().getQuery();
+				System.err.println(q);
+				IDataSet<SearchCode> ret = GitHubTestUtil.getOAuthClient().getSearchCode("asc", q, null);
 
-			ret.observe().subscribe(fileObs);
+				ret.observe().subscribe(fileObs);
 
-		} catch (Exception e) {
-			System.err.println("Error in onNext() of GeneratedGithubRepoToFiles:");
-			e.printStackTrace();
+			} catch (Exception e) {
+				System.err.println("Error in onNext() of GeneratedGithubRepoToFiles:");
+				e.printStackTrace();
+			}
+
+			cache.add(o.getFullName());
 		}
 
 	}
@@ -85,13 +92,13 @@ public class RepoToFile implements ObservableSource<SearchCode>, Observer<Reposi
 		subscribers.add(observer);
 	}
 
-	public static void main(String[] a){
-		
-		
+	public static void main(String[] a) {
+
 		MDE mde = MDE.Eugenia;
-		String q = new CodeSearchQuery().create(mde.getKeyword()).extension(mde.getExtension()).repo("https://github.com/GuanglongDu/GMFSVG").inFile().build().getQuery();
+		String q = new CodeSearchQuery().create(mde.getKeyword()).extension(mde.getExtension())
+				.repo("https://github.com/GuanglongDu/GMFSVG").inFile().build().getQuery();
 		System.out.println(q);
-		
+
 	}
-	
+
 }
