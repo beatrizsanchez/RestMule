@@ -40,7 +40,6 @@ public class GitHubWrappedCallback<D,R extends IWrap<D>> extends AbstractWrapped
 	@Override
 	public void handleTotal(Response<R> response) {
 		Integer totalCount = response.body().getTotalCount();
-		LOG.debug(totalCount);
 		this.dataset.setTotal(totalCount);
 	}
 

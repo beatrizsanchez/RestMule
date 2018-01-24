@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
@@ -30,13 +31,13 @@ public class [%= R.name %]Session extends AbstractSession {
 	
 	private static HashMap<String, ISession> sessions;
 	
-	private static HashMap<String, ISession> getSessions(){
+	private static HashMap<String, ISession> getSessions() {
 		if (sessions == null)
 			sessions = new HashMap<String, ISession>();
 		return sessions;
 	}
 
-	private static void addSession([%= R.name %]Session session){
+	private static void addSession([%= R.name %]Session session) {
 		[%= R.name %]Session.getSessions().put(session.id() , session);
 	}
 	
@@ -46,19 +47,19 @@ public class [%= R.name %]Session extends AbstractSession {
 	
 	/** PREDEFINED SESSION TYPES */
 	
-	public static ISession createPublic(){
+	public static ISession createPublic() {
 		[%= R.name %]Session session = new [%= R.name %]Session();
 		[%= R.name %]Session.addSession(session);
 		return session;
 	}
 
-	public static ISession createWithBasicAuth(String username, String password){
+	public static ISession createWithBasicAuth(String username, String password) {
 		[%= R.name %]Session session = new [%= R.name %]Session(username, password);
 		[%= R.name %]Session.addSession(session);
 		return session;
 	}
 
-	public static ISession createWithBasicAuth(String token){
+	public static ISession createWithBasicAuth(String token) {
 		[%= R.name %]Session session = new [%= R.name %]Session(token);
 		[%= R.name %]Session.addSession(session);
 		return session;
@@ -76,15 +77,15 @@ public class [%= R.name %]Session extends AbstractSession {
 
 	/** TYPE CONSTRUCTORS */
 	
-	private [%= R.name %]Session(){
+	private [%= R.name %]Session() {
 		super(); 
 	}
 
-	private [%= R.name %]Session(String username, String password){
+	private [%= R.name %]Session(String username, String password) {
 		super(username, password);
 	}
 
-	private [%= R.name %]Session(String token){
+	private [%= R.name %]Session(String token) {
 		super(token);
 	}
 
@@ -99,18 +100,31 @@ public class [%= R.name %]Session extends AbstractSession {
 	/** METHODS FROM ISESSION */
 
 	@Override
-	public void setRateLimit(@Nonnull String rateLimit){
-		this.rateLimit = Integer.valueOf(rateLimit);
+	public void setRateLimit(@Nonnull String rateLimit) {
+		if (rateLimit != null) {
+ 			this.rateLimit = Integer.valueOf(rateLimit);
+			this.isSet.set(true);
+		}	
 	}
 
 	@Override
-	public void setRateLimitRemaining(@Nonnull String rateLimitRemaining){
-		this.rateLimitRemaining = new AtomicInteger(Integer.valueOf(rateLimitRemaining));
+	public void setRateLimitRemaining(@Nonnull String rateLimitRemaining) {
+		if (rateLimitRemaining != null) {
+			Integer remaining = Integer.valueOf(rateLimitRemaining);
+			if (remaining != this.rateLimitRemaining.get()) {
+				this.rateLimitRemaining = new AtomicInteger(remaining);		
+			}
+		}
 	}
 
 	@Override
-	public void setRateLimitReset(@Nonnull String rateLimitReset){
-		this.rateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
+	public void setRateLimitReset(@Nonnull String rateLimitReset) {
+		if (rateLimitReset != null) {
+			Date newRateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
+			if (!newRateLimitReset.equals(getRateLimitReset())) {
+				this.rateLimitReset = newRateLimitReset;
+			}
+		}
 	}
 	
 	/** METHODS FROM ABSTRACT */
