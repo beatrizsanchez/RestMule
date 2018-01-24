@@ -14,6 +14,7 @@ import org.epsilonlabs.rescli.github.model.Commits.Author;
 import org.epsilonlabs.rescli.github.model.Commits.Committer;
 import org.epsilonlabs.rescli.github.model.SearchCode;
 import org.epsilonlabs.rescli.github.model.SearchCode.Repository;
+import org.epsilonlabs.rescli.github.test.mde.MDE;
 import org.epsilonlabs.rescli.github.test.query.GitHubTestUtil;
 
 public class SearchCodeResult {
@@ -55,7 +56,7 @@ public class SearchCodeResult {
 		this.totalRepos = dataset.observe().distinct( item -> item.getRepository().getId() ).count().blockingGet(); 
 	}
 	public void getCommits(String owner, String repo, String path){
-		this.commits = GitHubTestUtil.getOAuthClient()
+		this.commits = GitHubTestUtil.getPublicClient()
 				.getReposCommits(owner, repo, null, null, path, null, null)
 				.observe().toList().blockingGet();
 	}
