@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
@@ -93,19 +94,31 @@ public class GitHubSession extends AbstractSession {
 
 	@Override
 	public void setRateLimit(@Nonnull String rateLimit) {
-		if (rateLimit != null)
+		if (rateLimit != null) {
 			this.rateLimit = Integer.valueOf(rateLimit);
+			this.isSet.set(true);
+		}
+		
 	}
 
 	@Override
 	public void setRateLimitRemaining(@Nonnull String rateLimitRemaining) {
-		
-		this.rateLimitRemaining = new AtomicInteger(Integer.valueOf(rateLimitRemaining));
+		if (rateLimitRemaining != null){
+			Integer remaining = Integer.valueOf(rateLimitRemaining);
+			if (remaining != this.rateLimitRemaining.get()) {
+				this.rateLimitRemaining = new AtomicInteger(remaining);		
+			}
+		}
 	}
 
 	@Override
 	public void setRateLimitReset(@Nonnull String rateLimitReset) {
-		this.rateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
+		if (rateLimitReset != null) {
+			Date newRateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
+			if (!newRateLimitReset.equals(getRateLimitReset())) {
+				this.rateLimitReset = newRateLimitReset;
+			}
+		}
 	}
 
 	/** METHODS FROM ABSTRACT */

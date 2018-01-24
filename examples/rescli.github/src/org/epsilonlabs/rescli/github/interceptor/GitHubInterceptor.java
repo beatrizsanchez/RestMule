@@ -30,7 +30,7 @@ public class GitHubInterceptor extends AbstractInterceptor {
 	}
 
 	public Interceptor requestInterceptor(){
-		return requestInterceptor(userAgent, accept, sessionId);
+		return sessionRequestInterceptor(userAgent, accept, sessionId);
 	}
 	
 	public Interceptor sessionResponseInterceptor(){

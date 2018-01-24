@@ -1,6 +1,7 @@
 package org.epsilonlabs.rescli.core.session;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -21,5 +22,8 @@ public interface IRateLimiter {
 	long getRateLimitResetInMilliSeconds();
 	
 	Date getRateLimitReset();
+	
+	AtomicBoolean isSet();
+
 	
 }

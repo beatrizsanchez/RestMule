@@ -61,10 +61,10 @@ public abstract class AbstractInterceptor {
 		};
 	}
 
-	protected static final Interceptor requestInterceptor(final String userAgent, final String accept, final String sessionId){ 
+	protected static final Interceptor sessionRequestInterceptor(final String userAgent, final String accept, final String sessionId){ 
 		return new Interceptor() {
 			@Override public Response intercept(Chain chain) throws IOException {
-				ISession session = AbstractSession.getSession(sessionClass, sessionId);
+				ISession session = AbstractSession.getSession(sessionClass, sessionId);				
 				return chain.proceed(chain.request().newBuilder()
 						.header(USER_AGENT, userAgent)
 						.header(ACCEPT, accept)
@@ -80,10 +80,13 @@ public abstract class AbstractInterceptor {
 				Response response = chain.proceed(chain.request());		
 				ISession session = AbstractSession.getSession(sessionClass, sessionId);
 
-				session.setRateLimit(response.header(limit));
-				session.setRateLimitRemaining(response.header(remaining));
+				//if (!session.isSet().get()){
+					session.setRateLimit(response.header(limit));
+					session.setRateLimitRemaining(response.header(remaining));
+				//}
 				session.setRateLimitReset(response.header(reset));
 				
+			
 				LOG.info(session);
 				return response;
 			}

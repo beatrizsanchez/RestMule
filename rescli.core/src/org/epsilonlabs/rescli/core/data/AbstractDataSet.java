@@ -77,7 +77,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 		return (total == null) ? count : total;
 	}
 
-	public void setTotal(int total) {
+	public void setTotal(Integer total) {
 		this.total = total;
 	}
 
