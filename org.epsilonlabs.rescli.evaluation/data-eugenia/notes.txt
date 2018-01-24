@@ -1,0 +1,17 @@
+GithubRepoSearchRunner.java LOC: 185
+Depends on Kohsuke and OkHttp libraries
+Fails if number of pages returned is greater than 1000
+
+========
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 311.46 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 05:13 min
+[INFO] Final Memory: 17M/214M
+[INFO] ------------------------------------------------------------------------

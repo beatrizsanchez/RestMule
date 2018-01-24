@@ -95,7 +95,7 @@ public class GithubRepoSearchRunnerTest {
 		String githubUser = readGithubUserFromFile(0);
 		String githubPass = readGithubPassFromFile(0);
 		
-		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-gmf/", "data-gmf/analysis/ecssal-analysis-model.xmi", githubUser, githubPass, "figure extension:gmfgraph", false);
+		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-gmf/", githubUser, githubPass, "figure extension:gmfgraph");
 		ghSearchRunner.runSearch();
 	}
 	
@@ -105,17 +105,17 @@ public class GithubRepoSearchRunnerTest {
 		String githubUser = readGithubUserFromFile(1);
 		String githubPass = readGithubPassFromFile(1);
 		
-		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-sirius/", "data-sirius/analysis/ecssal-analysis-model.xmi", githubUser, githubPass, "node extension:odesign", false);
+		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-sirius/", githubUser, githubPass, "node extension:odesign");
 		ghSearchRunner.runSearch();
 	}
 	
 //	@Ignore("to be executed manually")
 	@Test	
 	public void testEugenia() {
-		String githubUser = readGithubUserFromFile(2);
-		String githubPass = readGithubPassFromFile(2);
+		String githubUser = readGithubUserFromFile(0);
+		String githubPass = readGithubPassFromFile(0);
 		
-		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-eugenia/", "data-eugenia/analysis/ecssal-analysis-model.xmi", githubUser, githubPass, "\"gmf.diagram\" extension:ecore", false);
+		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-eugenia/", githubUser, githubPass, "\"gmf.diagram\" extension:ecore");
 		ghSearchRunner.runSearch();
 	}
 	

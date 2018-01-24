@@ -51,10 +51,16 @@
 			<version>2.5</version>
 		</dependency>
 		<dependency>
+		    <groupId>com.github.kohsuke</groupId>
+		    <artifactId>github-api</artifactId>
+		    <version>github-api-1.92</version>
+		</dependency>
+		
+		<!-- <dependency>
 			<groupId>com.github.patrickneubauer</groupId>
 			<artifactId>github-api</artifactId>
 			<version>github-api-1.92-tryout-increased</version>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
@@ -73,14 +79,6 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>23.6-jre</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>uk.ac.york.cs.ecss</groupId>
-			<artifactId>analysis-language</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<scope>system</scope>
-			<systemPath>${project.basedir}/libs/analysis-language-0.0.1-SNAPSHOT-jar-with-dependencies.jar</systemPath>
 		</dependency>
 
 	</dependencies>
