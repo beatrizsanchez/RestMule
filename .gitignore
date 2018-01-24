@@ -4,7 +4,7 @@
 **/gen/**
 *private.properties
 *.uml/
-
+*.log*
 
 .DS_Store
 
