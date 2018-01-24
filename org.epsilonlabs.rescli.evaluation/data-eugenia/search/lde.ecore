@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="arduino" nsURI="http://arduino/1.0" nsPrefix="arduino">
+  <eAnnotations source="gmf">
+    <details key="foo" value="bar"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Robo">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="temAcoes" upperBound="-1"
+        eType="#//Acao" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="temTransicoes" upperBound="-1"
+        eType="#//Transicoes" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="temCondicoes" upperBound="-1"
+        eType="#//Condicao" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Acao" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Transicao_de_Entrada" eType="#//Transicoes"
+        eOpposite="#//Transicoes/Acao_de_Saida"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Transicao_de_Saida" eType="#//Transicoes"
+        eOpposite="#//Transicoes/Acao_de_Entrada"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transicoes">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="Acao_de_Entrada"/>
+      <details key="target" value="Acao_de_Saida"/>
+      <details key="target.decoration" value="filledclosedarrow"/>
+      <details key="width" value="2"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Acao_de_Entrada" eType="#//Acao"
+        eOpposite="#//Acao/Transicao_de_Saida"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Acao_de_Saida" eType="#//Acao"
+        eOpposite="#//Acao/Transicao_de_Entrada"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_Esquerda" eSuperTypes="#//Corpo">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Virar Esquerda"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mover_Frente" eSuperTypes="#//Corpo">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Mover Frente"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mover_Tras" eSuperTypes="#//Corpo">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Mover Trás"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_Direita" eSuperTypes="#//Corpo">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Virar Direita"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rodar_Esquerda_Tempo" eSuperTypes="#//Corpo_Modificavel">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="tempo"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rodar_Direita_Tempo" eSuperTypes="#//Corpo_Modificavel">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="tempo"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Acoes_Predefinidas" abstract="true"
+      eSuperTypes="#//Acao"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Acoes_Modificaveis" abstract="true"
+      eSuperTypes="#//Acao"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Mover_Frente_Tempo" eSuperTypes="#//Corpo_Modificavel">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="tempo"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mover_Tras_Tempo" eSuperTypes="#//Corpo_Modificavel">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="tempo"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_para_X_Graus" eSuperTypes="#//Cabeca_Modificavel">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,130,253"/>
+      <details key="color" value="255,130,253"/>
+      <details key="label" value="graus"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_Max_Drt" eSuperTypes="#//Cabeca">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,130,253"/>
+      <details key="color" value="255,130,253"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Virar Máx. Direita"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_Max_Esq" eSuperTypes="#//Cabeca">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,130,253"/>
+      <details key="color" value="255,130,253"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Virar Máx. Esquerda"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Centrar" eSuperTypes="#//Cabeca">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,130,253"/>
+      <details key="color" value="255,130,253"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Centrar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_45_Esq" eSuperTypes="#//Cabeca">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,130,253"/>
+      <details key="color" value="255,130,253"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Virar 45 Graus Esquerda"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Virar_45_Drt" eSuperTypes="#//Cabeca">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,130,253"/>
+      <details key="color" value="255,130,253"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Virar 45 Graus Direita"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mover_Aleatoriamente" eSuperTypes="#//Corpo">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Mover Aleatoriamente"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LED" abstract="true" eSuperTypes="#//Acoes_Predefinidas"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Verde" abstract="true" eSuperTypes="#//LED"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Tricolor" abstract="true" eSuperTypes="#//LED"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_LED_Verde" eSuperTypes="#//Verde">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar LED Verde"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Desligar_LED_Verde" eSuperTypes="#//Verde">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Desligar LED Verde"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_Intermitencia" eSuperTypes="#//Verde">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar Intermitência"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Desligar_Intermitencia" eSuperTypes="#//Verde">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Desligar Intermitência"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Varias_Cores" abstract="true" eSuperTypes="#//Tricolor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Unica_Cor" abstract="true" eSuperTypes="#//Tricolor"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_Cores_Policia" eSuperTypes="#//Varias_Cores">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar Cores Polícia"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_Cores_Arco_Iris" eSuperTypes="#//Varias_Cores">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar Cores Arco-Íris"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_Azul" eSuperTypes="#//Unica_Cor">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar Azul"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_Verde" eSuperTypes="#//Unica_Cor">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar Verde"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Ligar_Vermelho" eSuperTypes="#//Unica_Cor">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Ligar Vermelho"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Desligar_Cor" eSuperTypes="#//Unica_Cor">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Desligar Luz"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Desligar_Cores" eSuperTypes="#//Varias_Cores">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,255,64"/>
+      <details key="color" value="255,255,64"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Desligar Cores"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Acoes_Condicionais" abstract="true"
+      eSuperTypes="#//Acao">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tem" lowerBound="1" eType="#//Condicao"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="While" eSuperTypes="#//Acoes_Condicionais">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="214,214,214"/>
+      <details key="color" value="214,214,214"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="While"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="corpo" lowerBound="1" eType="#//Acao">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="If" eSuperTypes="#//Acoes_Condicionais">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="214,214,214"/>
+      <details key="color" value="214,214,214"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="If"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="then" lowerBound="1" eType="#//Acao"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Condicao" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Bumper_Pressionado" eSuperTypes="#//Condicao">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="214,214,214"/>
+      <details key="color" value="214,214,214"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Bumper"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Distancia_Infra_Vermelhos" eSuperTypes="#//Condicao">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="214,214,214"/>
+      <details key="color" value="214,214,214"/>
+      <details key="label" value="distancia"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="distancia" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Corpo" abstract="true" eSuperTypes="#//Acoes_Predefinidas">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="evitarObstaculo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Corpo_Modificavel" abstract="true" eSuperTypes="#//Acoes_Modificaveis">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tempo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="evitarObstaculo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cabeca" abstract="true" eSuperTypes="#//Acoes_Predefinidas"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Cabeca_Modificavel" abstract="true"
+      eSuperTypes="#//Acoes_Modificaveis">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="graus" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Inicio" eSuperTypes="#//Acao">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="0,255,0"/>
+      <details key="color" value="0,255,0"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Início"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="evitarObstaculo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fim" eSuperTypes="#//Acao">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="255,0,0"/>
+      <details key="color" value="255,0,0"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Fim"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parar" eSuperTypes="#//Corpo">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="nome"/>
+      <details key="label.readOnly" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Parar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parar_Tempo" eSuperTypes="#//Corpo_Modificavel">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="64,207,255"/>
+      <details key="color" value="64,207,255"/>
+      <details key="label" value="tempo"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sS_DSL" nsURI="http://www.example.org/sS_DSL" nsPrefix="sS_DSL">
+  <eClassifiers xsi:type="ecore:EClass" name="SS_DSL">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasElements" upperBound="-1"
+        eType="#//Element" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement" abstract="true" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clientDependency" upperBound="-1"
+        eType="#//Dependency" eOpposite="#//Dependency/supplier"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplierDependency" upperBound="-1"
+        eType="#//Dependency" eOpposite="#//Dependency/client"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true" eSuperTypes="#//Element"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Namespace" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Classifier" abstract="true" eSuperTypes="#//Namespace"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectedRelationship" abstract="true"
+      eSuperTypes="#//Relationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Association" eSuperTypes="#//Relationship">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="1"/>
+      <details key="color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Class" eOpposite="#//Class/sourceAssociation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Class" eOpposite="#//Class/targetAssociation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency" eSuperTypes="#//DirectedRelationship">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supplier" lowerBound="1"
+        upperBound="-1" eType="#//NamedElement" eOpposite="#//NamedElement/clientDependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="client" lowerBound="1"
+        upperBound="-1" eType="#//NamedElement" eOpposite="#//NamedElement/supplierDependency"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Usage" eSuperTypes="#//Dependency">
+    <eAnnotations source="gmf.link">
+      <details key="label.pattern" value="&lt;&lt;use>>"/>
+      <details key="source" value="client"/>
+      <details key="target" value="supplier"/>
+      <details key="style" value="dot"/>
+      <details key="width" value="2"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="color" value="0,0,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BehavioredClassifier" abstract="true"
+      eSuperTypes="#//Classifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//Classifier"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Class" eSuperTypes="#//BehavioredClassifier">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="255,255,97"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedAttribute" upperBound="-1"
+        eType="#//Property" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceAssociation" upperBound="-1"
+        eType="#//Association" eOpposite="#//Association/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetAssociation" upperBound="-1"
+        eType="#//Association" eOpposite="#//Association/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Property" eSuperTypes="#//ConnectableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="PackageableElement" abstract="true"
+      eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedElement" abstract="true" eSuperTypes="#//NamedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ConnectableElement" abstract="true"
+      eSuperTypes="#//TypedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceSpecification" eSuperTypes="#//PackageableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Enumeration" eSuperTypes="#//DataType">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="204,204,0"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="150,180"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedLiteral" upperBound="-1"
+        eType="#//EnumerationLiteral" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumerationLiteral" eSuperTypes="#//InstanceSpecification">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="250,250,250"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="150,25"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Aggregation" eSuperTypes="#//Association">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="1"/>
+      <details key="source.decoration" value="filledrhomb"/>
+      <details key="color" value="180,160,160"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Composition" eSuperTypes="#//Association">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="1"/>
+      <details key="source.decoration" value="filledrhomb"/>
+      <details key="color" value="0,0,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Workbook" eSuperTypes="#//Class">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="192,192,192"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Workitem" abstract="true" eSuperTypes="#//Class">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="order" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="gmf.label">
+        <details key="label.pattern" value="order: {0}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Worksheet" eSuperTypes="#//Workitem">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="0,255,128"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TableType">
+    <eLiterals name="HORIZONTAL"/>
+    <eLiterals name="RELATIONSHIP"/>
+    <eLiterals name="VERTICAL"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CellType">
+    <eLiterals name="NUMBER"/>
+    <eLiterals name="TEXT"/>
+    <eLiterals name="NONE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AggregationFunction">
+    <eLiterals name="AVERAGE"/>
+    <eLiterals name="COUNT"/>
+    <eLiterals name="MAX"/>
+    <eLiterals name="MIN"/>
+    <eLiterals name="PRODUCT"/>
+    <eLiterals name="SUM"/>
+    <eLiterals name="MEDIAN"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Table" eSuperTypes="#//Workitem">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="255,255,102"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//TableType"
+        defaultValueLiteral="VERTICAL">
+      <eAnnotations source="gmf.label">
+        <details key="label.pattern" value="type: {0}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Header" eSuperTypes="#//Class">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="102,178,255"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Formula" eSuperTypes="#//Class">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="178,102,255"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formula" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="gmf.label">
+        <details key="label.pattern" value="formula: {0}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CellsAggregation" eSuperTypes="#//Workitem">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="255,102,178"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aFunction" lowerBound="1"
+        eType="#//AggregationFunction" defaultValueLiteral="SUM">
+      <eAnnotations source="gmf.label">
+        <details key="label.pattern" value="aggregation: {0}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entry" eSuperTypes="#//Property">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="250,250,250"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="180,55"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cType" lowerBound="1" eType="#//CellType">
+      <eAnnotations source="gmf.label">
+        <details key="label.pattern" value="cType: {0}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Format" abstract="true" eSuperTypes="#//Class"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RegEx" eSuperTypes="#//Format">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="label" value="name"/>
+      <details key="color" value="255,133,51"/>
+      <details key="figure" value="rectangle"/>
+      <details key="size" value="125,60"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exp" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="gmf.label">
+        <details key="label.pattern" value="epx: {0}"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

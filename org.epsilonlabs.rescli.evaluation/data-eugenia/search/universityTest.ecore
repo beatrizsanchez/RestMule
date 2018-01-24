@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="universityTest" nsURI="universityTest" nsPrefix="universityTest">
+  <eClassifiers xsi:type="ecore:EClass" name="University">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="departments" upperBound="-1"
+        eType="#//Department" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depProfesors" upperBound="-1"
+        eType="#//Professor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clients" upperBound="-1"
+        eType="#//Student" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Department">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nameD"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="true"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="profesors" upperBound="-1"
+        eType="#//Professor" containment="true" eOpposite="#//Professor/owner">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nameD" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="students" upperBound="-1"
+        eType="#//Student" containment="true" eOpposite="#//Student/belongs">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Professor">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nameP"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="true"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="owner" eType="#//Department"
+        eOpposite="#//Department/profesors"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="slaves" upperBound="-1"
+        eType="#//Student" eOpposite="#//Student/advisor">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="esclavoDe"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Student">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="studentName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="true"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="studentName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongs" eType="#//Department"
+        eOpposite="#//Department/students"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="laboratoty" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="advisor" eType="#//Professor"
+        eOpposite="#//Professor/slaves"/>
+  </eClassifiers>
+</ecore:EPackage>

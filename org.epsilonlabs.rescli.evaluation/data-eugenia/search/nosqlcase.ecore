@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="polyglotmodel" nsURI="polyglotmodel" nsPrefix="polyglotmodel">
+  <eClassifiers xsi:type="ecore:EClass" name="Schema">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+      <details key="rcp" value="false"/>
+      <details key="onefile" value="true"/>
+      <details key="diagram.extension" value="eer"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelosnosql" upperBound="-1"
+        eType="#//NosqlEsquema" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entidade" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.style" value="solid"/>
+      <details key="label.icon" value="true"/>
+      <details key="tool.small.bundle" value="bigdatamodel.edit"/>
+      <details key="tool.small.path" value="/icons/full/obj16/Entidade.gif"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntidadeNaoEstruturada" eSuperTypes="#//Entidade">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.style" value="dash"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Atributo" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="ellipse"/>
+      <details key="border.style" value="solid"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipoatributo" eType="#//TiposAtributo"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="obrigatorio" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="chavedeparticao" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TiposAtributo">
+    <eLiterals name="SIMPLES"/>
+    <eLiterals name="COMPOSTO" value="1"/>
+    <eLiterals name="DERIVADO" value="2"/>
+    <eLiterals name="MULTIVALORADO" value="3"/>
+    <eLiterals name="IDENTIFICADOR" value="4"/>
+    <eLiterals name="DISCRIMINADOR" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relacionamento" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="polygon"/>
+      <details key="polygon.x" value="0 40 80 40 0"/>
+      <details key="polygon.y" value="40 0 40 80 40"/>
+      <details key="size" value="90,45"/>
+      <details key="border.style" value="solid"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelacionamentoLink">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="cardinalidade"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="1"/>
+      <details key="source.decoration" value="square"/>
+      <details key="incoming" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="participacao" eType="#//Participacao"
+        defaultValueLiteral="TOTAL"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidade" eType="#//TiposCardinalidade"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identificador" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Entidade"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Relacionamento"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TiposNosql">
+    <eLiterals name="DOCUMENT"/>
+    <eLiterals name="KEYVALUE" value="1"/>
+    <eLiterals name="GRAPH" value="2"/>
+    <eLiterals name="COLUMNS" value="3"/>
+    <eLiterals name="MULTIMODEL" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Participacao">
+    <eLiterals name="TOTAL"/>
+    <eLiterals name="PARCIAL" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtributoEntidadeLink">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="1"/>
+      <details key="source.decoration" value="none"/>
+      <details key="incoming" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Entidade"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Atributo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtributoRelacionamentoLink">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="1"/>
+      <details key="source.decoration" value="none"/>
+      <details key="incoming" value="true"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Relacionamento"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Atributo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TiposCardinalidade">
+    <eLiterals name="ONE"/>
+    <eLiterals name="MANY" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NosqlEsquema">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="modelobd"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.style" value="solid"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelobd" eType="#//TiposNosql"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementos" upperBound="-1"
+        eType="#//Elemento" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="false"/>
+        <details key="width" value="15"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//RelacionamentoNosqlEsquema"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relacionamentosnosqlesquemas"
+        upperBound="-1" eType="#//RelacionamentoNosqlEsquema" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributosrelacionamentolink"
+        upperBound="-1" eType="#//AtributoRelacionamentoLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relacionamentoslink" upperBound="-1"
+        eType="#//RelacionamentoLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributosentidadelink"
+        upperBound="-1" eType="#//AtributoEntidadeLink" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relacionamentosentidadesagregadas"
+        upperBound="-1" eType="#//RelacionamentoEntidadesAgregadasLink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Elemento"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EntidadeSemiEstruturada" eSuperTypes="#//Entidade">
+    <eAnnotations source="gmf.node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntidadeAgregada" eSuperTypes="#//Entidade">
+    <eAnnotations source="gmf.node"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//RelacionamentoEntidadesAgregadasLink"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelacionamentoEntidadesAgregadasLink">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidade" eType="#//TiposCardinalidade"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        upperBound="-1" eType="#//EntidadeAgregada"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//EntidadeAgregada"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelacionamentoNosqlEsquema">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//NosqlEsquema"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//NosqlEsquema"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="descricao" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

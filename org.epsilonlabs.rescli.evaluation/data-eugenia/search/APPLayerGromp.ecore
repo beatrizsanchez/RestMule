@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="archimateAL2f" nsURI="http://uniandes.edu.co/metamodels/archimateAL2f"
+    nsPrefix="al2f">
+  <eClassifiers xsi:type="ecore:EClass" name="ArchimateModel">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//ArchimateElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchimateElement" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composedOfElementElement"
+        upperBound="-1" eType="#//ArchimateElement" containment="true" eOpposite="#//ArchimateElement/composesElementElement">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composesElementElement"
+        eType="#//ArchimateElement" eOpposite="#//ArchimateElement/composedOfElementElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregatesElementElement"
+        upperBound="-1" eType="#//ArchimateElement" eOpposite="#//ArchimateElement/aggregatedByElementElement">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="uses"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregatedByElementElement"
+        eType="#//ArchimateElement" eOpposite="#//ArchimateElement/aggregatesElementElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataObject" eSuperTypes="#//ArchimateElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessedByApplicationFunctionDataObject"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/accessesDataObjectApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="accessedBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessedByApplicationServiceDataObject"
+        upperBound="-1" eType="#//ApplicationService" eOpposite="#//ApplicationService/accessesDataObjectApplicationService">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="accessedBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationService" eSuperTypes="#//ArchimateElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizedByApplicationFunctionApplicationService"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/realizesApplicationServiceApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="realizedBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedByApplicationFunctionApplicationService"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/usesApplicationServiceApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="usedBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedToApplicationInterfaceApplicationService"
+        upperBound="-1" eType="#//ApplicationInterface" eOpposite="#//ApplicationInterface/assignedToApplicationServiceApplicationInterface">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="assignedTo"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessesDataObjectApplicationService"
+        upperBound="-1" eType="#//DataObject" eOpposite="#//DataObject/accessedByApplicationServiceDataObject">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="accesses"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationFunction" eSuperTypes="#//ArchimateElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggeredByApplicationFunctionApplicationFunction"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/triggersToApplicationFunctionApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="triggeredBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="triggersToApplicationFunctionApplicationFunction"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/triggeredByApplicationFunctionApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="triggersTo"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowsToApplicationFunctionApplicationFunction"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/flowsFromApplicationFunctionApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="flowsTo"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowsFromApplicationFunctionApplicationFunction"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/flowsToApplicationFunctionApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="flowsFrom"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="realizesApplicationServiceApplicationFunction"
+        eType="#//ApplicationService" eOpposite="#//ApplicationService/realizedByApplicationFunctionApplicationService">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="realizes"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedToApplicationComponentApplicationFunction"
+        upperBound="-1" eType="#//ApplicationComponent" eOpposite="#//ApplicationComponent/assignedToApplicationFunctionApplicationComponent">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="assignedTo"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usesApplicationServiceApplicationFunction"
+        upperBound="-1" eType="#//ApplicationService" eOpposite="#//ApplicationService/usedByApplicationFunctionApplicationService">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="uses"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="accessesDataObjectApplicationFunction"
+        upperBound="-1" eType="#//DataObject" eOpposite="#//DataObject/accessedByApplicationFunctionDataObject">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="accesses"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationInteraction" eSuperTypes="#//ApplicationFunction">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationInterface" eSuperTypes="#//ArchimateElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composesApplicationComponentApplicationInterface"
+        eType="#//ApplicationComponent" eOpposite="#//ApplicationComponent/composedOfApplicationInterfaceApplicationComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usedByApplicationComponentApplicationInterface"
+        upperBound="-1" eType="#//ApplicationComponent" eOpposite="#//ApplicationComponent/usesApplicationInterfaceApplicationComponent">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="usedBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedToApplicationServiceApplicationInterface"
+        upperBound="-1" eType="#//ApplicationService" eOpposite="#//ApplicationService/assignedToApplicationInterfaceApplicationService">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="assignedTo"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationComponent" eSuperTypes="#//ArchimateElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="external"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregatedByApplicationCollaborationApplicationComponent"
+        eType="#//ApplicationCollaboration" eOpposite="#//ApplicationCollaboration/aggregatesApplicationComponentApplicationCollaboration">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="aggregatedBy"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="assignedToApplicationFunctionApplicationComponent"
+        upperBound="-1" eType="#//ApplicationFunction" eOpposite="#//ApplicationFunction/assignedToApplicationComponentApplicationFunction">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="assignedTo"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="composedOfApplicationInterfaceApplicationComponent"
+        upperBound="-1" eType="#//ApplicationInterface" containment="true" eOpposite="#//ApplicationInterface/composesApplicationComponentApplicationInterface">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usesApplicationInterfaceApplicationComponent"
+        upperBound="-1" eType="#//ApplicationInterface" eOpposite="#//ApplicationInterface/usedByApplicationComponentApplicationInterface">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="uses"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ApplicationCollaboration" eSuperTypes="#//ApplicationComponent">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="elementName"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="true"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="aggregatesApplicationComponentApplicationCollaboration"
+        upperBound="-1" eType="#//ApplicationComponent" eOpposite="#//ApplicationComponent/aggregatedByApplicationCollaborationApplicationComponent">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="aggregates"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>

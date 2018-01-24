@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="umlClassMetaModel" nsURI="umlClassMetaModel" nsPrefix="">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UmlPackage">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Classes" upperBound="-1"
+        eType="#//UmlClass" containment="true" eOpposite="#//UmlClass/Package"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Associations" upperBound="-1"
+        eType="#//UmlAssociation" containment="true" eOpposite="#//UmlAssociation/Package"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UmlClass">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Package" lowerBound="1"
+        eType="#//UmlPackage" eOpposite="#//UmlPackage/Classes"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingRelations" upperBound="-1"
+        eType="#//UmlAssociation" eOpposite="#//UmlAssociation/Source">
+      <eAnnotations source="gmf.link">
+        <details key="source.decoration" value="arrow"/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingRelations" upperBound="-1"
+        eType="#//UmlAssociation" eOpposite="#//UmlAssociation/Target">
+      <eAnnotations source="gmf.link">
+        <details key="source.decoration" value="arrow"/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UmlAssociation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Package" lowerBound="1"
+        eType="#//UmlPackage" eOpposite="#//UmlPackage/Associations"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Source" lowerBound="1"
+        eType="#//UmlClass" eOpposite="#//UmlClass/outgoingRelations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Target" lowerBound="1"
+        eType="#//UmlClass" eOpposite="#//UmlClass/incomingRelations"/>
+  </eClassifiers>
+</ecore:EPackage>

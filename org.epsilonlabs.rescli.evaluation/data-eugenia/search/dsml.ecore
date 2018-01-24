@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="dsml" nsURI="dsml" nsPrefix="dsml">
+  <eClassifiers xsi:type="ecore:EClass" name="DrawingArea">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+      <details key="rcp" value="false"/>
+      <details key="onefile" value="true"/>
+      <details key="diagram.extension" value="dsml"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rule" lowerBound="1" eType="#//Rule"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patterns" lowerBound="1"
+        eType="#//EventPattern" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="output" lowerBound="1"
+        eType="#//EventOutput" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="windows" upperBound="-1"
+        eType="#//Window" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetGroupby" upperBound="-1"
+        eType="#//TargetGroupby" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+        eType="#//Link" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkPatternTarget" upperBound="-1"
+        eType="#//LinkPatternTarget" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linkTaget" upperBound="-1"
+        eType="#//LinkTarget" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Component" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//Component">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="ruleName"/>
+      <details key="figure" value="rounded"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ruleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Rule"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1"
+        eType="#//Query" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="free"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventOutput" eSuperTypes="#//Component">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="outputName"/>
+      <details key="figure" value="rounded"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="outputName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="OutputEvent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="queries" upperBound="-1"
+        eType="#//Query" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="free"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventPattern" eSuperTypes="#//Component">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="eventPattern"/>
+      <details key="figure" value="rounded"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventPattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="EventPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="node" upperBound="-1" eType="#//Pattern"
+        containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="collapsible" value="true"/>
+        <details key="layout" value="free"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Window" eSuperTypes="#//Component">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="window"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="window" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="Window"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeWindow" eType="#//TypeWindow"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TargetGroupby" eSuperTypes="#//Component">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="targetGroupby"/>
+      <details key="figure" value="rounded"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetGroupby" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="TargetGroupby"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//Component">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="eventName"/>
+      <details key="figure" value="rounded"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="eventName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="list"/>
+        <details key="collapsible" value="false"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name,type"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.icon" value="false"/>
+      <details key="label.pattern" value="{0}:{1}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Query" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" eType="#//Link"
+        eOpposite="#//Link/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" eType="#//Link"
+        eOpposite="#//Link/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Aggregation" eSuperTypes="#//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="typeAggregation"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeAggregation" eType="#//TypeAggregation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConditionGroup" eSuperTypes="#//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="conditionGroup"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="255,204,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conditionGroup" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="ConditionGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationTypes" upperBound="-1"
+        eType="#//Query" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="free"/>
+        <details key="collapsible" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupbyCondition" eSuperTypes="#//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="groupbyCondition"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="76,217,100"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupbyCondition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="groupbyCondition"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationTypes" upperBound="-1"
+        eType="#//Query" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="free"/>
+        <details key="collapsible" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BringGroup" eSuperTypes="#//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="bringGroup"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="0,153,255"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bringGroup" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="BringGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="bringAll" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationTypes" upperBound="-1"
+        eType="#//Query" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="free"/>
+        <details key="collapsible" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target" eSuperTypes="#//Pattern #//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="targetAlias"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="255,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operationTypes" upperBound="-1"
+        eType="#//Query" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="layout" value="free"/>
+        <details key="collapsible" value="true"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingTarget" eType="#//LinkPatternTarget"
+        eOpposite="#//LinkPatternTarget/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingTarget" eType="#//LinkPatternTarget"
+        eOpposite="#//LinkPatternTarget/source"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//Query #//Pattern">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="description"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="NOT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operator" eSuperTypes="#//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="operator"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="Operator"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" eType="#//Attribute"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operatorAlias" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueOperator" eSuperTypes="#//Query">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="valueOperator"/>
+      <details key="figure" value="ellipse"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valueOperator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pattern" abstract="true" eSuperTypes="#//Query"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryPattern" eSuperTypes="#//Pattern">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="UnaryPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeUnaryPattern" eType="#//TypeUnaryPattern"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternTimer" eSuperTypes="#//Pattern">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="patternTimer"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="patternTimer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="PatternTimer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typePatternTimer" eType="#//TypePatternTimer"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RepeatPattern" eSuperTypes="#//Pattern">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="repeatPattern"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="repeatPattern" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" defaultValueLiteral="RepeatPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typePatternTimer" eType="#//TypeRepeatPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Query"
+        eOpposite="#//Query/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Query"
+        eOpposite="#//Query/incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkTarget">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="incoming" value="true"/>
+      <details key="color" value="0,0,0"/>
+      <details key="width" value="1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" upperBound="-1"
+        eType="#//Target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkPatternTarget">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="comparisonTarget"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="incoming" value="true"/>
+      <details key="color" value="0,0,0"/>
+      <details key="width" value="1"/>
+      <details key="tool.description" value="Operations: [FOLLOWEDBY, OR, AND, OR, UNTIL, WHILE]"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Target" eOpposite="#//Target/outgoingTarget"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Target" eOpposite="#//Target/incomingTarget"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparisonTarget" eType="#//TypeTargetComparison"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Comparison" eSuperTypes="#//Link">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="comparison"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="incoming" value="true"/>
+      <details key="color" value="0,0,0"/>
+      <details key="width" value="1"/>
+      <details key="tool.description" value="Operations: [=, >=, >, &lt;=, &lt;, &lt;>]"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparison" eType="#//TypeComparison"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Arithmetic" eSuperTypes="#//Link">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="arithmetic"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="incoming" value="true"/>
+      <details key="color" value="0,0,0"/>
+      <details key="width" value="1"/>
+      <details key="tool.description" value="Operations: [+, /, %, *, -]"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arithmetic" eType="#//TypeArithmetic"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LogicalConnector" eSuperTypes="#//Link">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="typeLogical"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="incoming" value="true"/>
+      <details key="color" value="0,153,255"/>
+      <details key="width" value="2"/>
+      <details key="tool.description" value="Operations: [and, or]"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeLogical" eType="#//TypeLogical"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRule">
+    <eLiterals name="QUERY"/>
+    <eLiterals name="PATTERN" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeWindow">
+    <eLiterals name="LENGTH"/>
+    <eLiterals name="LENGTH_BATCH" value="1"/>
+    <eLiterals name="TIME" value="2"/>
+    <eLiterals name="EXT_TIMED" value="3"/>
+    <eLiterals name="TIME_BATCH" value="4"/>
+    <eLiterals name="EXT_TIMED_BATCH" value="5"/>
+    <eLiterals name="TIME_LENGTH_BATCH" value="6"/>
+    <eLiterals name="TIME_SEC" value="7"/>
+    <eLiterals name="TIME_ACCUM" value="8"/>
+    <eLiterals name="KEEPALL" value="9"/>
+    <eLiterals name="FIRSTLENGTH" value="10"/>
+    <eLiterals name="FIRSTTIME" value="11"/>
+    <eLiterals name="EXPR" value="12"/>
+    <eLiterals name="EXPR_BATCH" value="13"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeUnaryPattern">
+    <eLiterals name="EVERY"/>
+    <eLiterals name="EVERY_DISTINCT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeRepeatPattern">
+    <eLiterals name="RANGE"/>
+    <eLiterals name="REPEAT" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeTargetComparison">
+    <eLiterals name="FOLLOWEDBY"/>
+    <eLiterals name="AND" value="1"/>
+    <eLiterals name="OR" value="2"/>
+    <eLiterals name="UNTIL" value="3"/>
+    <eLiterals name="WHILE" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeLogical">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeComparison">
+    <eLiterals name="EQUAL"/>
+    <eLiterals name="GREATER_EQUAL" value="1"/>
+    <eLiterals name="GREATER_THAN" value="2"/>
+    <eLiterals name="LESS_EQUAL" value="3"/>
+    <eLiterals name="LESS_THAN" value="4"/>
+    <eLiterals name="NOT_EQUAL" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeArithmetic">
+    <eLiterals name="ADDITION"/>
+    <eLiterals name="DIVISION" value="1"/>
+    <eLiterals name="MODULUS" value="2"/>
+    <eLiterals name="MULTIPLICATION" value="3"/>
+    <eLiterals name="SUBTRACTION" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypeAggregation">
+    <eLiterals name="AVG"/>
+    <eLiterals name="COUNT" value="1"/>
+    <eLiterals name="MAX" value="2"/>
+    <eLiterals name="MIN" value="3"/>
+    <eLiterals name="SUM" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TypePatternTimer">
+    <eLiterals name="WITHIN_TIMER"/>
+    <eLiterals name="WITHIN_MAX_TIMER" value="1"/>
+    <eLiterals name="INTERVAL" value="2"/>
+    <eLiterals name="AT" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

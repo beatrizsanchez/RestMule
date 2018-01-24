@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ewe"
+    nsURI="ewe" nsPrefix="ewe">
+  <eClassifiers xsi:type="ecore:EClass" name="Project">
+    <eAnnotations source="gmf.diagram">
+      <details key="note" value="Root class"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targets" lowerBound="1"
+        upperBound="-1" eType="#//Target" containment="true" eOpposite="#//Target/containingProject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultTarget" lowerBound="1"
+        eType="#//Target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="border.width" value="2"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="color" value="249,249,213"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+        <details key="namespace" value=""/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="follows" eType="#//Task"
+        eOpposite="#//Task/follower">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="follows"/>
+        <details key="target.decoration" value="arrow"/>
+        <details key="style" value="dash"/>
+        <details key="width" value="2"/>
+        <details key="tool.small.bundle" value="Epsilon_Workflow_Editor.edit"/>
+        <details key="tool.small.path" value="icons/full/obj16/Follows.gif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="follower" eType="#//Task"
+        eOpposite="#//Task/follows"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attributes" upperBound="-1"
+        eType="#//Attribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="taskelements" upperBound="-1"
+        eType="#//NestedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EpsilonTask" abstract="true" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadModelTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Load Model Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//ParameterNestedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StoreModelTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Store Model Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="model" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParameterNestedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="gmf.node">
+        <details key="label" value="name"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariableNestedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="as" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExportsNestedElement" eSuperTypes="#//VariableNestedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UsesNestedElement" eSuperTypes="#//VariableNestedElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelNestedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="as" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExecutableModelTask" abstract="true"
+      eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="src"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="src" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exports" upperBound="-1"
+        eType="#//ExportsNestedElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uses" upperBound="-1" eType="#//UsesNestedElement"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//ModelNestedElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RollbackTransactionTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Rollback Transaction Task"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DisposeModelTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Dispose Model Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="model" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StartTransactionTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Start Transaction Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="models" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EolTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="EOL Task"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EmlTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="EML Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useMatchTrace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportTransformationTrace"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportMergeTrace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EglTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="EGL Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="target" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EtlTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="ETL Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportTransformationTrace"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EvlTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="EVL Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="failOnErrors" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="failOnWarnings" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportAsModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportConstraintTrace"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CommitTransactionTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Commit Transaction Task"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Target">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="border.width" value="2"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetTasks" lowerBound="1"
+        upperBound="-1" eType="#//Task" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="note" value="targetTasks"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containingProject" lowerBound="1"
+        eType="#//Project" eOpposite="#//Project/targets">
+      <eAnnotations source="gmf.compartment">
+        <details key="note" value="targets"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="depends" upperBound="-1"
+        eType="#//Target">
+      <eAnnotations source="gmf.link">
+        <details key="label" value="depends"/>
+        <details key="target.decoration" value="filledclosedarrow"/>
+        <details key="style" value="dash"/>
+        <details key="width" value="3"/>
+        <details key="tool.small.bundle" value="Epsilon_Workflow_Editor.edit"/>
+        <details key="tool.small.path" value="icons/full/obj16/Depends.gif"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoadEMFModelTask" eSuperTypes="#//LoadModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Load EMF Model Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="modelFile" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelFile" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="isMetamodelFileBased" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="readOnLoad" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metamodelUri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="storeOnDisposal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Attribute">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NestedElement" eSuperTypes="#//Task"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlockTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Flock Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="originalModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="migratedModel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EUnitTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="EUnit Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="failOnErrors" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="report" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral="no"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toDir" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EclTask" eSuperTypes="#//ExecutableModelTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="ECL Task"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="useMatchTrace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exportMatchTrace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DisposeModelsTask" eSuperTypes="#//EpsilonTask">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Dispose Models Task"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

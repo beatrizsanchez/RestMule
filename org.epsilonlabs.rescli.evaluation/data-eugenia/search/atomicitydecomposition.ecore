@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="atomicitydecomposition" nsURI="http://soton.ac.uk/models/eventb/atomicitydecomposition"
+    nsPrefix="atomicitydecomposition">
+  <eClassifiers xsi:type="ecore:EClass" name="FlowDiagram" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//EventBNamedCommentedDataElaborationElement ../../ac.soton.eventb.emf.diagrams/model/diagrams.ecore#//Diagram ../../org.eventb.emf.core/model/eventbcore.ecore#//AbstractExtension">
+    <eAnnotations source="org.eventb.emf.core.extendedMetaClasses" references="../../org.eventb.emf.core/model/eventbcore.ecore#//machine/Machine"/>
+    <eAnnotations source="gmf.diagram"/>
+    <eOperations name="validate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
+      <eParameters name="diagnostic" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//TypedParameterExpression" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refine" lowerBound="1"
+        upperBound="-1" eType="#//Child" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sw" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="copy" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Child" abstract="true" eSuperTypes="../../org.eventb.emf.core/model/eventbcore.ecore#//EventBElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ref" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Leaf" eSuperTypes="#//Child #//MultiFlow">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="color" value="0,189,15"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constructor" abstract="true" eSuperTypes="#//Child"/>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.text" value="AND"/>
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="andLink" lowerBound="2"
+        upperBound="-1" eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Loop" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eAnnotations source="gmf.label">
+      <details key="label.text" value="*"/>
+    </eAnnotations>
+    <eOperations name="validate" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EBoolean">
+      <eParameters name="diagnostic" eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EDiagnosticChain"/>
+      <eParameters name="context">
+        <eGenericType eClassifier="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EMap">
+          <eTypeArguments/>
+          <eTypeArguments/>
+        </eGenericType>
+      </eParameters>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loopLink" lowerBound="1"
+        upperBound="-1" eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="All" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.text" value="ALL"/>
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="allLink" lowerBound="1"
+        eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newParameter" lowerBound="1"
+        eType="#//TypedParameterExpression" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Some" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.text" value="SOME"/>
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="someLink" lowerBound="1"
+        eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newParameter" lowerBound="1"
+        eType="#//TypedParameterExpression" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+      <details key="label.text" value="OR"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orLink" lowerBound="2"
+        upperBound="-1" eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Xor" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="xorLink" lowerBound="2"
+        upperBound="-1" eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="One" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oneLink" lowerBound="1"
+        eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newParameter" lowerBound="1"
+        eType="#//TypedParameterExpression" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiFlow" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decompose" upperBound="-1"
+        eType="#//FlowDiagram" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedParameterExpression" eSuperTypes="../../ac.soton.eventb.emf.core.extension/model/eventbcoreextension.ecore#//TypedParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="InputExpression" lowerBound="1"
+        eType="ecore:EDataType platform:/plugin/org.eclipse.emf.ecore/model/Ecore.ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Par" eSuperTypes="#//Constructor">
+    <eAnnotations source="gmf.node">
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parLink" lowerBound="1"
+        eType="#//Leaf" containment="true">
+      <eAnnotations source="gmf.link">
+        <details key="label" value=""/>
+        <details key="style" value="dash"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="newParameter" lowerBound="1"
+        eType="#//TypedParameterExpression" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bpmn" nsURI="http://www.example.org/bpmn" nsPrefix="bpmn">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BPMNDiagram">
+    <eAnnotations source="gmf.diagram">
+      <details key="model.extension" value="bpmn"/>
+      <details key="diagram.extension" value="bpmn_diagram"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//Element" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Partition" abstract="true" eSuperTypes="#//Element">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Lane" eSuperTypes="#//Partition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowControllers" upperBound="-1"
+        eType="#//FlowController" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParticipantPool" eSuperTypes="#//Partition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lanes" upperBound="-1"
+        eType="#//Lane" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector" abstract="true" eSuperTypes="#//Element">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="name"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="border.style" value="solid"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="width" value="1"/>
+      <details key="tool.small.bundle" value="bpmn.edit"/>
+      <details key="tool.small.path" value="/icons/full/obj16/MessageFlow.gif"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//FlowController"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//FlowController"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageFlow" eSuperTypes="#//Connector">
+    <eAnnotations source="gmf.link">
+      <details key="tool.name" value="Message Flow"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowController" abstract="true" eSuperTypes="#//Element">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Gateway" abstract="true" eSuperTypes="#//FlowController">
+    <eAnnotations source="gmf.node"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InclusiveGateway" eSuperTypes="#//Gateway">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Inclusive Gateway"/>
+      <details key="tool.small.bundle" value="bpmn.edit"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/bpmn/svg/inclusive_gateway.svg"/>
+      <details key="size" value="60,60"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParallelGateway" eSuperTypes="#//Gateway">
+    <eAnnotations source="gmf.node">
+      <details key="tool.name" value="Parallel Gateway"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/bpmn/svg/pararell_gateway.svg"/>
+      <details key="size" value="60,60"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StartEvent" eSuperTypes="#//FlowController">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="tool.name" value="Start Event"/>
+      <details key="resizable" value="false"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/bpmn/svg/initial_state.svg"/>
+      <details key="margin" value="2"/>
+      <details key="size" value="40,40"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EndEvent" eSuperTypes="#//FlowController">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="tool.name" value="End Event"/>
+      <details key="resizable" value="false"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/bpmn/svg/final_state.svg"/>
+      <details key="size" value="40,40"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Task" eSuperTypes="#//FlowController">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="tool.name" value="Task"/>
+      <details key="resizable" value="true"/>
+      <details key="margin" value="2"/>
+      <details key="figure" value="rounded"/>
+      <details key="color" value="255,239,213"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

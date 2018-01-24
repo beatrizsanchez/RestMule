@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="questionnaire" nsURI="questionnaire" nsPrefix="questionnaire">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Questionnaire">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entree" lowerBound="1"
+        eType="#//Entree" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="infos" upperBound="-1"
+        eType="#//Information" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="questions" upperBound="-1"
+        eType="#//Question" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sortie" upperBound="-1"
+        eType="#//Sortie" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entree" eSuperTypes="#//Etape">
+    <eAnnotations source="gmf.node">
+      <details key="label.text" value="Entree"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/questionnaire/svg/home.svg"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sortie" eSuperTypes="#//Etape">
+    <eAnnotations source="gmf.node">
+      <details key="label.text" value="Sortie"/>
+      <details key="label.readOnly" value="true"/>
+      <details key="figure" value="svg"/>
+      <details key="svg.uri" value="platform:/plugin/questionnaire/svg/exit.svg"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Etape" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="intitule"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intitule" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="etapeSuivante" eType="#//Etape">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="arrow"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Information" eSuperTypes="#//Etape"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Question" abstract="true" eSuperTypes="#//Etape"/>
+  <eClassifiers xsi:type="ecore:EClass" name="QuestionTexte" eSuperTypes="#//Question">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reponse" lowerBound="1"
+        eType="#//ReponseTexte" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuestionBinaire" eSuperTypes="#//Question">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="oui" lowerBound="1" eType="#//ReponseOui"
+        containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="non" lowerBound="1" eType="#//ReponseNon"
+        containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuestionValeur" eSuperTypes="#//Question">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reponse" lowerBound="1"
+        eType="#//ReponseValeur" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="QuestionChoixMultiple" eSuperTypes="#//Question">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="reponses" lowerBound="2"
+        upperBound="-1" eType="#//ReponseChoixMultiple" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reponse" abstract="true" eSuperTypes="#//Etape"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReponseTexte" eSuperTypes="#//Reponse"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ReponseOui" eSuperTypes="#//Reponse">
+    <eAnnotations source="gmf.node">
+      <details key="label.readOnly" value="true"/>
+      <details key="label.text" value="Oui"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReponseNon" eSuperTypes="#//Reponse">
+    <eAnnotations source="gmf.node">
+      <details key="label.readOnly" value="true"/>
+      <details key="label.text" value="Non"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReponseValeur" eSuperTypes="#//Reponse">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valeur" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vrai" eType="#//Etape">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="arrow"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="faux" eType="#//Etape">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="arrow"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReponseChoixMultiple" eSuperTypes="#//Reponse"/>
+</ecore:EPackage>

@@ -1,0 +1,572 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="caracteristica" nsURI="caracteristica" nsPrefix="caracteristica">
+  <eClassifiers xsi:type="ecore:EClass" name="LPS">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pontosDeVariacao" upperBound="-1"
+        eType="#//PontoDeVariacao" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementos" upperBound="-1"
+        eType="#//Elemento" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="externos" upperBound="-1"
+        eType="#//ElementoExterno" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regras" upperBound="-1"
+        eType="#//Regra" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="produtos" upperBound="-1"
+        eType="#//Produto" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expressoes" upperBound="-1"
+        eType="#//Expressao" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementosDeProduto" upperBound="-1"
+        eType="#//ElementoDeProduto" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sistema" eType="#//CaracteristicaRaiz"
+        eOpposite="#//CaracteristicaRaiz/LpsDoSistema"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributos" upperBound="-1"
+        eType="#//Atributo" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valoresContextuais" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="simulacoes" upperBound="-1"
+        eType="#//Simulacao" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inconsistenciaERA" upperBound="-1"
+        eType="#//InconsistenciaRegraAdaptacao" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="erro" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Elemento">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementoExterno">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CasoDeUso" eSuperTypes="#//ElementoExterno">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="utils.TriangleFigure"/>
+      <details key="label.pattern" value="Externo {0}"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CasoDeTeste" eSuperTypes="#//ElementoExterno">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="utils.TriangleFigure"/>
+      <details key="label.pattern" value="Externo {0}"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementoCaracteristico" eSuperTypes="#//Elemento"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Atributo" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="utils.TriangleFigure"/>
+      <details key="label.pattern" value="Attribute {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipoValor" eType="#//TipoValor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaPai" eType="#//Caracteristica"
+        eOpposite="#//Caracteristica/atributo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Caracteristica" eSuperTypes="#//Elemento">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementosExternos" upperBound="-1"
+        eType="#//ElementoExterno">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaPai" eType="#//Caracteristica"
+        eOpposite="#//Caracteristica/caracteristicaFilha"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaFilha" upperBound="-1"
+        eType="#//Caracteristica" eOpposite="#//Caracteristica/caracteristicaPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variacoes" upperBound="-1"
+        eType="#//Variacao" eOpposite="#//Variacao/caracteristicaPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributo" upperBound="-1"
+        eType="#//Atributo" eOpposite="#//Atributo/caracteristicaPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaRaiz" eSuperTypes="#//Caracteristica">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="LpsDoSistema" lowerBound="1"
+        eType="#//LPS" eOpposite="#//LPS/sistema"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaOpcional" eSuperTypes="#//Caracteristica #//ElementoCaracteristico">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="ellipse"/>
+      <details key="border.style" value="dash"/>
+      <details key="border.width" value="2"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaAgrupada" eSuperTypes="#//Caracteristica #//ElementoCaracteristico">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="utils.TriangleFigure"/>
+      <details key="border.style" value="dash"/>
+      <details key="border.width" value="2"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaMandatoria" eSuperTypes="#//Caracteristica">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.style" value="solid"/>
+      <details key="border.width" value="2"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariacaoDois" eSuperTypes="#//Caracteristica #//ElementoCaracteristico">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome,cardinalidadeMaxima"/>
+      <details key="label.pattern" value="Variation {0} : {1} "/>
+      <details key="figure" value="utils.DiamondFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMaxima" eType="#//CardinalidadeMaxima"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMinimaOr"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMaximaOr"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PontoDeVariacao"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variacao" eSuperTypes="#//PontoDeVariacao #//Elemento">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMinima" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMaxima" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variantes" upperBound="-1"
+        eType="#//Variante" eOpposite="#//Variante/variacaoPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaPai" eType="#//Caracteristica"
+        eOpposite="#//Caracteristica/variacoes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variante" eSuperTypes="#//PontoDeVariacao #//ElementoCaracteristico #//Caracteristica">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variacaoPai" eType="#//Variacao"
+        eOpposite="#//Variacao/variantes"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RaizDeContexto" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entidadesDeContexto" upperBound="-1"
+        eType="#//EntidadeDeContexto" eOpposite="#//EntidadeDeContexto/raiz">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntidadeDeContexto" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="label.pattern" value="Entidade de Contexto {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="raiz" eType="#//RaizDeContexto"
+        eOpposite="#//RaizDeContexto/entidadesDeContexto"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="informacoesDeContexto"
+        upperBound="-1" eType="#//InformacaoDeContexto" eOpposite="#//InformacaoDeContexto/elementoPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InformacaoDeContexto" eSuperTypes="#//Elemento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome,valor"/>
+      <details key="label.pattern" value="Informação de Contexto: {0} Valor {1}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="origem" eType="#//Origem"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="validade" eType="#//Validade"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualidade" eType="#//Qualidade"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipoValor" eType="#//TipoValor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementoPai" lowerBound="1"
+        eType="#//EntidadeDeContexto" eOpposite="#//EntidadeDeContexto/informacoesDeContexto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ElementoDeProduto">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementoOriginal" eType="#//Elemento"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaProduto" eSuperTypes="#//ElementoDeProduto">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaProdutoPai"
+        eType="#//CaracteristicaProduto" eOpposite="#//CaracteristicaProduto/caracteristicaProdutoFilha"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaProdutoFilha"
+        upperBound="-1" eType="#//CaracteristicaProduto" eOpposite="#//CaracteristicaProduto/caracteristicaProdutoPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributoProduto" upperBound="-1"
+        eType="#//AtributoProduto" eOpposite="#//AtributoProduto/caracteristicaProdutoPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AtributoProduto" eSuperTypes="#//ElementoDeProduto">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome,valor"/>
+      <details key="figure" value="utils.TriangleFigure"/>
+      <details key="label.pattern" value="Attribute {0}:{1}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipoValor" eType="#//TipoValor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaProdutoPai"
+        eType="#//CaracteristicaProduto" eOpposite="#//CaracteristicaProduto/atributoProduto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaMandatoriaProduto" eSuperTypes="#//CaracteristicaProduto">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaOpcionalProduto" eSuperTypes="#//CaracteristicaProduto">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariacaoDoisProduto" eSuperTypes="#//CaracteristicaProduto">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome,cardinalidadeMaxima"/>
+      <details key="label.pattern" value="Variation {0} : {1} "/>
+      <details key="figure" value="utils.DiamondFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMaxima" eType="#//CardinalidadeMaxima"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMinimaOr"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMaximaOr"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaracteristicaAgrupadaProduto" eSuperTypes="#//CaracteristicaProduto">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="figure" value="TriangleFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VariacaoProduto" eSuperTypes="#//ElementoDeProduto">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMinima" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cardinalidadeMaxima" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variantesProduto" upperBound="-1"
+        eType="#//VarianteProduto" eOpposite="#//VarianteProduto/variacaoProdutoPai">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="caracteristicaProdutoPai"
+        eType="#//CaracteristicaProduto"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VarianteProduto" eSuperTypes="#//ElementoDeProduto">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variacaoProdutoPai" lowerBound="1"
+        eType="#//VariacaoProduto" eOpposite="#//VariacaoProduto/variantesProduto"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selecionado" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Produto" eSuperTypes="#//CaracteristicaProduto">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="label.pattern" value="Product: {0}"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="LinhaDoProduto" eType="#//CaracteristicaRaiz">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Origem">
+    <eLiterals name="Sentida"/>
+    <eLiterals name="Usuario" value="1"/>
+    <eLiterals name="Perfil" value="2"/>
+    <eLiterals name="Derivada" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Validade">
+    <eLiterals name="Volatil"/>
+    <eLiterals name="Frequente" value="1"/>
+    <eLiterals name="Raramente" value="2"/>
+    <eLiterals name="Permanente" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Qualidade">
+    <eLiterals name="Baixo"/>
+    <eLiterals name="Alto" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TipoValor">
+    <eLiterals name="TInteger"/>
+    <eLiterals name="TString" value="1"/>
+    <eLiterals name="TFloat" value="2"/>
+    <eLiterals name="TBoolean" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Regra">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conteudo" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RegraDeComposicao" eSuperTypes="#//Regra">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="label.pattern" value="Composition Rule {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="antecedente" eType="#//Antecedente">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="label" value="antecedent"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="consequente" eType="#//Antecedente">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="label" value="consequent"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RegraDeContexto" eSuperTypes="#//Regra">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="label.pattern" value="Regra de Contexto {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="evento" eType="#//Evento">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="label" value="evento"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="acao" eType="#//Acao">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="label" value="ação"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Evento" eSuperTypes="#//Expressao"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EventoLogico" eSuperTypes="#//Evento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="operadorLogico"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ladoDireitoEvento" eType="#//Evento">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operadorLogico" lowerBound="1"
+        eType="#//OperadorLogico"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ladoEsquerdoEvento" eType="#//Evento">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EventoRelacional" eSuperTypes="#//Evento">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variavelDeContexto" eType="#//InformacaoDeContexto"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operadorRelacional" eType="#//OperadorRelacional"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Acao" eSuperTypes="#//Expressao"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AcaoLogico" eSuperTypes="#//Acao">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="operadorAcaoLogico"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ladoEsquerdoAcao" lowerBound="1"
+        eType="#//Acao">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operadorAcaoLogico" eType="#//OperadorAcaoLogico"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ladoDireitoAcao" lowerBound="1"
+        eType="#//Acao">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralAcao" eSuperTypes="#//Acao">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presenca" eType="#//Presenca"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elemento" eType="#//ElementoCaracteristico"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Designar" eSuperTypes="#//Acao">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributo" eType="#//Atributo"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipoValor" eType="#//TipoValor"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Expressao">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Antecedente" eSuperTypes="#//Expressao"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressaoLogica" eSuperTypes="#//Antecedente">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="operadorLogico"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ladoDireitoComposicao"
+        eType="#//Antecedente">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operadorLogico" eType="#//OperadorLogico"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ladoEsquerdoComposicao"
+        eType="#//Antecedente">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="closedarrow"/>
+        <details key="color" value="0,0,0"/>
+        <details key="style" value="solid"/>
+        <details key="width" value="3"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExpressaoRelacional" eSuperTypes="#//Antecedente">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variaveldaExpressao" eType="#//Atributo"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="operadorRelacional" eType="#//OperadorRelacional"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="valor" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LiteralComposicao" eSuperTypes="#//Antecedente">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="presenca" eType="#//Presenca"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elemento" eType="#//ElementoCaracteristico"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperadorLogico">
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperadorAcaoLogico">
+    <eLiterals name="AND"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CardinalidadeMaxima">
+    <eLiterals name="OR"/>
+    <eLiterals name="XOR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OperadorRelacional">
+    <eLiterals name="MAIOR"/>
+    <eLiterals name="MENOR" value="1"/>
+    <eLiterals name="IGUAL" value="2"/>
+    <eLiterals name="MAIORIGUAL" value="3"/>
+    <eLiterals name="MENORIGUAL" value="4"/>
+    <eLiterals name="DIFERENTE" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Presenca">
+    <eLiterals name="PRESENTE" value="1"/>
+    <eLiterals name="AUSENTE"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Simulacao">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+      <details key="label.pattern" value="Simulation {0}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transicoes" upperBound="-1"
+        eType="#//Transicao" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="estados" upperBound="-1"
+        eType="#//Estado" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transicao">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="eAntigo"/>
+      <details key="target" value="eNovo"/>
+      <details key="target.decoration" value="closedarrow"/>
+      <details key="width" value="2"/>
+      <details key="label" value="etiqueta"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eAntigo" eType="#//Estado"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="eNovo" eType="#//Estado"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regrasQuebradas" upperBound="-1"
+        eType="#//RegraDeComposicao"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="acoes" upperBound="-1"
+        eType="#//Acao"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="safe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="etiqueta" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Estado">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nome"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nome" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="produto" eType="#//CaracteristicaProduto"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="safe" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InconsistenciaRegraAdaptacao">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="regrasInconsistentes" upperBound="-1"
+        eType="#//RegraDeContexto"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literaisInconsistentes"
+        upperBound="-1" eType="#//LiteralAcao"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atribuicoesInconsistentes"
+        upperBound="-1" eType="#//Designar"/>
+  </eClassifiers>
+</ecore:EPackage>

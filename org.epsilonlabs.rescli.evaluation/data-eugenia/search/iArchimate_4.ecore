@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="iArchimate" nsURI="http://co/edu/uniandes/iArchimate" nsPrefix="co.edu.uniandes.iArchimate">
+  <eAnnotations source="gmf">
+    <details key="foo" value="bar"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Model">
+    <eAnnotations source="gmf.diagram">
+      <details key="model.extension" value="iarchimate"/>
+      <details key="diagram.extension" value="iarchimate_diagram"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="supportingData" upperBound="-1"
+        eType="#//SupportinData" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="rounded"/>
+      <details key="label.icon" value="true"/>
+      <details key="label" value="name"/>
+      <details key="label.pattern" value="{0}"/>
+      <details key="size" value="140,60"/>
+      <details key="border.color" value="0,0,0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="typeName" lowerBound="1"
+        eType="#//ElementTypeName"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elementSupportingData"
+        eType="#//SupportinData">
+      <eAnnotations source="gmf.link">
+        <details key="target.decoration" value="arrow"/>
+        <details key="source.decoration" value="filledsquare"/>
+        <details key="style" value="dash"/>
+        <details key="color" value="0,0,255"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SupportinData">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="rounded"/>
+      <details key="label.icon" value="true"/>
+      <details key="label" value="idDecisionTrace"/>
+      <details key="label.pattern" value="{0}"/>
+      <details key="size" value="100,60"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idSupportingData" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decisions" upperBound="-1"
+        eType="#//Decision" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="facts" upperBound="-1"
+        eType="#//Fact" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observations" upperBound="-1"
+        eType="#//Observation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sources" upperBound="-1"
+        eType="#//Source" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Source" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reliability" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="certaintyDegree" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceObservations" upperBound="-1"
+        eType="#//Observation" eOpposite="#//Observation/belongsTo"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectObservation" eSuperTypes="#//Source"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Meeting" eSuperTypes="#//Source">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="minuteNumber" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="meetingParticipants" lowerBound="2"
+        upperBound="-1" eType="#//Person"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Document" eSuperTypes="#//Source">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person" eSuperTypes="#//Source">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="organizationalUnit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rol" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Observation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idObservation" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="referenceDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="observationFacts" upperBound="-1"
+        eType="#//Fact" eOpposite="#//Fact/isFactOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongsTo" lowerBound="1"
+        eType="#//Source" eOpposite="#//Source/sourceObservations"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Fact">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="isFactOf" lowerBound="1"
+        upperBound="-1" eType="#//Observation" eOpposite="#//Observation/observationFacts"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idFact" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="element" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InstanceFact" eSuperTypes="#//Fact">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exist" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AttributeFact" eSuperTypes="#//Fact">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attValue" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RelationFact" eSuperTypes="#//Fact">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relValue" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Decision">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="idDecision" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="result" lowerBound="1"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="decisionFacts" lowerBound="1"
+        upperBound="-1" eType="#//Fact"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ElementTypeName">
+    <eLiterals name="NotSelected" value="100"/>
+    <eLiterals name="BusinessActor"/>
+    <eLiterals name="BusinessRole" value="1"/>
+    <eLiterals name="BusinessCollaboration" value="2"/>
+    <eLiterals name="BusinessInterface" value="3"/>
+    <eLiterals name="Location" value="4"/>
+    <eLiterals name="BusinessObject" value="5"/>
+    <eLiterals name="BusinessProcess" value="6"/>
+    <eLiterals name="BusinessFunction" value="7"/>
+    <eLiterals name="BusinessInteraction" value="8"/>
+    <eLiterals name="BusinessEvent" value="9"/>
+    <eLiterals name="BusinessService" value="10"/>
+    <eLiterals name="Representation" value="11"/>
+    <eLiterals name="Meaning" value="12"/>
+    <eLiterals name="Value" value="13"/>
+    <eLiterals name="Product" value="14"/>
+    <eLiterals name="Contract" value="15"/>
+    <eLiterals name="ApplicationComponent" value="16"/>
+    <eLiterals name="ApplicationCollaboration" value="17"/>
+    <eLiterals name="ApplicationInterface" value="18"/>
+    <eLiterals name="DataObject" value="19"/>
+    <eLiterals name="ApplicationFunction" value="20"/>
+    <eLiterals name="ApplicationInteraction" value="21"/>
+    <eLiterals name="ApplicationService" value="22"/>
+    <eLiterals name="Node" value="23"/>
+    <eLiterals name="Device" value="24"/>
+    <eLiterals name="SystemSoftware" value="25"/>
+    <eLiterals name="InfrastructureInterface" value="26"/>
+    <eLiterals name="Network" value="27"/>
+    <eLiterals name="CommunicationPath" value="28"/>
+    <eLiterals name="InfrastructureFunction" value="29"/>
+    <eLiterals name="InfrastructureService" value="30"/>
+    <eLiterals name="Artifact" value="31"/>
+    <eLiterals name="Stakeholder" value="32"/>
+    <eLiterals name="Driver" value="33"/>
+    <eLiterals name="Assessment" value="34"/>
+    <eLiterals name="Goal" value="35"/>
+    <eLiterals name="Requirement" value="36"/>
+    <eLiterals name="Constraint" value="37"/>
+    <eLiterals name="Principle" value="38"/>
+    <eLiterals name="WorkPackage" value="39"/>
+    <eLiterals name="Deliverable" value="40"/>
+    <eLiterals name="Plateau" value="41"/>
+    <eLiterals name="Gap" value="42"/>
+  </eClassifiers>
+</ecore:EPackage>
