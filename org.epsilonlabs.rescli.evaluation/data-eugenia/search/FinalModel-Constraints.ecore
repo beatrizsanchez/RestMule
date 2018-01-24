@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="finalmodel" nsURI="finalmodel" nsPrefix="">
+  <eClassifiers xsi:type="ecore:EClass" name="DeclareModel">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activities" upperBound="-1"
+        eType="#//Activity" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constraints" upperBound="-1"
+        eType="#//Constraint" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lowerBoundCardinality"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="upperBoundCardinality"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Constraint" eOpposite="#//Constraint/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Constraint" eOpposite="#//Constraint/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Constraint" abstract="true">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Activity" eOpposite="#//Activity/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Activity" eOpposite="#//Activity/incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Arrowed" abstract="true" eSuperTypes="#//Constraint">
+    <eAnnotations source="gmf.link">
+      <details key="target.decoration" value="arrow"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RespondedExistence" eSuperTypes="#//Constraint">
+    <eAnnotations source="gmf.link">
+      <details key="source.decoration" value="myfigure.CircleDecoration"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternatedRespondedExistence" eSuperTypes="#//RespondedExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainRespondedExistence" eSuperTypes="#//RespondedExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CoExistence" eSuperTypes="#//Constraint">
+    <eAnnotations source="gmf.link">
+      <details key="source.decoration" value="myfigure.CircleDecoration"/>
+      <details key="target.decoration" value="myfigure.CircleDecoration"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternatedCoExistence" eSuperTypes="#//CoExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainCoExistence" eSuperTypes="#//CoExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotRespondedCoExistence" eSuperTypes="#//CoExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotAltRespondedCoExistence" eSuperTypes="#//AlternatedCoExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotChainRespondedCoExistence" eSuperTypes="#//ChainCoExistence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Response" eSuperTypes="#//Arrowed">
+    <eAnnotations source="gmf.link">
+      <details key="source.decoration" value="myfigure.CircleDecoration"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternatedResponse" eSuperTypes="#//Response"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainResponse" eSuperTypes="#//Response"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Precendence" eSuperTypes="#//Arrowed">
+    <eAnnotations source="gmf.link">
+      <details key="target.decoration" value="myfigure.CircleArrowDecoration"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternatedPrecendence" eSuperTypes="#//Precendence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainPrecendence" eSuperTypes="#//Precendence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Succesion" eSuperTypes="#//Arrowed">
+    <eAnnotations source="gmf.link">
+      <details key="source.decoration" value="myfigure.CircleDecoration"/>
+      <details key="target.decoration" value="myfigure.CircleArrowDecoration"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AlternatedSuccesion" eSuperTypes="#//Succesion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChainSuccesion" eSuperTypes="#//Succesion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotRespPrecSucc" eSuperTypes="#//Succesion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotAltNotRespPrecSucc" eSuperTypes="#//AlternatedSuccesion"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotChainNotRespPrecSucc" eSuperTypes="#//ChainSuccesion"/>
+</ecore:EPackage>

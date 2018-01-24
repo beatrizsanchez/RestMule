@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore">
+  <ecore:EClass name="hupij" instanceClassName="jepmo" instanceTypeName="vgrin" eGenericSuperTypes="">
+    <eAnnotations source="gmf" references="/1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3">
+      <eAnnotations source="gmf.label" references="/2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0"/>
+      <details key="diagram.extension" value="%eiU{n]ce"/>
+      <details key="model.extension" value="d{"/>
+      <details key="onefile" value="KH"/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+    </eAnnotations>
+    <eTypeParameters href="#/101"/>
+    <eTypeParameters href="#/102"/>
+    <eTypeParameters href="#/103"/>
+    <eTypeParameters href="#/104"/>
+    <eTypeParameters href="#/105"/>
+    <eTypeParameters href="#/106"/>
+    <eTypeParameters href="#/107"/>
+    <eTypeParameters href="#/108"/>
+    <eTypeParameters href="#/109"/>
+    <eTypeParameters href="#/110"/>
+    <eTypeParameters href="#/111"/>
+    <eTypeParameters href="#/112"/>
+    <eTypeParameters href="#/113"/>
+    <eTypeParameters href="#/114"/>
+    <eTypeParameters href="#/115"/>
+    <eTypeParameters href="#/116"/>
+  </ecore:EClass>
+  <ecore:EClass name="lgann" instanceClassName="mbmpw" instanceTypeName="dyvuv">
+    <eAnnotations source="gmf.diagram">
+      <eAnnotations source="gmf" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5"/>
+      <details key="rcp" value="j?X"/>
+      <details key="units" value="?IT*_W"/>
+      <details key="border.color" value="4Q6C;.Z#"/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+    </eAnnotations>
+    <eOperations name="lgann" eType="/75" eExceptions="/76 /77">
+      <eParameters name="jepmo" eType="/0">
+        <eAnnotations source="gmf.compartment" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2">
+          <details key="style" value="zH$0WEV8WU"/>
+          <details key="target" value="`RR?E$4h"/>
+          <details key="target.constraint" value="7#rcq7K(RV'"/>
+          <details key="width" value="Tr"/>
+          <details key="collapsible" value="W3?%UJ``"/>
+          <details key="layout" value=""/>
+          <details key="diagram.extension" value="RX+2,P"/>
+          <details key="model.extension" value="Ex*F+ hW&quot;L"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="vgrin" eType="/1">
+        <eAnnotations source="gmf.affixed" references="/0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3">
+          <details key="onefile" value="u"/>
+          <details key="rcp" value=""/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="lgann" eType="/2">
+        <eAnnotations source="gmf.label" references="/0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1">
+          <details key="units" value="1|S,Kiu"/>
+          <details key="border.color" value="=BQ\5"/>
+          <details key="border.styl" value="zbUf-}f"/>
+          <details key="border.width" value="S^S$;"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="mbmpw" eType="/3">
+        <eAnnotations source="gmf">
+          <details key="color" value="6b"/>
+          <details key="figure" value="yu"/>
+          <details key="label" value="5m:o9d"/>
+          <details key="label.icon" value="I"/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="dyvuv" eType="/4">
+        <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1">
+          <details key="label.parser" value="- Vj+s>7j $z"/>
+          <details key="label.edit.pattern" value=";O9\&lt;ez6="/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="trfjw" eType="/5">
+        <eAnnotations source="gmf.node" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+      </eParameters>
+      <eParameters name="orwcu" eType="/6">
+        <eAnnotations source="gmf.link" references="/1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2"/>
+      </eParameters>
+      <eParameters name="jheqh" eType="/7">
+        <eAnnotations source="gmf.compartment" references="/1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+      </eParameters>
+      <eParameters name="btpyr" eType="/8">
+        <eAnnotations source="gmf.affixed" references="/0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1">
+          <details key="label.pattern" value="c&amp;H/1ht{x@n"/>
+          <details key="label.view.pattern" value=""/>
+          <details key="label.placement" value="t?mOJcq:"/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="mbmpw" eType="/78" eExceptions="/79 /80 /81">
+      <eParameters name="xpkld" eType="/9">
+        <eAnnotations source="gmf.label"/>
+      </eParameters>
+      <eParameters name="yntbs" eType="/10">
+        <eAnnotations source="gmf" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0"/>
+      </eParameters>
+      <eParameters name="nyupv" eType="/11">
+        <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2"/>
+      </eParameters>
+      <eParameters name="kkkbg" eType="/12">
+        <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5"/>
+      </eParameters>
+      <eParameters name="djznx" eType="/13">
+        <eAnnotations source="gmf.link"/>
+      </eParameters>
+      <eParameters name="iptwj" eType="/14">
+        <eAnnotations source="gmf.compartment" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6"/>
+      </eParameters>
+      <eParameters name="fsxfl" eType="/15">
+        <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2"/>
+      </eParameters>
+    </eOperations>
+    <eOperations name="dyvuv" eType="/82" eExceptions="/83 /84 /0 /1 /2 /3 /4 /5 /6 /7 /8"/>
+    <eOperations name="trfjw" eType="/9" eExceptions="/10 /11 /12 /13 /14 /15 /16 /17 /18 /19 /20 /21 /22 /23"/>
+    <eOperations name="orwcu" eType="/24" eExceptions="/25 /26 /27 /28 /29 /30 /31 /32 /33 /34"/>
+    <eOperations name="jheqh" eType="/35"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mxbgy" eType="/57" defaultValueLiteral="kuosu"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cjcjb" eType="/58" defaultValueLiteral="gczyl"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gjqvn" eType="/59" defaultValueLiteral="fabid"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nocqs" eType="/60" defaultValueLiteral="fqnle"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uvihl" eType="/61" defaultValueLiteral="doggb"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hatlx" eType="/62" defaultValueLiteral="kizxb"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dpicx" eType="/63" defaultValueLiteral="dktqj"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cokac" eType="/64" defaultValueLiteral="qzlpx"/>
+  </ecore:EClass>
+  <ecore:EClass name="trfjw" instanceClassName="orwcu" instanceTypeName="jheqh">
+    <eAnnotations source="gmf.node" references="/0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1">
+      <eAnnotations source="gmf.diagram" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5"/>
+      <contents/>
+      <contents/>
+      <contents/>
+      <contents/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ehsyg" eType="/65" defaultValueLiteral="gxhfn"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="wgfgh" eType="/66" defaultValueLiteral="jnyoi"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sdptt" eType="/69" defaultValueLiteral="ssvkr"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kpray" eType="/70" defaultValueLiteral="sjdrx"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hkqtz" eType="/71" defaultValueLiteral="vrneu"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qhnwr" eType="/72" defaultValueLiteral="oqpcf"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hvwog" eType="/73" defaultValueLiteral="hupij"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="jepmo" eType="/74" defaultValueLiteral="vgrin"/>
+  </ecore:EClass>
+  <ecore:EClass name="btpyr" instanceClassName="xpkld" instanceTypeName="yntbs">
+    <eAnnotations source="gmf.link" references="/2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1">
+      <eAnnotations source="gmf.node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ixlsa" eType="/83" defaultValueLiteral="muybk" eOpposite="/3/@eStructuralFeatures.0" eKeys="/1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3">
+      <eGenericType eTypeParameter="/103" eClassifier="/43"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tudfz" eType="/84" defaultValueLiteral="arfjy" eOpposite="/3/@eStructuralFeatures.1" eKeys="/1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5 /1/@eStructuralFeatures.6 /1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1">
+      <eGenericType eTypeParameter="/104" eClassifier="/44"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mxbgy" eType="/0" defaultValueLiteral="kuosu" eOpposite="/3/@eStructuralFeatures.2" eKeys="/2/@eStructuralFeatures.2 /2/@eStructuralFeatures.3 /2/@eStructuralFeatures.4 /2/@eStructuralFeatures.5 /2/@eStructuralFeatures.6 /2/@eStructuralFeatures.7 /1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3 /1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5 /1/@eStructuralFeatures.6 /1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1">
+      <eGenericType eTypeParameter="/105" eClassifier="/45"/>
+    </eStructuralFeatures>
+  </ecore:EClass>
+  <ecore:EClass name="nyupv" instanceClassName="kkkbg" instanceTypeName="djznx">
+    <eAnnotations source="gmf.compartment">
+      <eAnnotations source="gmf.link" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1"/>
+      <details key="border.styl" value="wg*vAd y"/>
+      <details key="border.width" value="uq5`ahV3Y"/>
+      <details key="color" value="zg"/>
+      <details key="figure" value="7"/>
+      <details key="label" value="k&amp;"/>
+      <details key="label.icon" value="E"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cjcjb" eType="/1" defaultValueLiteral="gczyl" eOpposite="/4/@eStructuralFeatures.0" eKeys="/1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3 /1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5">
+      <eGenericType eTypeParameter="/106" eClassifier="/46"/>
+    </eStructuralFeatures>
+  </ecore:EClass>
+  <ecore:EClass name="iptwj" instanceClassName="fsxfl" instanceTypeName="nillx">
+    <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4">
+      <eAnnotations source="gmf.compartment" references="/0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5"/>
+      <details key="label.parser" value="4qY5u%vL&amp;t%]"/>
+    </eAnnotations>
+    <eOperations name="btpyr" eType="/36" eExceptions="/37 /38 /39 /40 /41 /42 /43 /44 /45 /46 /47 /48 /49 /50 /51 /52"/>
+    <eOperations name="xpkld" eType="/53" eExceptions="/54 /55 /56 /57 /58 /59 /60 /61 /62 /63"/>
+    <eOperations name="yntbs" eType="/64" eExceptions="/65 /66 /69 /70 /71 /72 /73 /74"/>
+    <eOperations name="nyupv" eType="/75" eExceptions="/76 /77 /78 /79 /80 /81 /82 /83"/>
+    <eOperations name="kkkbg" eType="/84" eExceptions="/0 /1 /2 /3"/>
+    <eOperations name="djznx" eType="/4" eExceptions="/5 /6 /7 /8 /9 /10 /11 /12 /13 /14 /15 /16 /17 /18 /19 /20 /21 /22 /23 /24"/>
+    <eOperations name="iptwj" eType="/25" eExceptions="/26 /27 /28 /29 /30 /31 /32 /33 /34 /35 /36"/>
+    <eOperations name="fsxfl" eType="/37" eExceptions="/38 /39 /40 /41 /42 /43 /44 /45 /46 /47 /48 /49"/>
+    <eOperations name="nillx" eType="/50" eExceptions="/51 /52 /53 /54 /55 /56 /57 /58 /59 /60 /61 /62 /63 /64 /65 /66 /69 /70 /71 /72 /73"/>
+    <eOperations name="yqkmq" eType="/74" eExceptions="/75 /76 /77 /78 /79 /80 /81 /82"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="gjqvn" eType="/2" defaultValueLiteral="fabid" eOpposite="/5/@eStructuralFeatures.0">
+      <eGenericType eTypeParameter="/107" eClassifier="/47"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="nocqs" eType="/3" defaultValueLiteral="fqnle" eOpposite="/5/@eStructuralFeatures.1" eKeys="/1/@eStructuralFeatures.6">
+      <eGenericType eTypeParameter="/108" eClassifier="/48"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uvihl" eType="/4" defaultValueLiteral="doggb" eOpposite="/5/@eStructuralFeatures.2" eKeys="/1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1 /2/@eStructuralFeatures.2 /2/@eStructuralFeatures.3 /2/@eStructuralFeatures.4 /2/@eStructuralFeatures.5 /2/@eStructuralFeatures.6 /2/@eStructuralFeatures.7 /1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3">
+      <eGenericType eTypeParameter="/109" eClassifier="/49"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hatlx" eType="/5" defaultValueLiteral="kizxb" eOpposite="/5/@eStructuralFeatures.3" eKeys="/1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5 /1/@eStructuralFeatures.6 /1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1 /2/@eStructuralFeatures.2 /2/@eStructuralFeatures.3 /2/@eStructuralFeatures.4 /2/@eStructuralFeatures.5 /2/@eStructuralFeatures.6">
+      <eGenericType eTypeParameter="/110" eClassifier="/50"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dpicx" eType="/6" defaultValueLiteral="dktqj" eOpposite="/5/@eStructuralFeatures.4" eKeys="/2/@eStructuralFeatures.7 /1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3 /1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5 /1/@eStructuralFeatures.6 /1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1 /2/@eStructuralFeatures.2">
+      <eGenericType eTypeParameter="/111" eClassifier="/51"/>
+    </eStructuralFeatures>
+  </ecore:EClass>
+  <ecore:EClass name="yqkmq" instanceClassName="jjqag" instanceTypeName="wybyy">
+    <eAnnotations source="gmf.label" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1">
+      <eAnnotations source="gmf.affixed" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cokac" eType="/7" defaultValueLiteral="qzlpx" eOpposite="/6/@eStructuralFeatures.0" eKeys="/2/@eStructuralFeatures.3 /2/@eStructuralFeatures.4 /2/@eStructuralFeatures.5 /2/@eStructuralFeatures.6 /2/@eStructuralFeatures.7 /1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3 /1/@eStructuralFeatures.4">
+      <eGenericType eTypeParameter="/112" eClassifier="/52"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ehsyg" eType="/8" defaultValueLiteral="gxhfn" eOpposite="/6/@eStructuralFeatures.1" eKeys="/1/@eStructuralFeatures.5 /1/@eStructuralFeatures.6">
+      <eGenericType eTypeParameter="/113" eClassifier="/53"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="wgfgh" eType="/9" defaultValueLiteral="jnyoi" eOpposite="/6/@eStructuralFeatures.2">
+      <eGenericType eTypeParameter="/114" eClassifier="/54"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sdptt" eType="/10" defaultValueLiteral="ssvkr" eOpposite="/6/@eStructuralFeatures.3">
+      <eGenericType eTypeParameter="/115" eClassifier="/55"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="kpray" eType="/11" defaultValueLiteral="sjdrx" eOpposite="/6/@eStructuralFeatures.4" eKeys="/1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1 /2/@eStructuralFeatures.2 /2/@eStructuralFeatures.3 /2/@eStructuralFeatures.4 /2/@eStructuralFeatures.5 /2/@eStructuralFeatures.6 /2/@eStructuralFeatures.7 /1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3 /1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5">
+      <eGenericType eTypeParameter="/116" eClassifier="/56"/>
+    </eStructuralFeatures>
+  </ecore:EClass>
+  <ecore:EClass name="abova" instanceClassName="qiiwb" instanceTypeName="qfyza">
+    <eAnnotations source="gmf" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1">
+      <eAnnotations source="gmf.label" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2"/>
+      <details key="label.edit.pattern" value="P+OxGs"/>
+      <details key="label.pattern" value="e27"/>
+      <details key="label.view.pattern" value="Tm:O!o>5@iQ"/>
+      <details key="label.placement" value="@"/>
+      <details key="label.text" value=",Y=q[vK*F"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hkqtz" eType="/12" defaultValueLiteral="vrneu" eOpposite="/7/@eStructuralFeatures.0" eKeys="/1/@eStructuralFeatures.6 /1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1 /2/@eStructuralFeatures.2 /2/@eStructuralFeatures.3">
+      <eGenericType eTypeParameter="/101" eClassifier="/41"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="qhnwr" eType="/13" defaultValueLiteral="oqpcf" eOpposite="/7/@eStructuralFeatures.1" eKeys="/2/@eStructuralFeatures.4 /2/@eStructuralFeatures.5 /2/@eStructuralFeatures.6 /2/@eStructuralFeatures.7 /1/@eStructuralFeatures.0 /1/@eStructuralFeatures.1 /1/@eStructuralFeatures.2 /1/@eStructuralFeatures.3 /1/@eStructuralFeatures.4 /1/@eStructuralFeatures.5 /1/@eStructuralFeatures.6 /1/@eStructuralFeatures.7 /2/@eStructuralFeatures.0 /2/@eStructuralFeatures.1 /2/@eStructuralFeatures.2 /2/@eStructuralFeatures.3">
+      <eGenericType eTypeParameter="/102" eClassifier="/42"/>
+    </eStructuralFeatures>
+  </ecore:EClass>
+  <ecore:EClass name="tygvx" instanceClassName="vylyx" instanceTypeName="qmyhh">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3">
+      <eAnnotations source="gmf"/>
+      <details key="label.readOnly" value="]eLn=]K0Os"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="vnmsr" instanceClassName="xlrce" instanceTypeName="ikiuj">
+    <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1">
+      <eAnnotations source="gmf.diagram" references="/2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="ekkpe" instanceClassName="irnjc" instanceTypeName="jblrp">
+    <eAnnotations source="gmf.link" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3">
+      <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="txhal" instanceClassName="vlugt" instanceTypeName="eoiww">
+    <eAnnotations source="gmf.compartment" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0">
+      <eAnnotations source="gmf.link" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1"/>
+      <details key="margin" value=""/>
+      <details key="phantom" value="Xb"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="bcyww" instanceClassName="fkrka" instanceTypeName="waqxe">
+    <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0">
+      <eAnnotations source="gmf.compartment" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="mxvsa" instanceClassName="ifale" instanceTypeName="cykmi">
+    <eAnnotations source="gmf.label" references="/2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2">
+      <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+      <details key="polygon.x" value="A9+4}5a1Ni6"/>
+      <details key="polygon.y" value="$1|/C0"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="otjct" instanceClassName="csxoe" instanceTypeName="uxcql">
+    <eAnnotations source="gmf" references="/1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3">
+      <eAnnotations source="gmf.label" references="/1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3"/>
+      <details key="resizable" value="NaR_ecKZ&quot;"/>
+      <details key="size" value="l{4h4"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="hskcg" instanceClassName="ymvwc" instanceTypeName="tlvlf">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0">
+      <eAnnotations source="gmf" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+      <details key="svg.uri" value="L"/>
+      <details key="tool.description" value="t/,UNm6+&amp;"/>
+      <details key="tool.large.bundle" value="dVNkv&amp;&quot;tV"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="zppyk" instanceClassName="ispxx" instanceTypeName="kkeib">
+    <eAnnotations source="gmf.node">
+      <eAnnotations source="gmf.diagram"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="xyiuy" instanceClassName="qhfvq" instanceTypeName="wjwiv">
+    <eAnnotations source="gmf.link" references="/1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0">
+      <eAnnotations source="gmf.node" references="/2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="zveyw" instanceClassName="nfbbr" instanceTypeName="sivum">
+    <eAnnotations source="gmf.compartment" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2"/>
+  </ecore:EClass>
+  <ecore:EClass name="wwfng" instanceClassName="rbwpf" instanceTypeName="kfgre">
+    <eAnnotations source="gmf.affixed" references="/2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3"/>
+  </ecore:EClass>
+  <ecore:EClass name="hjewp" instanceClassName="hkype" instanceTypeName="kinid">
+    <eAnnotations source="gmf.label" references="/1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1">
+      <details key="tool.large.path" value="f"/>
+      <details key="tool.name" value="w"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="axuup" instanceClassName="ihail" instanceTypeName="bxhfk">
+    <eAnnotations source="gmf" references="/0/@eAnnotations.0/@contents.2">
+      <details key="tool.small.bundle" value="`1"/>
+      <details key="tool.small.path " value="[d/R"/>
+      <details key="incoming" value="j_RB"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="joyqo" instanceClassName="ixlsa" instanceTypeName="muybk">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6"/>
+  </ecore:EClass>
+  <ecore:EClass name="tudfz" instanceClassName="arfjy" instanceTypeName="mxbgy">
+    <eAnnotations source="gmf.node"/>
+  </ecore:EClass>
+  <ecore:EClass name="kuosu" instanceClassName="cjcjb" instanceTypeName="gczyl">
+    <eAnnotations source="gmf.link" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0"/>
+  </ecore:EClass>
+  <ecore:EClass name="gjqvn" instanceClassName="fabid" instanceTypeName="nocqs">
+    <eAnnotations source="gmf.compartment" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6">
+      <details key="source" value="1P:C6@"/>
+      <details key="source.constraint" value=""/>
+      <details key="source.decoration" value="P]"/>
+      <details key="style" value="AIJ{"/>
+      <details key="target" value="dJziP"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="fqnle" instanceClassName="uvihl" instanceTypeName="doggb">
+    <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0"/>
+  </ecore:EClass>
+  <ecore:EClass name="hatlx" instanceClassName="kizxb" instanceTypeName="dpicx">
+    <eAnnotations source="gmf.label" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0">
+      <details key="target.constraint" value="[fOVmR/jh{#R"/>
+      <details key="width" value="N]"/>
+      <details key="collapsible" value="#`o6"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="dktqj" instanceClassName="cokac" instanceTypeName="qzlpx">
+    <eAnnotations source="gmf" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1">
+      <details key="layout" value="=y0E;"/>
+      <details key="diagram.extension" value="(U}6/B(]f"/>
+      <details key="model.extension" value="qcy:F.le"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="ehsyg" instanceClassName="gxhfn" instanceTypeName="wgfgh">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.6">
+      <details key="onefile" value="X`B944j+"/>
+      <details key="rcp" value=""/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="jnyoi" instanceClassName="sdptt" instanceTypeName="ssvkr">
+    <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+  </ecore:EClass>
+  <ecore:EClass name="kpray" instanceClassName="sjdrx" instanceTypeName="hkqtz">
+    <eAnnotations source="gmf.link"/>
+  </ecore:EClass>
+  <ecore:EClass name="vrneu" instanceClassName="qhnwr" instanceTypeName="oqpcf">
+    <eAnnotations source="gmf.compartment" references="/1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2">
+      <details key="units" value="`?v:HW>;l"/>
+      <details key="border.color" value="!."/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="hvwog" instanceClassName="hupij" instanceTypeName="jepmo">
+    <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3"/>
+  </ecore:EClass>
+  <ecore:EClass name="vgrin" instanceClassName="lgann" instanceTypeName="mbmpw">
+    <eAnnotations source="gmf.label"/>
+  </ecore:EClass>
+  <ecore:EClass name="dyvuv" instanceClassName="trfjw" instanceTypeName="orwcu">
+    <eAnnotations source="gmf" references="/0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0"/>
+  </ecore:EClass>
+  <ecore:EClass name="jheqh" instanceClassName="btpyr" instanceTypeName="xpkld">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1">
+      <details key="border.styl" value="&quot;nzL7"/>
+      <details key="border.width" value="|r"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="yntbs" instanceClassName="nyupv" instanceTypeName="kkkbg">
+    <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2"/>
+  </ecore:EClass>
+  <ecore:EClass name="djznx" instanceClassName="iptwj" instanceTypeName="fsxfl">
+    <eAnnotations source="gmf.link"/>
+  </ecore:EClass>
+  <ecore:EClass name="nillx" instanceClassName="yqkmq" instanceTypeName="jjqag">
+    <eAnnotations source="gmf.compartment">
+      <details key="color" value="$83a"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="wybyy" instanceClassName="abova" instanceTypeName="qiiwb">
+    <eAnnotations source="gmf.affixed" references="/2/@eAnnotations.0/@contents.1">
+      <details key="figure" value="0RS}RI,tM.i"/>
+      <details key="label" value="1?RhEGT0"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="qfyza" instanceClassName="tygvx" instanceTypeName="vylyx">
+    <eAnnotations source="gmf.label" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5">
+      <details key="label.icon" value="qG"/>
+      <details key="label.parser" value="7Rhe/"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="qmyhh" instanceClassName="vnmsr" instanceTypeName="xlrce">
+    <eAnnotations source="gmf" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3">
+      <details key="label.edit.pattern" value="J 1"/>
+      <details key="label.pattern" value="V"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="ikiuj" instanceClassName="ekkpe" instanceTypeName="irnjc">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1"/>
+  </ecore:EClass>
+  <ecore:EClass name="jblrp" instanceClassName="txhal" instanceTypeName="vlugt">
+    <eAnnotations source="gmf.node" references="/0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0"/>
+  </ecore:EClass>
+  <ecore:EClass name="eoiww" instanceClassName="bcyww" instanceTypeName="fkrka">
+    <eAnnotations source="gmf.link" references="/2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6"/>
+  </ecore:EClass>
+  <ecore:EClass name="waqxe" instanceClassName="mxvsa" instanceTypeName="ifale">
+    <eAnnotations source="gmf.compartment" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2"/>
+  </ecore:EClass>
+  <ecore:EClass name="cykmi" instanceClassName="otjct" instanceTypeName="csxoe">
+    <eAnnotations source="gmf.affixed" references="/0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3"/>
+  </ecore:EClass>
+  <ecore:EClass name="uxcql" instanceClassName="hskcg" instanceTypeName="ymvwc">
+    <eAnnotations source="gmf.label" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7">
+      <details key="label.view.pattern" value=";b(q/f1"/>
+      <details key="label.placement" value="b^|ss\1&amp;"/>
+      <details key="label.text" value="a&quot;,?{&quot;9,_kA*0"/>
+      <details key="label.readOnly" value="7E"/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EClass name="tlvlf" instanceClassName="zppyk" instanceTypeName="ispxx">
+    <eAnnotations source="gmf"/>
+  </ecore:EClass>
+  <ecore:EClass name="kkeib" instanceClassName="xyiuy" instanceTypeName="qhfvq">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0">
+      <details key="margin" value=""/>
+    </eAnnotations>
+  </ecore:EClass>
+  <ecore:EDataType name="wjwiv" instanceClassName="zveyw" instanceTypeName="nfbbr">
+    <eAnnotations source="gmf.node"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="sivum" instanceClassName="wwfng" instanceTypeName="rbwpf">
+    <eAnnotations source="gmf.link" references="/0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="kfgre" instanceClassName="hjewp" instanceTypeName="hkype">
+    <eAnnotations source="gmf.compartment" references="/0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="kinid" instanceClassName="axuup" instanceTypeName="ihail">
+    <eAnnotations source="gmf.affixed" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6">
+      <details key="phantom" value=""/>
+      <details key="polygon.x" value="^jpsegeL"/>
+      <details key="polygon.y" value="2."/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="bxhfk" instanceClassName="joyqo" instanceTypeName="ixlsa">
+    <eAnnotations source="gmf.label" references="/1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1">
+      <details key="resizable" value="V"/>
+      <details key="size" value="LY|^C"/>
+      <details key="svg.uri" value="&lt;k"/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="muybk" instanceClassName="tudfz" instanceTypeName="arfjy">
+    <eAnnotations source="gmf" references="/2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="mxbgy" instanceClassName="kuosu" instanceTypeName="cjcjb">
+    <eAnnotations source="gmf.diagram"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="gczyl" instanceClassName="gjqvn" instanceTypeName="fabid">
+    <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="nocqs" instanceClassName="fqnle" instanceTypeName="uvihl">
+    <eAnnotations source="gmf.link"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="doggb" instanceClassName="hatlx" instanceTypeName="kizxb">
+    <eAnnotations source="gmf.compartment" references="/2/@eAnnotations.0/@contents.1">
+      <details key="tool.description" value=""/>
+      <details key="tool.large.bundle" value="kI]}(kF"/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="dpicx" instanceClassName="dktqj" instanceTypeName="cokac">
+    <eAnnotations source="gmf.affixed" references="/2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1">
+      <details key="tool.large.path" value="qY!qyJCq"/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="qzlpx" instanceClassName="ehsyg" instanceTypeName="gxhfn">
+    <eAnnotations source="gmf.label" references="/1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3">
+      <details key="tool.name" value="VeD8R[N *IL"/>
+      <details key="tool.small.bundle" value="BD7r"/>
+      <details key="tool.small.path " value=""/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="wgfgh" instanceClassName="jnyoi" instanceTypeName="sdptt">
+    <eAnnotations source="gmf" references="/2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1">
+      <details key="incoming" value="!Gqk.=}B%p"/>
+      <details key="source" value="|/O0}"/>
+      <details key="source.constraint" value=">(h"/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="ssvkr" instanceClassName="kpray" instanceTypeName="sjdrx">
+    <eAnnotations source="gmf.diagram" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2">
+      <details key="source.decoration" value="9O/"/>
+    </eAnnotations>
+  </ecore:EDataType>
+  <ecore:EDataType name="hkqtz" instanceClassName="vrneu" instanceTypeName="qhnwr">
+    <eAnnotations source="gmf.node" references="/1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1 /2/@eAnnotations.0/@contents.2 /2/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.0 /1/@eAnnotations.0/@contents.1 /1/@eAnnotations.0/@contents.2 /1/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.4 /1/@eAnnotations.0/@contents.5 /0/@eAnnotations.0/@contents.0 /0/@eAnnotations.0/@contents.1 /0/@eAnnotations.0/@contents.2 /0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6"/>
+  </ecore:EDataType>
+  <ecore:EDataType name="oqpcf" instanceClassName="hvwog" instanceTypeName="hupij">
+    <eAnnotations source="gmf.link" references="/0/@eAnnotations.0/@contents.3 /1/@eAnnotations.0/@contents.6 /1/@eAnnotations.0/@contents.7 /2/@eAnnotations.0/@contents.0 /2/@eAnnotations.0/@contents.1"/>
+  </ecore:EDataType>
+  <ecore:EPackage name="nillx" nsURI="yqkmq" nsPrefix="jjqag">
+    <eClassifiers xsi:type="ecore:EClass" href="#/16"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/17"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/18"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/19"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/20"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/21"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/22"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/23"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/24"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/25"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/26"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/27"/>
+  </ecore:EPackage>
+  <ecore:EPackage name="wybyy" nsURI="abova" nsPrefix="qiiwb">
+    <eClassifiers xsi:type="ecore:EClass" href="#/28"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/29"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/30"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/31"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/32"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/33"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/34"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/35"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/36"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/37"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/38"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/39"/>
+    <eClassifiers xsi:type="ecore:EClass" href="#/40"/>
+  </ecore:EPackage>
+  <ecore:EEnum name="qfyza" instanceClassName="tygvx" instanceTypeName="vylyx">
+    <eLiterals name="eoiww" literal="bcyww"/>
+    <eLiterals name="fkrka" literal="waqxe"/>
+    <eLiterals name="mxvsa" literal="ifale"/>
+    <eLiterals name="cykmi" literal="otjct"/>
+    <eLiterals name="csxoe" literal="uxcql"/>
+  </ecore:EEnum>
+  <ecore:EEnum name="qmyhh" instanceClassName="vnmsr" instanceTypeName="xlrce">
+    <eLiterals name="hskcg" literal="ymvwc"/>
+    <eLiterals name="tlvlf" literal="zppyk"/>
+    <eLiterals name="ispxx" literal="kkeib"/>
+    <eLiterals name="xyiuy" literal="qhfvq"/>
+    <eLiterals name="wjwiv" literal="zveyw"/>
+    <eLiterals name="nfbbr" literal="sivum"/>
+    <eLiterals name="wwfng" literal="rbwpf"/>
+    <eLiterals name="kfgre" literal="hjewp"/>
+    <eLiterals name="hkype" literal="kinid"/>
+  </ecore:EEnum>
+  <ecore:EEnum name="ikiuj" instanceClassName="ekkpe" instanceTypeName="irnjc">
+    <eLiterals name="axuup" literal="ihail"/>
+  </ecore:EEnum>
+  <ecore:EEnum name="jblrp" instanceClassName="txhal" instanceTypeName="vlugt">
+    <eLiterals name="bxhfk" literal="joyqo"/>
+  </ecore:EEnum>
+  <ecore:EEnum name="eoiww" instanceClassName="bcyww" instanceTypeName="fkrka"/>
+  <ecore:EEnum name="waqxe" instanceClassName="mxvsa" instanceTypeName="ifale"/>
+  <ecore:EEnum name="cykmi" instanceClassName="otjct" instanceTypeName="csxoe"/>
+  <ecore:EEnum name="uxcql" instanceClassName="hskcg" instanceTypeName="ymvwc"/>
+  <ecore:EEnum name="tlvlf" instanceClassName="zppyk" instanceTypeName="ispxx"/>
+  <ecore:EEnum name="kkeib" instanceClassName="xyiuy" instanceTypeName="qhfvq"/>
+  <ecore:EEnum name="wjwiv" instanceClassName="zveyw" instanceTypeName="nfbbr"/>
+  <ecore:EEnum name="sivum" instanceClassName="wwfng" instanceTypeName="rbwpf"/>
+  <ecore:EEnum name="kfgre" instanceClassName="hjewp" instanceTypeName="hkype"/>
+  <ecore:EEnum name="kinid" instanceClassName="axuup" instanceTypeName="ihail"/>
+  <ecore:EEnum name="bxhfk" instanceClassName="joyqo" instanceTypeName="ixlsa"/>
+  <ecore:EEnum name="muybk" instanceClassName="tudfz" instanceTypeName="arfjy"/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:EFactory/>
+  <ecore:ETypeParameter name="jjqag"/>
+  <ecore:ETypeParameter name="wybyy"/>
+  <ecore:ETypeParameter name="abova"/>
+  <ecore:ETypeParameter name="qiiwb"/>
+  <ecore:ETypeParameter name="qfyza"/>
+  <ecore:ETypeParameter name="tygvx"/>
+  <ecore:ETypeParameter name="vylyx"/>
+  <ecore:ETypeParameter name="qmyhh"/>
+  <ecore:ETypeParameter name="vnmsr"/>
+  <ecore:ETypeParameter name="xlrce"/>
+  <ecore:ETypeParameter name="ikiuj"/>
+  <ecore:ETypeParameter name="ekkpe"/>
+  <ecore:ETypeParameter name="irnjc"/>
+  <ecore:ETypeParameter name="jblrp"/>
+  <ecore:ETypeParameter name="txhal"/>
+  <ecore:ETypeParameter name="vlugt"/>
+</xmi:XMI>

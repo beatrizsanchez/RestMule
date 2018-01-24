@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="statechart" nsURI="statechart" nsPrefix="statechart">
+  <eClassifiers xsi:type="ecore:EClass" name="Statechart">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entities" upperBound="-1"
+        eType="#//Entity" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Entity" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        defaultValueLiteral=""/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Node" abstract="true" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" upperBound="-1"
+        eType="#//Edge" eOpposite="#//Edge/target"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#//Entity">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Node"
+        eOpposite="#//Node/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Node"
+        eOpposite="#//Node/incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transition" eSuperTypes="#//Edge">
+    <eAnnotations source="gmf.link">
+      <details key="mxLabel" value="name"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="mxEndArrow" value="block"/>
+      <details key="mxBlockendFill" value="1"/>
+      <details key="mxEndSize" value="6"/>
+      <details key="mxHtml" value="1"/>
+      <details key="mxWidth" value="120"/>
+      <details key="mxHeight" value="120"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Link" eSuperTypes="#//Edge">
+    <eAnnotations source="gmf.link">
+      <details key="mxLabel" value="name"/>
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="mxEndArrow" value="none"/>
+      <details key="mxBlockendFill" value="1"/>
+      <details key="mxEndSize" value="6"/>
+      <details key="mxHtml" value="1"/>
+      <details key="mxWidth" value="120"/>
+      <details key="mxHeight" value="120"/>
+      <details key="mxDashed" value="1"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="State" eSuperTypes="#//Node">
+    <eAnnotations source="gmf.node">
+      <details key="mxLabel" value="name"/>
+      <details key="mxShape" value="swimlane"/>
+      <details key="mxChildLayout" value="stackLayout"/>
+      <details key="mxCollapsible" value="1"/>
+      <details key="mxHorizontalStack" value="0"/>
+      <details key="mxResizeParent" value="0"/>
+      <details key="mxResizeLast" value="1"/>
+      <details key="mxRounded" value="1"/>
+      <details key="mxMarginBottom" value="7"/>
+      <details key="mxMarginLeft" value="7"/>
+      <details key="mxMarginRight" value="7"/>
+      <details key="mxMarginTop" value="7"/>
+      <details key="mxHtml" value="1"/>
+      <details key="mxWhiteSpace" value="wrap"/>
+      <details key="mxWidth" value="200"/>
+      <details key="mxHeight" value="120"/>
+      <details key="mxSwimlaneFillColor" value="#FFFFFF"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="substates" upperBound="-1"
+        eType="#//State" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="mxShape" value="swimlane"/>
+        <details key="mxCollapsible" value="0"/>
+        <details key="mxNoLabel" value="1"/>
+        <details key="xEditable" value="0"/>
+        <details key="mxStrokeColor" value="none"/>
+        <details key="mxStartSize" value="0"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Note" eSuperTypes="#//Node">
+    <eAnnotations source="gmf.node">
+      <details key="mxLabel" value="description"/>
+      <details key="mxShape" value="note"/>
+      <details key="mxHtml" value="1"/>
+      <details key="mxWhiteSpace" value="wrap"/>
+      <details key="mxWidth" value="200"/>
+      <details key="mxHeight" value="120"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Start" eSuperTypes="#//Node">
+    <eAnnotations source="gmf.node">
+      <details key="mxLabel" value="name"/>
+      <details key="mxShape" value="startState"/>
+      <details key="mxWhiteSpace" value="wrap"/>
+      <details key="mxHtml" value="1"/>
+      <details key="mxFillColor" value="#000000"/>
+      <details key="mxWidth" value="30"/>
+      <details key="mxHeight" value="30"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="End" eSuperTypes="#//Node">
+    <eAnnotations source="gmf.node">
+      <details key="mxLabel" value="name"/>
+      <details key="mxShape" value="endState"/>
+      <details key="mxWhiteSpace" value="wrap"/>
+      <details key="mxHtml" value="1"/>
+      <details key="mxFillColor" value="#FFFFFF"/>
+      <details key="mxWidth" value="30"/>
+      <details key="mxHeight" value="30"/>
+    </eAnnotations>
+  </eClassifiers>
+</ecore:EPackage>

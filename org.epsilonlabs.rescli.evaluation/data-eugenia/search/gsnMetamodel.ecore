@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="gsnmetamodel" nsURI="http://gsnmetamodel/1.0" nsPrefix="gsnmetamodel">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="invocationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="settingDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+    <details key="validationDelegates" value="http://www.eclipse.org/emf/2002/Ecore/OCL"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelElement" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentationElement" abstract="true"
+      eSuperTypes="#//ModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Argumentation" abstract="true" eSuperTypes="#//ArgumentationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ArgumentElements" upperBound="-1"
+        eType="#//ArgumentElement" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Argumentations" upperBound="-1"
+        eType="#//Argumentation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentElement" abstract="true" eSuperTypes="#//ArgumentationElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contents" upperBound="-1"
+        eType="#//Structured_Expression" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Module" eSuperTypes="#//Argumentation #//ModelElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.style" value="dot"/>
+      <details key="border.color" value="255,0,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentElementCitation" abstract="true"
+      eSuperTypes="#//ArgumentElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cites" lowerBound="1" eType="#//ArgumentElement"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReasoningElement" abstract="true" eSuperTypes="#//ArgumentElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InformationElementCitation" abstract="true"
+      eSuperTypes="#//ArgumentElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_ModuleReference" eSuperTypes="#//InformationElementCitation">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cites" lowerBound="1" eType="#//GSN_Module"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Solution" eSuperTypes="#//InformationElementCitation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_ContextAsReference" eSuperTypes="#//InformationElementCitation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_AwaySolution" eSuperTypes="#//ArgumentElementCitation"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_AwayGoal" eSuperTypes="#//ArgumentElementCitation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="255,0,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_AwayContext" eSuperTypes="#//ArgumentElementCitation">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.color" value="255,0,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentReasoning" abstract="true" eSuperTypes="#//ReasoningElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="describes" eType="#//AssertedRelationship"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasStructure" eType="#//Argumentation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Assertion" abstract="true" eSuperTypes="#//ReasoningElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Strategy" eSuperTypes="#//ArgumentReasoning">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="polygon"/>
+      <details key="polygon.x" value="10 60 180 130"/>
+      <details key="polygon.y" value="60 0 0 60"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Choice" eSuperTypes="#//ArgumentReasoning">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="polygon"/>
+      <details key="polygon.x" value="0 10 20 10"/>
+      <details key="polygon.y" value="10 0 10 20"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="constrains" lowerBound="1"
+        upperBound="-1" eType="#//AssertedRelationship"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Claim" abstract="true" eSuperTypes="#//Assertion">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="assumed" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="toBeSupported" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertedRelationship" abstract="true"
+      eSuperTypes="#//Assertion">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasSource" lowerBound="1"
+        eType="#//ArgumentElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hasTarget" lowerBound="1"
+        eType="#//ArgumentElement"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiplicity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="optional" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Claim" abstract="true" eSuperTypes="#//Claim">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tobeInstantiated" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="undeveloped" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Goal" eSuperTypes="#//GSN_Claim">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="rectangle"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Justification" eSuperTypes="#//GSN_Claim">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_Assumption" eSuperTypes="#//GSN_Claim">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_ContextAsAssertion" eSuperTypes="#//GSN_Claim">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="id"/>
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertedContext" abstract="true" eSuperTypes="#//AssertedRelationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertedInference" abstract="true" eSuperTypes="#//AssertedRelationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertedEvidence" abstract="true" eSuperTypes="#//AssertedRelationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertedChallenge" abstract="true" eSuperTypes="#//AssertedRelationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AssertedCounterEvidence" abstract="true"
+      eSuperTypes="#//AssertedRelationship"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_InContextOf" eSuperTypes="#//AssertedContext">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="hasSource"/>
+      <details key="target" value="hasTarget"/>
+      <details key="target.decoration" value="closedarrow"/>
+      <details key="target.constraint" value="self->forAll(t|t.oclIsTypeOf(GSN_Assumption)or t.oclIsTypeOf(GSN_Justification) or t.oclIsTypeOf(GSN_ContextAsReference) or t.oclIsTypeOf(GSN_ContextAsAssertion))"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_SupportedBy" eSuperTypes="#//AssertedInference #//AssertedEvidence">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="hasSource"/>
+      <details key="target" value="hasTarget"/>
+      <details key="target.decoration" value="filledclosedarrow"/>
+      <details key="label" value="multiplicity"/>
+      <details key="target.constraint" value="self->forAll(t|t.oclIsTypeOf(GSN_Goal) or t.oclIsTypeOf(GSN_Strategy) or t.oclIsTypeOf(GSN_Solution))"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GSN_ChallengedBy" eSuperTypes="#//AssertedChallenge #//AssertedCounterEvidence"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//ModelElement #//Structured_Expression">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="role"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="role" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Structured_Expression">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="literal"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="literal" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Structured_Expression" abstract="true"
+      eSuperTypes="#//ModelElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Case" eSuperTypes="#//ModelElement">
+    <eAnnotations source="gmf.diagram">
+      <details key="model.extension" value="gsnml"/>
+      <details key="model.diagram" value="gsnml_diag"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contains" lowerBound="1"
+        upperBound="-1" eType="#//Argumentation" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

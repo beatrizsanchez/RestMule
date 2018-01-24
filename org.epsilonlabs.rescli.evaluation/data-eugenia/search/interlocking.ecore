@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="interlocking" nsURI="ro.ubblcuj.cs.master.model.interlocking"
+    nsPrefix="interlocking">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Interlocking">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//InterlockingElement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connections" upperBound="-1"
+        eType="#//InterlockingConnection" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Segment" eSuperTypes="#//InterlockingElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Semaphore" eSuperTypes="#//InterlockingElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Swich" eSuperTypes="#//InterlockingElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InterlockingElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connectors" upperBound="-1"
+        eType="#//Connector" containment="true">
+      <eAnnotations source="gmf.compartment"/>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Connector">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InterlockingConnection">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="style" value="dot"/>
+      <details key="width" value="5"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Connector"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Connector"/>
+  </eClassifiers>
+</ecore:EPackage>

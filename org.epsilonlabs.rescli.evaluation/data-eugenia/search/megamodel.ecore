@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="megamodel"
+    nsURI="http://org.isoe.fwk.megamodel.v0" nsPrefix="megamodel.v0">
+  <eClassifiers xsi:type="ecore:EClass" name="Megamodel" eSuperTypes="#//ModelingObject">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelingLanguages" upperBound="-1"
+        eType="#//Dsml" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notationPatterns" upperBound="-1"
+        eType="#//NotationPattern" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dsml" eSuperTypes="#//Diagrammable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="models" upperBound="-1"
+        eType="#//Model" containment="true" eOpposite="#//Model/instanceOf"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notations" upperBound="-1"
+        eType="#//Notation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootNotation" eType="#//Notation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftParent" eType="#//Dsml"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires" upperBound="-1"
+        eType="#//Dsml"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="knownAs" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="documentation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="origin" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightParent" eType="#//Dsml"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relations" upperBound="-1"
+        eType="#//DsmlRelation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="semanticBridge" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EModelElement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relateds" upperBound="-1"
+        eType="#//Dsml"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="problem" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="context" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="keywords" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="buildIn" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="leftParentDetails" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variantOf" eType="#//Dsml"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="rightParentDetails" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="requireDetails" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="relatedDetails" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Model" eSuperTypes="#//ModelingObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="instanceOf" eType="#//Dsml"
+        eOpposite="#//Dsml/models"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelingUniverse">
+    <eAnnotations source="diagraph">
+      <details key="node"/>
+      <details key="pov"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="megamodels" upperBound="-1"
+        eType="#//Megamodel" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="languageWorkbench" eType="#//Platform"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modelWorkbench" eType="#//Platform"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagramRuntimes" upperBound="-1"
+        eType="#//DiagramRuntime" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModelingObject" abstract="true" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EModelElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="URI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Location">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="universeLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="megamodelLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="coreMegamodel" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="absoluteLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Refactoring">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionedLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetLocation" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//RefactoringType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Generation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="concreteSyntax" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagram" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Platform" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="buildInRepository" eType="#//Megamodel"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matchingEngines" upperBound="-1"
+        eType="#//Matcher" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notationGenerators" eType="#//NotationWorkbench"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notationsTransformations"
+        upperBound="-1" eType="#//NotationTransformation" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="platformURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RefactoringType">
+    <eLiterals name="patternBased"/>
+    <eLiterals name="duplicateReferences" value="1"/>
+    <eLiterals name="poorReferences" value="2"/>
+    <eLiterals name="missingAnnotations" value="3"/>
+    <eLiterals name="inferNames" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Notation" eSuperTypes="#//ModelingObject">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigations" upperBound="-1"
+        eType="#//MultiViewNavigation" containment="true" eOpposite="#//MultiViewNavigation/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="workBench" eType="#//NotationWorkbench"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notationBridge" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagram" abstract="true" eSuperTypes="#//Diagrammable">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="canvas" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generatedBy" eType="#//Notation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="navigations" upperBound="-1"
+        eType="#//Diagram"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiViewNavigation" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Notation"
+        eOpposite="#//Notation/navigations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Notation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DotDiagram" eSuperTypes="#//Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="#//GraphViz"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GmfDiagram" eSuperTypes="#//Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="#//GmfRuntime"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObeoDiagram" eSuperTypes="#//Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="#//GmfRuntime"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphitiDiagram" eSuperTypes="#//Diagram">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="runtime" eType="#//GmfRuntime"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Matcher" abstract="true" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="left" eType="#//Model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="right" eType="#//Model"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pattern" eType="#//NotationPattern"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Dsml"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimilarityFloodingMatcher" eSuperTypes="#//Matcher"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StructuralMatcher" eSuperTypes="#//Matcher"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotationWorkbench" abstract="true" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GmfTools" eSuperTypes="#//NotationWorkbench">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gmfGraphURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gmfToolsURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gmfMapURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gmfGenURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagraph" eSuperTypes="#//NotationWorkbench">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="generationParameters" eType="#//Generation"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refactoringParameters"
+        eType="#//Refactoring" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="locationParameters" eType="#//Location"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagraphURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matchers" upperBound="-1"
+        eType="#//Matcher"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotationTransformation" eSuperTypes="#//Named">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//NotationWorkbench"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//NotationWorkbench"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DiagramRuntime" abstract="true" eSuperTypes="#//Named"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GmfRuntime" eSuperTypes="#//DiagramRuntime"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GraphViz" eSuperTypes="#//DiagramRuntime"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotationPattern" eSuperTypes="#//Dsml">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameters" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotationGenerator">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="matcher" upperBound="-1"
+        eType="#//Matcher"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Dsml"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Named">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReteMatcher" eSuperTypes="#//Matcher"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CustomMatcher" eSuperTypes="#//Matcher"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EcoreToolsDiagram" eSuperTypes="#//GmfDiagram"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DsmlRelation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mandatory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="details" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fromDsml" eType="#//Dsml"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="toDsml" eType="#//Dsml"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagrammable" abstract="true" eSuperTypes="#//ModelingObject">
+    <eAnnotations source="diagraph"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="diagramPictureURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaModelURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="diagrams" upperBound="-1"
+        eType="#//Diagram" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="notationURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

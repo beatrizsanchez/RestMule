@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="pm" nsURI="http://BPMN/Simplified" nsPrefix="pm">
+  <eAnnotations source="gmf"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Process" eSuperTypes="#//BaseElement">
+    <eAnnotations source="gmf.diagram"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="flowElements" ordered="false"
+        upperBound="-1" eType="#//FlowElement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowElement" eSuperTypes="#//BaseElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FlowNode" eSuperTypes="#//FlowElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incoming" ordered="false"
+        upperBound="-1" eType="#//Edge" resolveProxies="false" eOpposite="#//Edge/targetRef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoing" upperBound="-1"
+        eType="#//Edge" resolveProxies="false" eOpposite="#//Edge/sourceRef"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//FlowNode">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="rectangle"/>
+      <details key="label" value="name"/>
+      <details key="label.placement" value="internal"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectNode" eSuperTypes="#//FlowNode">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="label" value="name"/>
+      <details key="label.placement" value="internal"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataState" ordered="false"
+        eType="#//DataState" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DataState" eSuperTypes="#//BaseElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Gateway" eSuperTypes="#//FlowNode">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="gatewayDirection" ordered="false"
+        eType="#//GatewayDirection" defaultValueLiteral="Unspecified"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExclusiveGateway" eSuperTypes="#//Gateway">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="polygon"/>
+      <details key="polygon.x" value="0 50 100 50"/>
+      <details key="polygon.y" value="50 100 50 0"/>
+      <details key="label.placement" value="none"/>
+      <details key="color" value="255,255,255"/>
+      <details key="size" value="15,15"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="default" ordered="false"
+        eType="#//SequenceFlow" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ParallelGateway" eSuperTypes="#//Gateway">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="name"/>
+      <details key="figure" value="rectangle"/>
+      <details key="color" value="0,0,0"/>
+      <details key="size" value="15,50"/>
+      <details key="label.placement" value="none"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Edge" eSuperTypes="#//FlowElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="sourceRef" ordered="false"
+        lowerBound="1" eType="#//FlowNode" resolveProxies="false" eOpposite="#//FlowNode/outgoing"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="targetRef" ordered="false"
+        lowerBound="1" eType="#//FlowNode" resolveProxies="false" eOpposite="#//FlowNode/incoming"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SequenceFlow" eSuperTypes="#//Edge">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="sourceRef"/>
+      <details key="target" value="targetRef"/>
+      <details key="target.decoration" value="arrow"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="guard" ordered="false"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ObjectFlow" eSuperTypes="#//Edge">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="sourceRef"/>
+      <details key="target" value="targetRef"/>
+      <details key="source.constraint" value="self.oclIsTypeOf(ObjectNode) or oppositeEnd.oclIsTypeOf(ObjectNode)"/>
+      <details key="target.decoration" value="arrow"/>
+      <details key="style" value="dash"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" eSuperTypes="#//FlowNode"/>
+  <eClassifiers xsi:type="ecore:EClass" name="StartEvent" eSuperTypes="#//Event">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="label.placement" value="none"/>
+      <details key="color" value="0,255,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EndEvent" eSuperTypes="#//Event">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+      <details key="label.placement" value="none"/>
+      <details key="color" value="0,0,0"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GatewayDirection">
+    <eLiterals name="Unspecified"/>
+    <eLiterals name="Converging" value="1"/>
+    <eLiterals name="Diverging" value="2"/>
+    <eLiterals name="Mixed" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

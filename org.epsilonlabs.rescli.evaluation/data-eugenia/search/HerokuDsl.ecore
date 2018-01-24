@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="herokuMM" nsURI="http://uniandes.edu.co/metamodels/herokuMM"
+    nsPrefix="hmm">
+  <eClassifiers xsi:type="ecore:EClass" name="HerokuMM">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveRelationsPQ" upperBound="-1"
+        eType="#//AssociationPQ" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveRelationsPS" upperBound="-1"
+        eType="#//AssociationPS" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveWebPools" upperBound="-1"
+        eType="#//WebPool" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveWorkerPools" upperBound="-1"
+        eType="#//WorkerPool" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveBlobs" upperBound="-1"
+        eType="#//Blob" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveRMDBs" upperBound="-1"
+        eType="#//RMDB" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveAMPQQueues" upperBound="-1"
+        eType="#//AMPQQueue" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HerokuArchitecturalElements" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AMPQQueue" eSuperTypes="#//HerokuArchitecturalElements">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dino" abstract="true" eSuperTypes="#//HerokuArchitecturalElements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="IPAdress" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Throughput" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Memory" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WebDino" eSuperTypes="#//Dino">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkerDino" eSuperTypes="#//Dino">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pool" abstract="true" eSuperTypes="#//HerokuArchitecturalElements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WebPool" eSuperTypes="#//Pool">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveWebDinos" upperBound="-1"
+        eType="#//WebDino" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WorkerPool" eSuperTypes="#//Pool">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="haveWorkerDinos" upperBound="-1"
+        eType="#//WorkerDino" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StorageElement" abstract="true" eSuperTypes="#//HerokuArchitecturalElements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Blob" eSuperTypes="#//StorageElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RMDB" eSuperTypes="#//StorageElement">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="Name"/>
+      <details key="label.placement" value="internal"/>
+      <details key="label.icon" value="false"/>
+      <details key="phantom" value="false"/>
+      <details key="figure" value="org.eclipse.gmf.runtime.lite.svg.SVGFigure"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="HerokuRelation" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="elementName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationPQ" eSuperTypes="#//HerokuRelation">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="connectorName"/>
+      <details key="source" value="SourceC"/>
+      <details key="target" value="TargetC"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SourceC" eType="#//Pool"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="TargetC" eType="#//AMPQQueue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssociationPS" eSuperTypes="#//HerokuRelation">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="connectorName"/>
+      <details key="source" value="SourceC"/>
+      <details key="target" value="TargetC"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SourceC" eType="#//Pool"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="TargetC" eType="#//StorageElement"/>
+  </eClassifiers>
+</ecore:EPackage>

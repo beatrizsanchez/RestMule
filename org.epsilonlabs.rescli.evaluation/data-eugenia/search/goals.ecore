@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="goals" nsURI="http://de.abilov.meta.goals" nsPrefix="goals">
+  <eClassifiers xsi:type="ecore:EClass" name="Model" abstract="true">
+    <eAnnotations source="gmf.diagram">
+      <details key="onefile" value="true"/>
+      <details key="units" value="Pixels"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
+        eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="links" upperBound="-1"
+        eType="#//GoalLink" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+    <eAnnotations source="gmf.node">
+      <details key="label.icon" value="false"/>
+      <details key="border.width" value="2"/>
+      <details key="border.color" value="0,0,0"/>
+      <details key="label" value="name"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GoalLink" abstract="true">
+    <eAnnotations source="gmf.link">
+      <details key="source" value="source"/>
+      <details key="target" value="target"/>
+      <details key="incoming" value="true"/>
+      <details key="color" value="0,0,0"/>
+      <details key="width" value="2"/>
+      <details key="source.constraint" value="self &lt;> oppositeEnd"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" eType="#//Goal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//Goal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Stakeholder" eSuperTypes="#//Element">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="ellipse"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Goal" abstract="true" eSuperTypes="#//Element">
+    <eAnnotations source="gmf.node">
+      <details key="figure" value="rounded"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authros" upperBound="-1"
+        eType="#//Stakeholder">
+      <eAnnotations source="gmf.link">
+        <details key="color" value="0,0,0"/>
+        <details key="width" value="1"/>
+        <details key="style" value="dot"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" lowerBound="1"
+        eType="#//Level" defaultValueLiteral="High"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="criticality" lowerBound="1"
+        eType="#//Level" defaultValueLiteral="High"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="responsible" eType="#//Stakeholder">
+      <eAnnotations source="gmf.link">
+        <details key="color" value="0,0,0"/>
+        <details key="width" value="1"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="beneficiaries" upperBound="-1"
+        eType="#//Stakeholder">
+      <eAnnotations source="gmf.link">
+        <details key="color" value="0,0,0"/>
+        <details key="width" value="1"/>
+        <details key="style" value="dot"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="level" lowerBound="1" eType="#//Level"
+        defaultValueLiteral="High"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DecompositionLink" eSuperTypes="#//GoalLink">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="type"/>
+      <details key="source.decoration" value="filledclosedarrow"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//DecompositionType"
+        defaultValueLiteral="And"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DecompositionType">
+    <eLiterals name="And" value="1"/>
+    <eLiterals name="Or" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DependencyLink" eSuperTypes="#//GoalLink">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="type"/>
+      <details key="source.decoration" value="rhomb"/>
+      <details key="target.decoration" value="arrow"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" lowerBound="1" eType="#//DependencyType"
+        defaultValueLiteral="Requires"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DependencyType">
+    <eLiterals name="Requires" value="1"/>
+    <eLiterals name="Support" value="2"/>
+    <eLiterals name="Obstruction" value="3"/>
+    <eLiterals name="Conflict" value="4"/>
+    <eLiterals name="Equivalence" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Level">
+    <eLiterals name="Low" value="1"/>
+    <eLiterals name="Medium" value="2"/>
+    <eLiterals name="High" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>

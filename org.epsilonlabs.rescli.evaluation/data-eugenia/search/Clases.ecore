@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="Clases"
+    nsURI="diagrama" nsPrefix="diagrama">
+  <eAnnotations source="gmf">
+    <details key="foo" value="bar"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Diagrama">
+    <eAnnotations source="gmf.diagram">
+      <details key="foo" value="bar"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="clases" upperBound="-1"
+        eType="#//Clase" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relaciones" upperBound="-1"
+        eType="#//Relacion" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Clase">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nombre"/>
+      <details key="figure" value="rectangle"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="atributos" upperBound="-1"
+        eType="#//Atributo" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibilidad" eType="#//EnumVisibilidad"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="paquete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="metodos" upperBound="-1"
+        eType="#//Metodo" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Atributo">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nombre"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.width" value="0"/>
+      <details key="border.color" value="255,255,255"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipo" eType="#//EnumTipos"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibilidad" eType="#//EnumVisibilidad"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relacion">
+    <eAnnotations source="gmf.link">
+      <details key="label" value="nombre"/>
+      <details key="source" value="origen"/>
+      <details key="target" value="destino"/>
+      <details key="style" value="solid"/>
+      <details key="width" value="2"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="destino" lowerBound="1"
+        eType="#//Clase"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="origen" lowerBound="1"
+        eType="#//Clase"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Metodo">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nombre"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.width" value="0"/>
+      <details key="border.color" value="255,255,255"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipoRetorno" eType="#//EnumTiposVoid"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="esVoid" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parametrosEntrada" upperBound="-1"
+        eType="#//Parametro" containment="true">
+      <eAnnotations source="gmf.compartment">
+        <details key="foo" value="bar"/>
+        <details key="layout" value="list"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parametro">
+    <eAnnotations source="gmf.node">
+      <details key="label" value="nombre"/>
+      <details key="figure" value="rectangle"/>
+      <details key="border.width" value="0"/>
+      <details key="border.color" value="255,255,255"/>
+      <details key="label.icon" value="false"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nombre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tipo" eType="#//EnumTipos"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumVisibilidad">
+    <eLiterals name="public"/>
+    <eLiterals name="private" value="1"/>
+    <eLiterals name="protected" value="2"/>
+    <eLiterals name="default" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumTipos">
+    <eLiterals name="String"/>
+    <eLiterals name="int" value="1"/>
+    <eLiterals name="boolean" value="2"/>
+    <eLiterals name="float" value="3"/>
+    <eLiterals name="double" value="4"/>
+    <eLiterals name="long" value="5"/>
+    <eLiterals name="char" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumTiposVoid">
+    <eLiterals name="String"/>
+    <eLiterals name="int" value="1"/>
+    <eLiterals name="boolean" value="2"/>
+    <eLiterals name="float" value="3"/>
+    <eLiterals name="double" value="4"/>
+    <eLiterals name="long" value="5"/>
+    <eLiterals name="char" value="6"/>
+    <eLiterals name="none" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="EnumRelaciones">
+    <eLiterals name="Herencia"/>
+    <eLiterals name="Agregacion" value="1"/>
+    <eLiterals name="Composicion" value="2"/>
+    <eLiterals name="Implementacion" value="3"/>
+  </eClassifiers>
+</ecore:EPackage>
