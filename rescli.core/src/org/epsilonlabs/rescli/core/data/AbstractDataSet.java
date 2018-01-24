@@ -96,6 +96,9 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 		LOG.info("COUNT " + count + " / " + total());
 		if (count.equals(total()) || count.equals(max)) {
 			status = Status.COMPLETED;
+			//FIXME this will call oncomplete before any of the asynchronous calls are made, 
+			//terminating the observable chain early.
+			//NB: currently no termination event is sent instead, should be fixed to be sent after the final event.
 			//subject.onComplete();
 		} else {
 			this.status = Status.AWAITING;

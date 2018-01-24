@@ -50,7 +50,7 @@ public class FileToRepo implements ObservableSource<Repository>, Observer<Search
 				
 				//FIXME doing only 3 for testing
 				//
-				if(cache.size()<3)
+				if(cache.size()<1)
 				//
 				repoObs.onNext(r);
 

@@ -6,17 +6,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.github.api.IGitHubApi;
-import org.epsilonlabs.rescli.github.model.Commits;
 import org.epsilonlabs.rescli.github.model.SearchCode;
-import org.epsilonlabs.rescli.github.model.SearchCode.Repository;
-import org.epsilonlabs.rescli.github.test.SearchCodeResult;
 import org.epsilonlabs.rescli.github.test.query.GitHubTestUtil;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import io.reactivex.ObservableSource;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subjects.PublishSubject;
 
 public class MDEAnalysis extends GitHubTestUtil {
 
@@ -48,25 +41,30 @@ public class MDEAnalysis extends GitHubTestUtil {
 			// Queues
 			FileToRepo f2r = new FileToRepo();
 			RepoToFile r2f = new RepoToFile(mde);
-			//?ToCommits ?2c = new ?ToCommits();
+			FileToCommits f2c = new FileToCommits();
 
 			// Subscriptions
 			searchCode.observe().subscribe(f2r);
 			f2r.repos().subscribe(r2f);
-			// ...
+			r2f.files().subscribe(f2c);
 
 			// Logging
-			RepoAndFileDataConsumer out = new RepoAndFileDataConsumer();
+			RepoAndFileDataConsumer rfdc = new RepoAndFileDataConsumer();
+			CommitDataConsumer cdc = new CommitDataConsumer();
 			// searchCode.observe().subscribe(out);
 			// f2r.repos().subscribe(out);
 			// r2f.files().subscribe(out);
-			r2f.files().subscribe(out);
+			r2f.files().subscribe(rfdc);
+			f2c.commits().subscribe(cdc);
 
 			// searchCode.observe().blockingSubscribe();
+			
+			//keep thread alive without forcing blocking etc.
 			Thread.sleep(10000);
 
-			out.dumpData();
-
+			rfdc.dumpData();
+			cdc.dumpData();
+			
 			// Initializing
 			// f2r.repos().doOnNext(out -> LOG.info("repo:
 			// "+out.getFullName()));

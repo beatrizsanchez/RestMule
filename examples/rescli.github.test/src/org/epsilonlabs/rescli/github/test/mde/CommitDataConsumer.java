@@ -13,9 +13,7 @@ package org.epsilonlabs.rescli.github.test.mde;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.epsilonlabs.rescli.github.model.Commits.Commit;
-import org.epsilonlabs.rescli.github.model.SearchCode;
-import org.epsilonlabs.rescli.github.model.SearchCode.Repository;
+import org.epsilonlabs.rescli.github.model.Commits;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
@@ -26,40 +24,33 @@ import io.reactivex.disposables.Disposable;
  * @author kb
  *
  */
-public class RepoAndFileDataConsumer implements Observer<SearchCode> {
+public class CommitDataConsumer implements Observer<Commits> {
 
 	HashMap<String, HashSet<String>> repoFileMap = new HashMap<>();
 
+	int count = 0;
+
 	@Override
-	public void onNext(SearchCode o) {
+	public void onNext(Commits o) {
 
-		System.err.println(o.getPath());
+		// System.err.println(o.getPath());
+		//
+		// Repository r = o.getRepository();
+		//
+		// String reponame = r.getFullName();
+		//
+		// HashSet<String> files = repoFileMap.get(reponame);
+		//
+		// if (files == null)
+		// files = new HashSet<String>();
+		//
+		// files.add(o.getPath());
+		// repoFileMap.put(reponame, files);
 
-		Repository r = o.getRepository();
+		// o.getRepository().get
+		count++;
+		// System.out.println(">" + o);
 
-		String reponame = r.getFullName();
-
-		HashSet<String> files = repoFileMap.get(reponame);
-
-		if (files == null)
-			files = new HashSet<String>();
-
-		files.add(o.getPath());
-		repoFileMap.put(reponame, files);
-		
-		//o.getRepository().get
-
-	}
-
-	private String asString(Object o) {
-		if (o instanceof Repository)
-			return "repo: " + ((Repository) o).getFullName();
-		if (o instanceof SearchCode)
-			return "file: " + ((SearchCode) o).getName();
-		if (o instanceof Commit)
-			return "commit: " + ((Commit) o).getUrl();
-		else
-			return o.toString();
 	}
 
 	@Override
@@ -85,7 +76,7 @@ public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 			for (String t : repoFileMap.get(s))
 				System.out.println("\t" + t);
 		}
-
+		System.err.println(count);
 	}
 
 }
