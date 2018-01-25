@@ -48,9 +48,10 @@ public class FileToRepo implements ObservableSource<Repository>, Observer<Search
 
 				// LOG.info(r.getId());
 				
-				//FIXME doing only 3 for testing
+				//FIXME doing only some
 				//
-				if(cache.size()<1)
+				//if(cache.size()<1)
+				//if(r.getFullName().equals("DevBoost/EMFText-Zoo"))
 				//
 				repoObs.onNext(r);
 

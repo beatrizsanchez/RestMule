@@ -12,45 +12,69 @@ package org.epsilonlabs.rescli.github.test.mde;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 
+import org.apache.lucene.analysis.CharArrayMap.EntrySet;
 import org.epsilonlabs.rescli.github.model.Commits;
 
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
-/**
- * Trivial data consumer, printing to console
- * 
- * @author kb
- *
- */
-public class CommitDataConsumer implements Observer<Commits> {
+// Repo/File/Commits triple
+public class CommitDataConsumer implements Observer<Entry<String, Entry<String, Commits>>> {
 
-	HashMap<String, HashSet<String>> repoFileMap = new HashMap<>();
+	// repo / {file - author : #commits}
+	HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap;
 
-	int count = 0;
+	public CommitDataConsumer(HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap) {
+		this.outputMap = outputMap;
+	}
 
+	// Repo/File/Commits triple
 	@Override
-	public void onNext(Commits o) {
+	public void onNext(Entry<String, Entry<String, Commits>> o) {
 
-		// System.err.println(o.getPath());
-		//
-		// Repository r = o.getRepository();
-		//
-		// String reponame = r.getFullName();
-		//
-		// HashSet<String> files = repoFileMap.get(reponame);
-		//
-		// if (files == null)
-		// files = new HashSet<String>();
-		//
-		// files.add(o.getPath());
-		// repoFileMap.put(reponame, files);
+		String author = o.getValue().getValue().getCommit().getCommitterInner().getEmail();
+		String repo = o.getKey();
+		String file = o.getValue().getKey();
 
-		// o.getRepository().get
-		count++;
-		// System.out.println(">" + o);
+		HashMap<String, Entry<String, HashSet<String>>> repoMap = outputMap.get(repo);
+		//
+		Entry<String, HashSet<String>> fileEntry = repoMap.get(file);
 
+		if (fileEntry == null)
+			fileEntry = new Entry<String, HashSet<String>>() {
+				String key = author;
+				HashSet<String> value = new HashSet<>();
+
+				@Override
+				public HashSet<String> setValue(HashSet<String> value) {
+					this.value = value;
+					// return NYI
+					return null;
+				}
+
+				@Override
+				public HashSet<String> getValue() {
+					return value;
+				}
+
+				@Override
+				public String getKey() {
+					return key;
+				}
+			};
+		//
+		HashSet<String> value = fileEntry.getValue();
+		value.add(o.getValue().getValue().getCommit().getUrl());
+		fileEntry.setValue(value);
+
+		repoMap.put(file, fileEntry);
+		
+		outputMap.put(repo, repoMap);
+		
+		//
+		
 	}
 
 	@Override
@@ -62,21 +86,11 @@ public class CommitDataConsumer implements Observer<Commits> {
 	@Override
 	public void onComplete() {
 		System.out.println("DATA STREAM ENDED");
-		dumpData();
 	}
 
 	@Override
 	public void onSubscribe(Disposable d) {
 		//
-	}
-
-	public void dumpData() {
-		for (String s : repoFileMap.keySet()) {
-			System.out.println(s);
-			for (String t : repoFileMap.get(s))
-				System.out.println("\t" + t);
-		}
-		System.err.println(count);
 	}
 
 }

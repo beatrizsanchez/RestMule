@@ -12,6 +12,7 @@ package org.epsilonlabs.rescli.github.test.mde;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map.Entry;
 
 import org.epsilonlabs.rescli.github.model.Commits.Commit;
 import org.epsilonlabs.rescli.github.model.SearchCode;
@@ -28,7 +29,11 @@ import io.reactivex.disposables.Disposable;
  */
 public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 
-	HashMap<String, HashSet<String>> repoFileMap = new HashMap<>();
+	HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap;
+
+	public RepoAndFileDataConsumer(HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap) {
+		this.outputMap = outputMap;
+	}
 
 	@Override
 	public void onNext(SearchCode o) {
@@ -39,15 +44,15 @@ public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 
 		String reponame = r.getFullName();
 
-		HashSet<String> files = repoFileMap.get(reponame);
+		HashMap<String, Entry<String, HashSet<String>>> files = outputMap.get(reponame);
 
 		if (files == null)
-			files = new HashSet<String>();
+			files = new HashMap<String, Entry<String, HashSet<String>>>();
 
-		files.add(o.getPath());
-		repoFileMap.put(reponame, files);
-		
-		//o.getRepository().get
+		files.put(o.getPath(), null);
+		outputMap.put(reponame, files);
+
+		// o.getRepository().get
 
 	}
 
@@ -79,11 +84,17 @@ public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 		//
 	}
 
+	//HashMap<String, HashMap<String, Entry<String, HashSet<String>>>>
 	public void dumpData() {
-		for (String s : repoFileMap.keySet()) {
+		for (String s : outputMap.keySet()) {
+			//repo
 			System.out.println(s);
-			for (String t : repoFileMap.get(s))
-				System.out.println("\t" + t);
+			for (Entry<String, Entry<String, HashSet<String>>> t : outputMap.get(s).entrySet()) {
+				//file
+				System.out.println("\t" + t.getKey());
+				//
+				System.out.println("\t\t" + t.getValue().getKey()+" : "+t.getValue().getValue());
+			}
 		}
 
 	}

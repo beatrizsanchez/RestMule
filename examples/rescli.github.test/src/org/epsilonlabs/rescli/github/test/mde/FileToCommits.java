@@ -13,6 +13,8 @@ package org.epsilonlabs.rescli.github.test.mde;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,15 +31,15 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
-public class FileToCommits implements ObservableSource<Commits>, Observer<SearchCode> {
+public class FileToCommits implements ObservableSource<Entry<String, Entry<String, Commits>>>, Observer<SearchCode> {
 
 	private static final Logger LOG = LogManager.getLogger(FileToCommits.class);
 
-	protected PublishSubject<Commits> commits = PublishSubject.create();
+	protected PublishSubject<Entry<String, Entry<String, Commits>>> commits = PublishSubject.create();
 	// notifications to tools interested in progress info
-	protected Collection<Observer<? super Commits>> subscribers = new LinkedList<>();
+	protected Collection<Observer<? super Entry<String, Entry<String, Commits>>>> subscribers = new LinkedList<>();
 
-	public Observable<Commits> commits() {
+	public Observable<Entry<String, Entry<String, Commits>>> commits() {
 		return commits;
 	}
 
@@ -49,6 +51,9 @@ public class FileToCommits implements ObservableSource<Commits>, Observer<Search
 		if (!cache.contains(o.getPath())) {
 
 			Repository r = o.getRepository();
+
+			String repo = r.getFullName();
+			String file = o.getPath();
 
 			//
 			// System.err.println(r.getOwner());
@@ -64,12 +69,55 @@ public class FileToCommits implements ObservableSource<Commits>, Observer<Search
 			IDataSet<Commits> ret = GitHubTestUtil.getOAuthClient().getReposCommits(r.getOwner().getLogin(),
 					r.getName(), null, null, o.getPath(), null, null);
 			//
-			ret.observe().subscribe(commits);
+			ret.observe().map(c -> entry(repo, file, c)).subscribe(commits);
 
 			cache.add(o.getPath());
 
 		}
 
+	}
+
+	private Entry<String, Entry<String, Commits>> entry(String r ,String f,Commits c) {
+		
+		Entry<String, Entry<String, Commits>> ret = new Entry<String, Map.Entry<String,Commits>>() {
+			String key=r;
+			Map.Entry<String,Commits> value=new Entry<String, Commits>() {
+				String key=f;
+				Commits value =c;
+				@Override
+				public Commits setValue(Commits value) {
+					//NYI
+					return null;
+				}
+				
+				@Override
+				public Commits getValue() {
+					return value;
+				}
+				
+				@Override
+				public String getKey() {
+					return key;
+				}
+			};
+			
+			@Override
+			public Entry<String, Commits> setValue(Entry<String, Commits> value) {
+				// NYI
+				return null;
+			}
+			
+			@Override
+			public Entry<String, Commits> getValue() {
+				return value;
+			}
+			
+			@Override
+			public String getKey() {
+				return key;
+			}
+		};
+		return ret;
 	}
 
 	@Override
@@ -88,7 +136,7 @@ public class FileToCommits implements ObservableSource<Commits>, Observer<Search
 	}
 
 	@Override
-	public void subscribe(Observer<? super Commits> observer) {
+	public void subscribe(Observer<? super Entry<String, Entry<String, Commits>>> observer) {
 		subscribers.add(observer);
 	}
 
