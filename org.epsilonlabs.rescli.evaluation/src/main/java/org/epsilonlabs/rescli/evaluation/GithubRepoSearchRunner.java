@@ -20,6 +20,7 @@ import org.kohsuke.github.extras.OkHttpConnector;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.OkUrlFactory;
 
@@ -60,7 +61,8 @@ public class GithubRepoSearchRunner {
 	public void runSearch() {
 		try {
 			
-			OkHttpClient client = new OkHttpClient();
+			Cache cache = new Cache(new File("cache/"), 1000 * 1024 * 1024); // 1GB cache
+			OkHttpClient client = new OkHttpClient().setCache(cache);
 			OkUrlFactory urlFactory = new OkUrlFactory(client);
 			HttpConnector connector = new ImpatientHttpConnector(new OkHttpConnector(urlFactory), DEFAULT_CONNECTION_TIMEOUT_IN_MILLI_SECONDS, DEFAULT_READ_TIMEOUT_IN_MILLI_SECONDS);
 			GitHub github = new GitHubBuilder().withPassword(githubUserName, githubUserPass).withConnector(connector).withAbuseLimitHandler(AbuseLimitHandler.WAIT).withRateLimitHandler(RateLimitHandler.WAIT).build();
