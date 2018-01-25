@@ -1,1 +1,5 @@
 /target/
+/cache-backup/
+/cache-data-gmf/
+/cache-data-sirius/
+/cache2/

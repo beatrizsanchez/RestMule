@@ -28,7 +28,7 @@ public class MDEAnalysis extends GitHubTestUtil {
 	@BeforeClass
 	public static void prepareClass() {
 		setup();
-		clearGitHubCache();
+		//clearGitHubCache();
 
 		localApi = GitHubTestUtil.getOAuthClient();
 		asyncClient = HttpAsyncClients.createDefault();
