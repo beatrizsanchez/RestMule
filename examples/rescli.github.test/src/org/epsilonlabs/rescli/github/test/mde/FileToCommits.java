@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.epsilonlabs.rescli.core.data.IDataSet;
+import org.epsilonlabs.rescli.github.model.Commits;
 import org.epsilonlabs.rescli.github.model.SearchCode;
 import org.epsilonlabs.rescli.github.model.SearchCode.Repository;
 import org.epsilonlabs.rescli.github.test.query.CodeSearchQuery;
@@ -28,46 +29,45 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.subjects.PublishSubject;
 
-public class RepoToFile implements ObservableSource<SearchCode>, Observer<Repository> {
+public class FileToCommits implements ObservableSource<Commits>, Observer<SearchCode> {
 
-	private MDE mde;
+	private static final Logger LOG = LogManager.getLogger(FileToCommits.class);
 
-	public RepoToFile(MDE mde) {
-		this.mde = mde;
-	}
-
-	private static final Logger LOG = LogManager.getLogger(RepoToFile.class);
-
-	protected PublishSubject<SearchCode> fileObs = PublishSubject.create();
+	protected PublishSubject<Commits> commits = PublishSubject.create();
 	// notifications to tools interested in progress info
-	protected Collection<Observer<? super SearchCode>> subscribers = new LinkedList<>();
+	protected Collection<Observer<? super Commits>> subscribers = new LinkedList<>();
 
-	public Observable<SearchCode> files() {
-		return fileObs;
+	public Observable<Commits> commits() {
+		return commits;
 	}
 
 	private HashSet<String> cache = new HashSet<>();
 
 	@Override
-	public void onNext(Repository o) {
+	public void onNext(SearchCode o) {
 
-		if (!cache.contains(o.getFullName())) {
+		if (!cache.contains(o.getPath())) {
 
-			try {
+			Repository r = o.getRepository();
 
-				String q = new CodeSearchQuery().create(mde.getKeyword()).extension(mde.getExtension())
-						.repo(o.getFullName()).build().getQuery();
-				System.err.println(q);
-				IDataSet<SearchCode> ret = GitHubTestUtil.getOAuthClient().getSearchCode("asc", q, null);
+			//
+			// System.err.println(r.getOwner());
+			// System.err.println(r.getOwner().getLogin());
+			// System.err.println(r.getOwner().getHtmlUrl());
+			// System.err.println(r.getOwner().getReposUrl());
+			//
+			// IDataSet<Commits> ret =
+			// GitHubTestUtil.getOAuthClient().getReposCommits(r.getOwner().getLogin(),r.getFullName(),
+			// "1018-01-24T17:50:00Z", "master", o.getName(), "",
+			// "2018-01-24T17:50:00Z");
 
-				ret.observe().subscribe(fileObs);
+			IDataSet<Commits> ret = GitHubTestUtil.getOAuthClient().getReposCommits(r.getOwner().getLogin(),
+					r.getName(), null, null, o.getPath(), null, null);
+			//
+			ret.observe().subscribe(commits);
 
-			} catch (Exception e) {
-				System.err.println("Error in onNext() of GeneratedGithubRepoToFiles:");
-				e.printStackTrace();
-			}
+			cache.add(o.getPath());
 
-			cache.add(o.getFullName());
 		}
 
 	}
@@ -84,11 +84,11 @@ public class RepoToFile implements ObservableSource<SearchCode>, Observer<Reposi
 
 	@Override
 	public void onComplete() {
-		fileObs.onComplete();
+		commits.onComplete();
 	}
 
 	@Override
-	public void subscribe(Observer<? super SearchCode> observer) {
+	public void subscribe(Observer<? super Commits> observer) {
 		subscribers.add(observer);
 	}
 

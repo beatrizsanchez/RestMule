@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
@@ -49,6 +50,9 @@ public abstract class AbstractSession implements ISession {
 	protected Integer rateLimit = -1;
 	protected AtomicInteger rateLimitRemaining = new AtomicInteger(-1);
 	protected Date rateLimitReset = new Date();
+	
+	protected AtomicBoolean isSet = new AtomicBoolean(false);
+	
 	protected Auth type = Auth.NO_AUTH;
 	protected boolean isHeader = true;
 	protected String token = "";
@@ -110,7 +114,12 @@ public abstract class AbstractSession implements ISession {
 	public long getRateLimitResetInMilliSeconds() {
 		return rateLimitReset.getTime();
 	}
-
+	
+	@Override
+	public AtomicBoolean isSet() {
+		return this.isSet;
+	}
+	
 	@Override
 	public Auth type() {
 		return this.type;

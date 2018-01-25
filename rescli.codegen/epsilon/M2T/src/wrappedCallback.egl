@@ -39,7 +39,8 @@ public class [%= R.name %]WrappedCallback<D,R extends IWrap<D>> extends Abstract
 
 	@Override
 	public void handleTotal(Response<R> response) {
-		this.dataset.setTotal(response.body().getTotalCount());
+		Integer totalCount = response.body().getTotalCount();
+		this.dataset.setTotal(totalCount);
 	}
 
 	@Override
