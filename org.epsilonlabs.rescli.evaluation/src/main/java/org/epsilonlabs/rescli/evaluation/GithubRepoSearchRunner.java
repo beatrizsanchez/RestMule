@@ -1,18 +1,11 @@
 package org.epsilonlabs.rescli.evaluation;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.kohsuke.github.AbuseLimitHandler;
 import org.kohsuke.github.GHCommit;
 import org.kohsuke.github.GHContent;
@@ -25,11 +18,10 @@ import org.kohsuke.github.RateLimitHandler;
 import org.kohsuke.github.extras.ImpatientHttpConnector;
 import org.kohsuke.github.extras.OkHttpConnector;
 
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.OkUrlFactory;
-
-import com.google.common.collect.Table;
-import com.google.common.collect.HashBasedTable;
 
 
 public class GithubRepoSearchRunner {
@@ -73,116 +65,53 @@ public class GithubRepoSearchRunner {
 			HttpConnector connector = new ImpatientHttpConnector(new OkHttpConnector(urlFactory), DEFAULT_CONNECTION_TIMEOUT_IN_MILLI_SECONDS, DEFAULT_READ_TIMEOUT_IN_MILLI_SECONDS);
 			GitHub github = new GitHubBuilder().withPassword(githubUserName, githubUserPass).withConnector(connector).withAbuseLimitHandler(AbuseLimitHandler.WAIT).withRateLimitHandler(RateLimitHandler.WAIT).build();
 
-			PagedSearchIterable<GHContent> result = github.searchContent().q(githubQuery).list().withPageSize(DEFAULT_PAGE_SIZE);
-			totalCount = result.getTotalCount();
+			PagedSearchIterable<GHContent> initialFiles = github.searchContent().q(githubQuery).list().withPageSize(DEFAULT_PAGE_SIZE);
+			totalCount = initialFiles.getTotalCount();
 			logger.info("TOTAL RESULT COUNT: " + Integer.toString(totalCount));
 			
 			int currResNo = 1;
 			
-			for (GHContent resultItem : result) {
-				GHRepository resultRepo = resultItem.getOwner();
-				String resultItemFullRepoName = resultRepo.getFullName();
-				String resultItemPath = java.net.URLDecoder.decode(resultItem.getPath(),"UTF-8");
-				String resultItemDownloadUrl = java.net.URLDecoder.decode(resultItem.getDownloadUrl(),"UTF-8");
+			// files
+			for (GHContent initialResultItem : initialFiles) {
+				GHRepository initialResultRepo = initialResultItem.getOwner();
+				String initialResultItemFullRepoName = initialResultRepo.getFullName();
 				
-				for (GHCommit commit : resultRepo.queryCommits().path(resultItemPath).list()) {
-				     String authorEmail = commit.getCommitShortInfo().getAuthor().getEmail();
-				     int count = 0;
-				     String tableKey = resultItemFullRepoName+";"+resultItemDownloadUrl;
-				     if ( resultTable.get(tableKey, authorEmail) != null) {
-				    	 	count = resultTable.get(tableKey, authorEmail);
-				     }
-				     resultTable.put(tableKey, authorEmail, count + 1);
-				     ++totalCommitCount;
-				 }
-								
-				try {
-					Path localDownloadTargetFile = obtainAvailableLocalFilePath(resultItem);
-					downloadElement(resultItem, localDownloadTargetFile);
-					
+				// files in current repo
+				PagedSearchIterable<GHContent> repoFiles = github.searchContent().q(githubQuery).repo(initialResultItemFullRepoName).list().withPageSize(DEFAULT_PAGE_SIZE);
+				for (GHContent resultItem : repoFiles) {
+					GHRepository resultRepo = resultItem.getOwner();
+					String resultItemPath = java.net.URLDecoder.decode(resultItem.getPath(),"UTF-8");
+					String resultItemFullRepoName = resultRepo.getFullName();
+					String resultItemDownloadUrl = java.net.URLDecoder.decode(initialResultItem.getDownloadUrl(),"UTF-8");
+				
+					// commits of file
+					for (GHCommit commit : resultRepo.queryCommits().path(resultItemPath).list()) {
+					     String authorEmail = commit.getCommitShortInfo().getAuthor().getEmail();
+					     int count = 0;
+					     String tableKey = resultItemFullRepoName+";"+resultItemDownloadUrl;
+					     if ( resultTable.get(tableKey, authorEmail) != null ) {
+					    	 	count = resultTable.get(tableKey, authorEmail);
+					     }
+					     resultTable.put(tableKey, authorEmail, count + 1);
+					     ++totalCommitCount;
+					 }// commits of file
+
 					logger.info("ADDED (" + currResNo + " of " + totalCount + "): " + resultItemFullRepoName);
-				} catch (Exception e) {
-					logger.info("Unable to obtain source grammar file.");
-					e.printStackTrace();
-				}
-				
-				++currResNo;
-				
-			}// GHContent loop end
+					++currResNo;
+					
+				}// files in current repo
+								
+			}// files end
 			
 			logger.info("TOTAL COMMIT COUNT: " + totalCommitCount);
 			logger.info("=============== RESULT TABLE PRINTOUT ===============");
 			logger.info(resultTable.toString());
 			logger.info("=============== RESULT TABLE PRINTOUT (END) =========");
 			
-		} catch (IOException e1) {
+		} catch (Exception e1) {
 			logger.info("Failed to connect to GitHub (bad credentials or timeout).");
 			e1.printStackTrace();
 		}
-	}
-	
-	private Path obtainAvailableLocalFilePath(GHContent resultItem) throws IOException {
-		String fileName = getProperFileNameFromUrl(resultItem.getDownloadUrl());
-
-		String extension = "";
-		String name = "";
-		
-		int idxOfDot = fileName.lastIndexOf('.');   //Get the last index of . to separate extension
-		extension = fileName.substring(idxOfDot + 1);
-		name = fileName.substring(0, idxOfDot);
-
-		Path path = Paths.get(searchResultPath + File.separator + fileName);
-		int counter = 1;
-		File availableFile = null;
-		while(Files.exists(path)){
-		    fileName = name+"_"+counter + "." + extension;
-		    path = Paths.get(searchResultPath + File.separator + fileName);
-		    counter++;
-		}
-		availableFile = new File(fileName);
-		
-		return Paths.get(searchResultPath + File.separator + availableFile);
-	}
-	
-	private void downloadElement(GHContent item, Path localFilePath) throws Exception {
-		try {
-			String downloadUrlString = item.getDownloadUrl();
-			URL remoteUrl = new URL(downloadUrlString);
-			
-			Files.createDirectories(localFilePath.getParent());
-						
-			if (Files.notExists(localFilePath)) {
-				Files.createFile(localFilePath); 
-				ReadableByteChannel rbc = Channels.newChannel((remoteUrl).openConnection().getInputStream());
-				FileOutputStream fos = new FileOutputStream(localFilePath.toFile());
-				fos.getChannel().transferFrom(rbc, 0, Long.MAX_VALUE);
-				fos.flush();
-				fos.close();	
-				
-				logger.info("Downloaded file " + remoteUrl);
-				logger.info("TO: " + localFilePath.toString());
-			}
-
-		} catch (MalformedURLException e1) {
-			logger.warn("FAILED TO TRANSFORM URL STRING TO URL OBJECT");
-			throw new Exception("FAILED TO TRANSFORM URL STRING TO URL OBJECT " + e1); 
-		} catch (IOException e) {
-			throw new Exception("FAILED TO DOWNLOAD ELEMENT " + e); 
-		}
-	}
-	
-	public String getProperFileNameFromUrl(String filePath) {
-		String fileName = null;
-		try {
-			fileName = java.net.URLDecoder.decode(new File(filePath).getName(), "UTF-8");
-			fileName = fileName.replaceAll(" ", "-");
-			String regex = "[\\(|\\[|\\{|\\)|\\}|\\]]";
-			fileName = fileName.replaceAll(regex, "");
-		} catch (UnsupportedEncodingException e) {
-			logger.error("Failed to get a proper file name from string file path.");
-			e.printStackTrace();
-		}
-		return fileName;
 	}
 
 }

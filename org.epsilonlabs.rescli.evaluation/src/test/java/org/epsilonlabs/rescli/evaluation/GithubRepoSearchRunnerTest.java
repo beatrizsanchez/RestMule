@@ -92,8 +92,8 @@ public class GithubRepoSearchRunnerTest {
 //	@Ignore("to be executed manually")
 	@Test	
 	public void testGMF() {
-		String githubUser = readGithubUserFromFile(0);
-		String githubPass = readGithubPassFromFile(0);
+		String githubUser = readGithubUserFromFile(1);
+		String githubPass = readGithubPassFromFile(1);
 		
 		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-gmf/", githubUser, githubPass, "figure extension:gmfgraph");
 		ghSearchRunner.runSearch();
@@ -102,8 +102,8 @@ public class GithubRepoSearchRunnerTest {
 //	@Ignore("to be executed manually")
 	@Test	
 	public void testSirius() {
-		String githubUser = readGithubUserFromFile(1);
-		String githubPass = readGithubPassFromFile(1);
+		String githubUser = readGithubUserFromFile(2);
+		String githubPass = readGithubPassFromFile(2);
 		
 		GithubRepoSearchRunner ghSearchRunner = new GithubRepoSearchRunner("data-sirius/", githubUser, githubPass, "node extension:odesign");
 		ghSearchRunner.runSearch();
