@@ -24,9 +24,9 @@ import io.reactivex.disposables.Disposable;
 public class CommitDataConsumer implements Observer<Entry<String, Entry<String, Commits>>> {
 
 	// repo / {file - author : #commits}
-	HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap;
+	HashMap<String, HashMap<String, HashMap<String, HashSet<String>>>> outputMap;
 
-	public CommitDataConsumer(HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap) {
+	public CommitDataConsumer(HashMap<String, HashMap<String, HashMap<String, HashSet<String>>>> outputMap) {
 		this.outputMap = outputMap;
 	}
 
@@ -38,43 +38,28 @@ public class CommitDataConsumer implements Observer<Entry<String, Entry<String, 
 		String repo = o.getKey();
 		String file = o.getValue().getKey();
 
-		HashMap<String, Entry<String, HashSet<String>>> repoMap = outputMap.get(repo);
+		HashMap<String, HashMap<String, HashSet<String>>> repoMap = outputMap.get(repo);
 		//
-		Entry<String, HashSet<String>> fileEntry = repoMap.get(file);
+		HashMap<String, HashSet<String>> fileMap = repoMap.get(file);
 
-		if (fileEntry == null)
-			fileEntry = new Entry<String, HashSet<String>>() {
-				String key = author;
-				HashSet<String> value = new HashSet<>();
+		if (fileMap == null)
+			fileMap = new HashMap<>();
 
-				@Override
-				public HashSet<String> setValue(HashSet<String> value) {
-					this.value = value;
-					// return NYI
-					return null;
-				}
+		HashSet<String> value = fileMap.get(author);
 
-				@Override
-				public HashSet<String> getValue() {
-					return value;
-				}
+		if (value == null)
+			value = new HashSet<>();
 
-				@Override
-				public String getKey() {
-					return key;
-				}
-			};
-		//
-		HashSet<String> value = fileEntry.getValue();
 		value.add(o.getValue().getValue().getCommit().getUrl());
-		fileEntry.setValue(value);
 
-		repoMap.put(file, fileEntry);
-		
+		fileMap.put(author, value);
+
+		repoMap.put(file, fileMap);
+
 		outputMap.put(repo, repoMap);
-		
+
 		//
-		
+
 	}
 
 	@Override

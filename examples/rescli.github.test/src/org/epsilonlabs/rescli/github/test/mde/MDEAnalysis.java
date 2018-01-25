@@ -41,7 +41,8 @@ public class MDEAnalysis extends GitHubTestUtil {
 	public void testMDETech() throws InterruptedException, IOException {
 
 		// output data store
-		HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> out = new HashMap<>();
+		// repo / file / author / commit
+		HashMap<String, HashMap<String, HashMap<String, HashSet<String>>>> out = new HashMap<>();
 
 		for (MDE mde : MDE.values()) {
 			String query = mde.query();

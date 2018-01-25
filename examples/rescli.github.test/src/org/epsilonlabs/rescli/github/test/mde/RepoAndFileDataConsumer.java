@@ -29,9 +29,9 @@ import io.reactivex.disposables.Disposable;
  */
 public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 
-	HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap;
+	HashMap<String, HashMap<String, HashMap<String, HashSet<String>>>> outputMap;
 
-	public RepoAndFileDataConsumer(HashMap<String, HashMap<String, Entry<String, HashSet<String>>>> outputMap) {
+	public RepoAndFileDataConsumer(HashMap<String, HashMap<String, HashMap<String, HashSet<String>>>> outputMap) {
 		this.outputMap = outputMap;
 	}
 
@@ -44,10 +44,10 @@ public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 
 		String reponame = r.getFullName();
 
-		HashMap<String, Entry<String, HashSet<String>>> files = outputMap.get(reponame);
+		HashMap<String, HashMap<String, HashSet<String>>> files = outputMap.get(reponame);
 
 		if (files == null)
-			files = new HashMap<String, Entry<String, HashSet<String>>>();
+			files = new HashMap<String, HashMap<String, HashSet<String>>>();
 
 		files.put(o.getPath(), null);
 		outputMap.put(reponame, files);
@@ -84,19 +84,22 @@ public class RepoAndFileDataConsumer implements Observer<SearchCode> {
 		//
 	}
 
-	//HashMap<String, HashMap<String, Entry<String, HashSet<String>>>>
+	// HashMap<String, HashMap<String, Entry<String, HashSet<String>>>>
 	public void dumpData() {
 		for (String s : outputMap.keySet()) {
-			//repo
+			// repo
 			System.out.println(s);
-			for (Entry<String, Entry<String, HashSet<String>>> t : outputMap.get(s).entrySet()) {
-				//file
-				System.out.println("\t" + t.getKey());
-				//
-				System.out.println("\t\t" + t.getValue().getKey()+" : "+t.getValue().getValue());
+			for (String t : outputMap.get(s).keySet()) {
+				// file
+				System.out.println("\t" + t);
+				for (String u : outputMap.get(s).get(t).keySet()) {
+					// author
+					System.out.println("\t\t" + u);
+					for (String v : outputMap.get(s).get(t).get(u))
+						System.out.println("\t\t\t" + v);
+				}
 			}
+
 		}
-
 	}
-
 }
