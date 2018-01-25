@@ -22,7 +22,6 @@ import org.epsilonlabs.rescli.core.data.IDataSet;
 import org.epsilonlabs.rescli.github.model.Commits;
 import org.epsilonlabs.rescli.github.model.SearchCode;
 import org.epsilonlabs.rescli.github.model.SearchCode.Repository;
-import org.epsilonlabs.rescli.github.test.query.CodeSearchQuery;
 import org.epsilonlabs.rescli.github.test.query.GitHubTestUtil;
 
 import io.reactivex.Observable;
@@ -138,15 +137,6 @@ public class FileToCommits implements ObservableSource<Entry<String, Entry<Strin
 	@Override
 	public void subscribe(Observer<? super Entry<String, Entry<String, Commits>>> observer) {
 		subscribers.add(observer);
-	}
-
-	public static void main(String[] a) {
-
-		MDE mde = MDE.Eugenia;
-		String q = new CodeSearchQuery().create(mde.getKeyword()).extension(mde.getExtension())
-				.repo("https://github.com/GuanglongDu/GMFSVG").inFile().build().getQuery();
-		System.out.println(q);
-
 	}
 
 }

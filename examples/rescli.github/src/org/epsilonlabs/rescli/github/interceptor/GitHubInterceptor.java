@@ -29,7 +29,7 @@ public class GitHubInterceptor extends AbstractInterceptor {
 		cache = GitHubCacheManager.getInstance();
 	}
 
-	public Interceptor requestInterceptor(){
+	public Interceptor sessionRequestInterceptor(){
 		return sessionRequestInterceptor(userAgent, accept, sessionId);
 	}
 	

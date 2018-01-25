@@ -20,6 +20,8 @@ import org.epsilonlabs.rescli.github.page.GitHubPagination;
 import org.epsilonlabs.rescli.github.session.GitHubSession;
 import org.epsilonlabs.rescli.github.util.GitHubPropertiesUtil;
 
+import okhttp3.OkHttpClient.Builder;
+
 public class EntityApi  {
 
 	public static EntityBuilder create(){
@@ -35,10 +37,11 @@ public class EntityApi  {
 	implements IClientBuilder<IEntityApi> { 
 	
 		private ISession session;
+		private boolean activeCaching = true;
 	
 		@Override
 		public IEntityApi build() {
-			return (IEntityApi) new EntityClient(session);
+			return (IEntityApi) new EntityClient(session, activeCaching);
 		}
 	
 		@Override
@@ -46,6 +49,13 @@ public class EntityApi  {
 			this.session = session;
 			return this;
 		}
+		
+		@Override
+		public IClientBuilder<IEntityApi> setActiveCaching(boolean activeCaching) {
+			this.activeCaching = activeCaching;
+			return this;
+		}
+	
 	}
 	
 	/** CLIENT */
@@ -54,7 +64,7 @@ public class EntityApi  {
 	{
 		private GitHubPagination paginationPolicy;
 		
-		EntityClient(ISession session) {
+		EntityClient(ISession session, boolean activeCaching) {
 			super();
 
 			ExecutorService executor = RateLimitExecutor.create(30, GitHubSession.class, session.id());
@@ -63,13 +73,15 @@ public class EntityApi  {
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 
 
-			this.client = AbstractClient.okHttp(executor)
-					.addInterceptor(interceptors.cacheRequestInterceptor())
-					.addInterceptor(interceptors.requestInterceptor())
-					.addNetworkInterceptor(interceptors.sessionResponseInterceptor())
-					.addNetworkInterceptor(interceptors.cacheResponseInterceptor())
-					.cache(GitHubCacheManager.getInstance().getOkHttpCache()) // FIXME Use Lucene Instead
-					.build();
+			Builder clientBuilder = AbstractClient.okHttp(executor);
+			
+			if (activeCaching) clientBuilder = clientBuilder.cache(GitHubCacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
+			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
+			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
+			clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.sessionResponseInterceptor());
+			if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());
+			
+			this.client = clientBuilder.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(IEntityEndpoint.class);
 			this.paginationPolicy = GitHubPagination.get();

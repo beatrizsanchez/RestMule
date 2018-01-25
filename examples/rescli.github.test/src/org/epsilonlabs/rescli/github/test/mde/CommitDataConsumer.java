@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map.Entry;
 
-import org.apache.lucene.analysis.CharArrayMap.EntrySet;
 import org.epsilonlabs.rescli.github.model.Commits;
 
 import io.reactivex.Observer;

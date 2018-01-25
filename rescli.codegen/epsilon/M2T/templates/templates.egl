@@ -18,10 +18,11 @@ public static class [%= name %]Builder
 implements IClientBuilder<I[%= name %]Api> { 
 
 	private ISession session;
+	private boolean activeCaching = true;
 
 	@Override
 	public I[%= name %]Api build() {
-		return (I[%= name %]Api) new [%= name %]Client(session);
+		return (I[%= name %]Api) new [%= name %]Client(session, activeCaching);
 	}
 
 	@Override
@@ -29,6 +30,13 @@ implements IClientBuilder<I[%= name %]Api> {
 		this.session = session;
 		return this;
 	}
+	
+	@Override
+	public IClientBuilder<I[%= name %]Api> setActiveCaching(boolean activeCaching) {
+		this.activeCaching = activeCaching;
+		return this;
+	}
+
 }
 
 [% } %]

@@ -27,10 +27,11 @@ public class GitHubApi  {
 	implements IClientBuilder<IGitHubApi> { 
 	
 		private ISession session;
+		private boolean activeCaching = true;
 	
 		@Override
 		public IGitHubApi build() {
-			return (IGitHubApi) new GitHubClient(session);
+			return (IGitHubApi) new GitHubClient(session, activeCaching);
 		}
 	
 		@Override
@@ -38,6 +39,13 @@ public class GitHubApi  {
 			this.session = session;
 			return this;
 		}
+		
+		@Override
+		public IClientBuilder<IGitHubApi> setActiveCaching(boolean activeCaching) {
+			this.activeCaching = activeCaching;
+			return this;
+		}
+	
 	}
 	
 	/** CLIENT */
@@ -46,12 +54,18 @@ public class GitHubApi  {
 		private IEntityApi entityClient;
 		private ISearchApi searchClient;
 		
-		GitHubClient(ISession session) {
+		GitHubClient(ISession session, boolean activeCaching) {
 			if (session == null) {
 				session = GitHubSession.createPublic(); 
 			}	
-			entityClient = EntityApi.create().setSession(session).build();
-			searchClient = SearchApi.create().setSession(session).build();
+			entityClient = EntityApi.create()
+				.setSession(GitHubSession.Factory.copy(session))
+				.setActiveCaching(activeCaching)
+				.build();
+			searchClient = SearchApi.create()
+				.setSession(GitHubSession.Factory.copy(session))
+				.setActiveCaching(activeCaching)
+				.build();
 		}
 
 		/** WRAPED METHODS */

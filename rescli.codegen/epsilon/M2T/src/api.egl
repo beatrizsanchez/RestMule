@@ -26,12 +26,15 @@ public class [%= R.name %]Api  {
 		private I[%= c.scope.firstToUpperCase() %]Api [%= c.scope.firstToLowerCase() %]Client;
 		[% } %]
 		
-		[%= R.name %]Client(ISession session) {
+		[%= R.name %]Client(ISession session, boolean activeCaching) {
 			if (session == null) {
 				session = [%= R.name %]Session.createPublic(); 
 			}	
 			[% for (c in scopes) { %]
-			[%= c.scope.firstToLowerCase() %]Client = [%= c.scope.firstToUpperCase() %]Api.create().setSession(session).build();
+			[%= c.scope.firstToLowerCase() %]Client = [%= c.scope.firstToUpperCase() %]Api.create()
+				.setSession([%= R.name %]Session.Factory.copy(session))
+				.setActiveCaching(activeCaching)
+				.build();
 			[% } %]
 		}
 

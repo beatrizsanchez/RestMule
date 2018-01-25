@@ -54,7 +54,6 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 		if (max != null){
 			this.subject = ReplaySubject.create(max);
 		}
-		LOG.info("MAX" + this.max);
 	}
 
 	@Override

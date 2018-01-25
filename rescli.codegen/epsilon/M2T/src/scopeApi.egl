@@ -21,6 +21,8 @@ import org.epsilonlabs.rescli.[%= name.toLowerCase() %].page.[%= name %]Paginati
 import org.epsilonlabs.rescli.[%= name.toLowerCase() %].session.[%= name %]Session;
 import org.epsilonlabs.rescli.[%= name.toLowerCase() %].util.[%= name %]PropertiesUtil;
 
+import okhttp3.OkHttpClient.Builder;
+
 public class [%= scope %]Api  {
 
 	[%= creators(scope, name) %]
@@ -34,7 +36,7 @@ public class [%= scope %]Api  {
 	{
 		private [%= name %]Pagination paginationPolicy;
 		
-		[%= scope %]Client(ISession session) {
+		[%= scope %]Client(ISession session, boolean activeCaching) {
 			super();
 
 			ExecutorService executor = RateLimitExecutor.create(30, [%= name %]Session.class, session.id());
@@ -43,13 +45,15 @@ public class [%= scope %]Api  {
 
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 
 
-			this.client = AbstractClient.okHttp(executor)
-					.addInterceptor(interceptors.cacheRequestInterceptor())
-					.addInterceptor(interceptors.requestInterceptor())
-					.addNetworkInterceptor(interceptors.sessionResponseInterceptor())
-					.addNetworkInterceptor(interceptors.cacheResponseInterceptor())
-					.cache([%= name %]CacheManager.getInstance().getOkHttpCache()) // FIXME Use Lucene Instead
-					.build();
+			Builder clientBuilder = AbstractClient.okHttp(executor);
+			
+			if (activeCaching) clientBuilder = clientBuilder.cache([%= name %]CacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
+			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
+			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
+			clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.sessionResponseInterceptor());
+			if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());
+			
+			this.client = clientBuilder.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(I[%= scope %]Endpoint.class);
 			this.paginationPolicy = [%= name %]Pagination.get();

@@ -27,6 +27,8 @@ public interface ISession extends IRateLimiter {
 	String hash();
 	String id();
 	
+	String token(String permission) throws Exception;
+	
 	public enum Auth {
 		NO_AUTH	(""), 
 		BASIC_AUTH (BASIC), 

@@ -15,5 +15,6 @@ public interface IClientBuilder<T> {
 
 	T build();
 	IClientBuilder<T> setSession(ISession session);
+	IClientBuilder<T> setActiveCaching(boolean activeCaching);
 
 }

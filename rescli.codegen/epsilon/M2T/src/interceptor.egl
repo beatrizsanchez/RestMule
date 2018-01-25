@@ -29,7 +29,7 @@ public class [%= R.name %]Interceptor extends AbstractInterceptor {
 		cache = [%= R.name %]CacheManager.getInstance();
 	}
 
-	public Interceptor requestInterceptor(){
+	public Interceptor sessionRequestInterceptor(){
 		return sessionRequestInterceptor(userAgent, accept, sessionId);
 	}
 	

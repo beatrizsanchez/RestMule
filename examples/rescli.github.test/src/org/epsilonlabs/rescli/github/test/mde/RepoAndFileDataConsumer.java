@@ -12,7 +12,6 @@ package org.epsilonlabs.rescli.github.test.mde;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map.Entry;
 
 import org.epsilonlabs.rescli.github.model.Commits.Commit;
 import org.epsilonlabs.rescli.github.model.SearchCode;
