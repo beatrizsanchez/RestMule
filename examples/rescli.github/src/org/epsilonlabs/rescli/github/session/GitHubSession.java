@@ -104,7 +104,6 @@ public class GitHubSession extends AbstractSession {
 	public void setRateLimit(@Nonnull String rateLimit) {
 		if (rateLimit != null) {
  			this.rateLimit = Integer.valueOf(rateLimit);
-			this.isSet.set(true);
 		}	
 	}
 
@@ -113,7 +112,7 @@ public class GitHubSession extends AbstractSession {
 		if (rateLimitRemaining != null) {
 			Integer remaining = Integer.valueOf(rateLimitRemaining);
 			if (remaining != this.rateLimitRemaining.get()) {
-				this.rateLimitRemaining = new AtomicInteger(remaining);		
+				this.rateLimitRemaining = new AtomicInteger(remaining);
 			}
 		}
 	}

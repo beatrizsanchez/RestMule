@@ -10,15 +10,15 @@ public enum MDE {
 	Acceleo(" mtl", "template"),
 	EGL("egl", "var"), 
 	IncQuery("eiq", "pattern"),*/
-	Eugenia("ecore", "\"gmf.diagram\""),
-	GMF("gmfgraph", "gure"),/*
+	Eugenia("ecore", "\"gmf.diagram\"")/*,
+	GMF("gmfgraph", "gure"),
 	EOL("eol", "var"), 
 	Xtext("xtext", "grammar"),
 	ETL("etl", "transform"), 
 	Ecore ("ecore", "EClass"),
 	EVL("evl", "context"), 
 	OCL("ocl", "context"),
-	*/Sirius("odesign", "node"),/* 
+	Sirius("odesign", "node"),
 	Henshin("henshin", "rule"),
 	MOFScript("m2t", "texttransformation"), 
 	Kermeta("kmt", "class"),

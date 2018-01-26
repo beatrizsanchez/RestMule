@@ -5,14 +5,22 @@ import static com.google.common.net.HttpHeaders.USER_AGENT;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.epsilonlabs.rescli.core.cache.AbstractCacheManager;
 import org.epsilonlabs.rescli.core.cache.ICache;
 import org.epsilonlabs.rescli.core.session.AbstractSession;
 import org.epsilonlabs.rescli.core.session.ISession;
 
+import okhttp3.Cache;
 import okhttp3.Interceptor;
+import okhttp3.Interceptor.Chain;
+import okhttp3.Request;
 import okhttp3.Response;
 
 /**
@@ -38,13 +46,28 @@ public abstract class AbstractInterceptor {
 	protected static Class<? extends AbstractSession> sessionClass;
 
 	protected String sessionId;
-
+	protected String agent;
+	
+	protected static Set<String> cacheKeys = new HashSet();
+	
 	protected static final Interceptor cacheRequestInterceptor(final ICache cache, final String sessionId) {
 		return new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
-				// TODO remove. It is a temporary fix
-				return chain.proceed(chain.request());
+				// TODO remove. It is a temporary fix using okhttp
+				Request request = chain.request();
+				Response response = chain.proceed(request);//getOkttpResponse(session, chain);
+						/*chain.proceed(request);	
+				Response cacheResponse = response.cacheResponse();
+				LOG.info("b");
+				if (cacheResponse != null){
+					LOG.info("RETURNING RESPONSE FROM CACHE"); 
+					cacheKeys.add(Cache.key(request.url()));
+					return cacheResponse; 
+				} else {
+					return response;
+				}*/
+				return response;
 
 				// TODO uncomment
 				/*
@@ -76,9 +99,10 @@ public abstract class AbstractInterceptor {
 		return new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
-				Response response = chain.proceed(chain.request());
 				ISession session = AbstractSession.getSession(sessionClass, sessionId);
-
+				
+				Response response = chain.proceed(chain.request());// getOkttpResponse(session, chain);
+				
 				session.setRateLimit(response.header(limit));
 				session.setRateLimitReset(response.header(reset));
 				session.setRateLimitRemaining(response.header(remaining));
@@ -131,6 +155,24 @@ public abstract class AbstractInterceptor {
 				return response;
 			}
 		};
+	}
+	
+	protected static Response getOkttpResponse(ISession session, Chain chain){
+		Response response = null;
+		try {
+			response = chain.proceed(chain.request());
+			if (//session.isCacheable() && FIXME allow this
+					response.cacheResponse() != null){
+				response = response.cacheResponse();
+			} else {
+				response = response.networkResponse();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return response;
+		
+		
 	}
 
 }

@@ -15,6 +15,7 @@ import org.epsilonlabs.rescli.github.test.query.GitHubTestUtil;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import io.reactivex.schedulers.Schedulers;
@@ -53,6 +54,7 @@ public class RateLimitAndPaginationTests extends GitHubTestUtil {
 	
 	/** Expected Limit For Search = 30 */  
 	@Test
+	@Ignore
 	public void testRequestsThatExcedTheRequestLimit() throws InterruptedException {
 		int expectedNumberOfQueries = MDE.values().length;
 		AtomicInteger count = new AtomicInteger(0);

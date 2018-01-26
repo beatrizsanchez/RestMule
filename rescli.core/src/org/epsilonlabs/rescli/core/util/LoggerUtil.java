@@ -35,7 +35,7 @@ public class LoggerUtil extends Thread {
 	}
 
 	private void log() {
-		LOG.info( dataset.status() 
+		LOG.info( dataset.id() + " - " + dataset.status() 
 				+ (dataset.status().equals(Status.COMPLETED) ? "" : ("(Got " + dataset.count() + " of "+ dataset.total() + ")")));
 	}
 

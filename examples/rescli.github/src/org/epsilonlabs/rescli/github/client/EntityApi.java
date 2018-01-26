@@ -74,12 +74,12 @@ public class EntityApi  {
 			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 
 
 			Builder clientBuilder = AbstractClient.okHttp(executor);
-			
+
 			if (activeCaching) clientBuilder = clientBuilder.cache(GitHubCacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
 			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
 			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
-			clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.sessionResponseInterceptor());
-			if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());
+			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionResponseInterceptor());
+			//if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());
 			
 			this.client = clientBuilder.build();
 

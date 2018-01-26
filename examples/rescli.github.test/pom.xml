@@ -37,7 +37,6 @@
 			<version>1.0.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.epsilonlabs.rescli</groupId>
 			<artifactId>org.epsilonlabs.rescli.core</artifactId>
@@ -87,6 +86,11 @@
 			<artifactId>okhttp</artifactId>
 			<version>3.8.0</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/com.google.collections/google-collections -->
+		<dependency>
+			<groupId>com.google.collections</groupId>
+			<artifactId>google-collections</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 </project>

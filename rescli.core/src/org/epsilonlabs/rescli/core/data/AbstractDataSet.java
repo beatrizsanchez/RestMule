@@ -1,6 +1,7 @@
 package org.epsilonlabs.rescli.core.data;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -29,6 +30,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 	private Integer count;
 	private LoggerUtil tester;
 	private Integer max;
+	private String id = UUID.randomUUID().toString();
 
 	public AbstractDataSet(Integer max){
 		this.status = Status.CREATED;
@@ -80,13 +82,17 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 		this.total = total;
 	}
 
+	public String id(){
+		return this.id;
+	}
+	
 	@Override
 	public synchronized Integer percentage(){
 		return ( total() != 0 ) ? (count*100)/total() : 0;	
 	}
 	
 	public synchronized void addElements(List<T> elements) {
-		//tester();
+		tester();
 		for (T element : elements){
 			status = Status.ADDING;
 			subject.onNext(element);

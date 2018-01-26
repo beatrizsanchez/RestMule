@@ -14,5 +14,6 @@ public interface IDataSet<T> extends IData<T> {
 	Integer total(); 
 	Integer percentage();
 	Integer count();
+	String id();
 
 }

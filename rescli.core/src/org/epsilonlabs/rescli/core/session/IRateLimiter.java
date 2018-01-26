@@ -25,5 +25,8 @@ public interface IRateLimiter {
 	
 	AtomicBoolean isSet();
 
+	void resetCacheCounter();
+	
+	Integer cacheCounter();
 	
 }

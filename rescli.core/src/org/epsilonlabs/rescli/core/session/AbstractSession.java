@@ -26,6 +26,7 @@ import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 
+import okhttp3.Cache;
 import okhttp3.Headers;
 
 /**
@@ -48,8 +49,9 @@ public abstract class AbstractSession implements ISession {
 
 	protected Integer rateLimit = -1;
 	protected AtomicInteger rateLimitRemaining = new AtomicInteger(-1);
-	protected Date rateLimitReset = new Date();
+	protected Date rateLimitReset;
 	protected AtomicBoolean isSet = new AtomicBoolean(false);
+	private AtomicInteger cachedCounter = new AtomicInteger(0);
 
 	protected Auth type = Auth.NO_AUTH;
 	protected boolean isHeader = true;
@@ -107,11 +109,20 @@ public abstract class AbstractSession implements ISession {
 
 	@Override
 	public long getRateLimitResetInMilliSeconds() {
-		return rateLimitReset.getTime();
+		if (rateLimitReset != null){
+			return rateLimitReset.getTime();
+		} else{
+			return -1;
+		}
 	}
 
 	@Override
 	public AtomicBoolean isSet() {
+		if (rateLimit != -1 && rateLimitRemaining.get() != -1 && rateLimitReset != null){
+			isSet.set(true);
+		} else {
+			isSet.set(false);
+		}
 		return this.isSet;
 	}
 
@@ -138,6 +149,28 @@ public abstract class AbstractSession implements ISession {
 		return this.id;
 	}
 
+	
+	Cache cache; // FIXME
+	@Override
+	public Cache cache() { // FIXME
+		return this.cache;
+	}
+	
+	@Override
+	public boolean isCacheable() {// FIXME
+		return this.cache != null;
+	}
+	
+	@Override
+	public Integer cacheCounter() {// FIXME
+		return cachedCounter.get();
+	}
+	
+	@Override
+	public void resetCacheCounter() {// FIXME
+		cachedCounter.set(0);
+	}
+	
 	protected String getToken() {
 		return this.token;
 	}
@@ -236,7 +269,8 @@ public abstract class AbstractSession implements ISession {
 	@Override
 	public String toString() {
 		return " session ["
-				+ "rateLimit=" + rateLimit+ ", "
+				+ id + ", "
+				+ "rateLimit=" + rateLimit + ", "
 				+ "rateLimitRemaining=" + rateLimitRemaining + ", "
 				+ "rateLimitReset=" + rateLimitReset + ", "
 				+ "headers=" + getHeaders().get(AUTHORIZATION) 

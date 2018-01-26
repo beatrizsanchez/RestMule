@@ -3,6 +3,7 @@ package org.epsilonlabs.rescli.core.session;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static org.apache.http.client.config.AuthSchemes.BASIC;
 
+import okhttp3.Cache;
 import okhttp3.Headers;
 
 /**
@@ -26,6 +27,9 @@ public interface ISession extends IRateLimiter {
 	Auth type();
 	String hash();
 	String id();
+	
+	boolean isCacheable();
+	Cache cache();
 	
 	String token(String permission) throws Exception;
 	
