@@ -27,6 +27,6 @@ public interface IRateLimiter {
 
 	void resetCacheCounter();
 	
-	Integer cacheCounter();
+	AtomicInteger cacheCounter();
 	
 }

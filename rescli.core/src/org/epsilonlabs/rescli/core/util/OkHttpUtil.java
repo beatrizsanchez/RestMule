@@ -2,7 +2,9 @@ package org.epsilonlabs.rescli.core.util;
 
 import java.io.IOException;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
+import org.epsilonlabs.rescli.core.session.ISession;
 
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -11,21 +13,25 @@ import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
+import okhttp3.internal.http.RealResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
+import okio.GzipSource;
+import okio.Okio;
 
 /**
  * 
  * {@link OkHttpUtil}
  * <p>
  * Copyright &copy; 2017 University of York.
+ * 
  * @author Beatriz Sanchez
  * @version 1.0.0
  *
  */
 public class OkHttpUtil {
 
-	public static ResponseBody cloneResponseBody(final ResponseBody body){		 
+	public static ResponseBody cloneResponseBody(final ResponseBody body) {
 		final ResponseBody responseBody = body;
 		BufferedSource source = responseBody.source();
 		try {
@@ -36,34 +42,77 @@ public class OkHttpUtil {
 		final Buffer bufferClone = source.buffer().clone();
 		return ResponseBody.create(responseBody.contentType(), responseBody.contentLength(), bufferClone);
 	}
+	
+	public static ResponseBody cloneResponseBodyOkio(final Response response) {
+		GzipSource body = new GzipSource(response.body().source());
+		String contentType = response.header(HttpHeaders.CONTENT_TYPE);
+		return new RealResponseBody(contentType, -1L, Okio.buffer(body));
+	}
 
-	public static Response response(Request request, String body, String contentType, Headers headers){
-		return new Response.Builder()
-				.request(request)
-				.protocol(Protocol.HTTP_2)
-				.code(HttpStatus.SC_OK)
-				.headers(headers)
-				.message("Loaded from Cache")
-				.body(ResponseBody.create(MediaType.parse(contentType), body))
-				.build();
+	public static Response response(Request request, String body, String contentType, Headers headers) {
+		return new Response.Builder().request(request).protocol(Protocol.HTTP_2).code(HttpStatus.SC_OK).headers(headers)
+				.message("Loaded from Cache").body(ResponseBody.create(MediaType.parse(contentType), body)).build();
+	}
+
+	public static Response clone(Response response) {
+		ResponseBody body = OkHttpUtil.cloneResponseBody(response.body());
+		return new Response.Builder().request(response.request()).protocol(response.protocol()).code(response.code())
+				.headers(response.headers()).message(response.message()).body(body).build();
+	}
+
+	public static Response clone(Response response, Headers headers) {
+		ResponseBody body = OkHttpUtil.cloneResponseBody(response.body());
+		return new Response.Builder().request(response.request()).protocol(response.protocol()).code(response.code())
+				.headers(headers).message(response.message()).body(body).build();
+		
 	}
 	
-	public static Response clone(Response response){
-		ResponseBody body = OkHttpUtil.cloneResponseBody(response.body());
-		return new Response.Builder()
-				.request(response.request())
-				.protocol(response.protocol())
-				.code(response.code())
-				.headers(response.headers())
-				.message(response.message())
-				.body(body)
-				.build();
+	public static Response cloneOkio(Response response, Headers headers) {
+		ResponseBody body = OkHttpUtil.cloneResponseBodyOkio(response);
+		return new Response.Builder().request(response.request()).protocol(response.protocol()).code(response.code())
+				.headers(headers).message(response.message()).body(body).build();
+		
+	}
+
+	public static Headers headers(ISession session, Request request, Headers headers) {
+		Headers.Builder headerBuilder = headers(session, headers);
+		for (String n : request.headers().names()) {
+			headerBuilder = headerBuilder.add(n, request.header(n));
+		}
+		return headerBuilder.build();
+
+	}
+
+	public static Headers headers(ISession session, Response response, Headers headers) {
+		Headers.Builder headerBuilder = headers(session, headers);
+		if (response != null) {
+			for (String n : response.headers().names()) {
+				headerBuilder = headerBuilder.add(n, response.header(n));
+			}
+		}
+		return headerBuilder.build();
+
+	}
+
+	private static Headers.Builder headers(ISession session, Headers headers) {
+		Headers.Builder headerBuilder = new Headers.Builder();
+		if (session != null) {
+			for (String n : session.getHeaders().names()) {
+				headerBuilder = headerBuilder.add(n, session.getHeaders().get(n));
+			}
+		}
+		if (headers != null) {
+			for (String n : headers.names()) {
+				headerBuilder = headerBuilder.add(n, headers.get(n));
+			}
+		}
+		return headerBuilder;
 	}
 
 	public static String path(Request request) {
 		HttpUrl url = request.url();
-		String query = (url.query()!=null) ? "?" + url.encodedQuery() : "";
+		String query = (url.query() != null) ? "?" + url.encodedQuery() : "";
 		return String.valueOf(new String(url.encodedPath() + query).hashCode());
 	}
-	
+
 }

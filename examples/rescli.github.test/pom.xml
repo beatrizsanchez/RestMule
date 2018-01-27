@@ -12,6 +12,7 @@
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+		<testSourceDirectory>test</testSourceDirectory>
 		<resources>
 			<resource>
 				<directory>resources</directory>
@@ -84,7 +85,7 @@
 		<dependency>
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
-			<version>3.8.0</version>
+			<version>3.9.1</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.google.collections/google-collections -->
 		<dependency>

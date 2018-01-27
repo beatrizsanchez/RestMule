@@ -41,8 +41,4 @@ public class GitHubInterceptor extends AbstractInterceptor {
 		return cacheRequestInterceptor(cache, sessionId);
 	}
 	
-	public Interceptor cacheResponseInterceptor(){
-		return cacheResponseInterceptor(cache, sessionId); 
-	}
-	
 }

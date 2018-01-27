@@ -59,6 +59,7 @@ public abstract class AbstractSession implements ISession {
 
 	protected String hash;
 
+	Cache cache; // FIXME
 	private String receiverHost = "localhost";
 	private int receiverPort = 9000;
 	
@@ -149,25 +150,29 @@ public abstract class AbstractSession implements ISession {
 		return this.id;
 	}
 
-	
-	Cache cache; // FIXME
 	@Override
-	public Cache cache() { // FIXME
+	public Cache cache() {
 		return this.cache;
 	}
 	
 	@Override
-	public boolean isCacheable() {// FIXME
+	public boolean isCacheable() {
 		return this.cache != null;
 	}
 	
-	@Override
-	public Integer cacheCounter() {// FIXME
-		return cachedCounter.get();
+	public void setCache(Cache cache){
+		this.cache = cache;
 	}
 	
 	@Override
+	public AtomicInteger cacheCounter() {// FIXME
+		return cachedCounter;
+	}
+	
+	private int hitStopAt;
+	@Override
 	public void resetCacheCounter() {// FIXME
+		int hitStopAt = this.cache.hitCount();
 		cachedCounter.set(0);
 	}
 	

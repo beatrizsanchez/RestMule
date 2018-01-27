@@ -75,7 +75,7 @@ public class EntityApi  {
 
 			Builder clientBuilder = AbstractClient.okHttp(executor);
 
-			if (activeCaching) clientBuilder = clientBuilder.cache(GitHubCacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
+			//if (activeCaching) clientBuilder = clientBuilder.cache(GitHubCacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
 			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
 			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
 			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionResponseInterceptor());

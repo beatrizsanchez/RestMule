@@ -1,6 +1,7 @@
 package org.epsilonlabs.rescli.core.session;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 import java.util.UUID;
 import java.util.concurrent.Executors;
@@ -28,7 +29,7 @@ import com.google.common.util.concurrent.RateLimiter;
 public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private static final Logger LOG = LogManager.getLogger(RateLimitExecutor.class);
-	private static final String COUNTER_DEBUG = "\n[{}] ({}) Total={}, Remaining={}, Dispatched={}";
+	private static final String COUNTER_DEBUG = ">>\n>>\n>>[{}] Total={}, Remaining={}, Dispatched={}\n>>";
 	
 	private RateLimiter maxRequestsPerSecond;
 	private AtomicInteger remainingRequestCounter;
@@ -86,8 +87,9 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 		// Wait for first request to return
 		while (!getLimiter().isSet().get() && dispatchCounter.get() == 1) {
 			try {
-				LOG.info("AWAITING (" + MILLISECONDS.toSeconds(1000) + " s) FOR FIRST REQUEST TO RETURN");
-				MILLISECONDS.sleep(100);
+
+				LOG.info("AWAITING FOR FIRST REQUEST TO RETURN");
+				MILLISECONDS.sleep(500);
 			} catch (InterruptedException e) {
 				LOG.error(e.getMessage());
 			}
@@ -95,7 +97,6 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 		dispatchCounter.incrementAndGet();
 
 		if (getLimiter().isSet().get()) {
-			logCounterDebug("inside set");
 			// Adjust request counter
 			if (dispatchCounter.get() == 2) {
 				LOG.info("ADJUSTING REQUEST COUNTER");
@@ -127,16 +128,13 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 		} else {
 			LOG.info("LIMITER HAS NOT YET BEEN SET");
 		}
-		logCounterDebug("after ifs");
 		remainingRequestCounter.decrementAndGet();
 		logCounterDebug("beforeExec");
 		super.execute(command);
-		
-		
 	}
 
 	private void logCounterDebug(String step) {
-		LOG.debug(COUNTER_DEBUG, sessionId, step, getLimiter().getRateLimit(), remainingRequestCounter.get(),
+		LOG.debug(COUNTER_DEBUG, sessionId, getLimiter().getRateLimit(), remainingRequestCounter.get(),
 				dispatchCounter.get());
 	}
 }

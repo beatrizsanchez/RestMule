@@ -30,7 +30,7 @@ public class RateLimitAndPaginationTests extends GitHubTestUtil {
 	@BeforeClass
 	public static void setup(){
 		GitHubTestUtil.setup();
-		api = GitHubTestUtil.getOAuthClient();
+		api = GitHubTestUtil.getBasicClient();
 	}
 
 	@Before
@@ -39,6 +39,7 @@ public class RateLimitAndPaginationTests extends GitHubTestUtil {
 	}
 	
 	@Test
+	@Ignore
 	public void testPagedRequestForWrapped() {
 		// Knowing that 100 elements per endpoint requests are provided
 		Long count = api.getSearchRepositories("asc", "epsilon", "stars").observe().count().blockingGet();
@@ -46,6 +47,7 @@ public class RateLimitAndPaginationTests extends GitHubTestUtil {
 	}
 	
 	@Test
+	@Ignore
 	public void testPagedRequestForList() {
 		// Knowing that 100 elements per endpoint requests are provided
 		Long count = api.getReposCommits("epsilonlabs", "emc-json", null, null, null, null, null).observe().count().blockingGet();
@@ -54,7 +56,6 @@ public class RateLimitAndPaginationTests extends GitHubTestUtil {
 	
 	/** Expected Limit For Search = 30 */  
 	@Test
-	@Ignore
 	public void testRequestsThatExcedTheRequestLimit() throws InterruptedException {
 		int expectedNumberOfQueries = MDE.values().length;
 		AtomicInteger count = new AtomicInteger(0);

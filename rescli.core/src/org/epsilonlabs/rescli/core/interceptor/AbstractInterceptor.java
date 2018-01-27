@@ -5,22 +5,22 @@ import static com.google.common.net.HttpHeaders.USER_AGENT;
 import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.epsilonlabs.rescli.core.cache.AbstractCacheManager;
 import org.epsilonlabs.rescli.core.cache.ICache;
 import org.epsilonlabs.rescli.core.session.AbstractSession;
 import org.epsilonlabs.rescli.core.session.ISession;
+import org.epsilonlabs.rescli.core.util.OkHttpUtil;
 
-import okhttp3.Cache;
+import okhttp3.CacheControl;
+import okhttp3.Headers;
 import okhttp3.Interceptor;
-import okhttp3.Interceptor.Chain;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -35,6 +35,8 @@ import okhttp3.Response;
  */
 public abstract class AbstractInterceptor {
 
+	private static final String RM_CACHE = "RM-CACHE";
+
 	private static final Logger LOG = LogManager.getLogger(AbstractInterceptor.class);
 
 	protected static String headerLimit;
@@ -47,49 +49,91 @@ public abstract class AbstractInterceptor {
 
 	protected String sessionId;
 	protected String agent;
-	
-	protected static Set<String> cacheKeys = new HashSet();
-	
-	protected static final Interceptor cacheRequestInterceptor(final ICache cache, final String sessionId) {
-		return new Interceptor() {
-			@Override
-			public Response intercept(Chain chain) throws IOException {
-				// TODO remove. It is a temporary fix using okhttp
-				Request request = chain.request();
-				Response response = chain.proceed(request);//getOkttpResponse(session, chain);
-						/*chain.proceed(request);	
-				Response cacheResponse = response.cacheResponse();
-				LOG.info("b");
-				if (cacheResponse != null){
-					LOG.info("RETURNING RESPONSE FROM CACHE"); 
-					cacheKeys.add(Cache.key(request.url()));
-					return cacheResponse; 
-				} else {
-					return response;
-				}*/
-				return response;
 
-				// TODO uncomment
-				/*
-				 * Request request = chain.request(); LOG.info(request.url());
-				 * ISession session = AbstractSession.getSession(sessionClass,
-				 * sessionId); LOG.info(session); if (cache.exists(request,
-				 * session)) { Response response = cache.load(request, session);
-				 * LOG.info("RETURNING RESPONSE FROM CACHE"); return response; }
-				 * return chain.proceed(request);
-				 */
-			}
-		};
-	}
+	protected static Set<String> cacheKeys = new HashSet<String>();
 
 	protected static final Interceptor sessionRequestInterceptor(final String userAgent, final String accept,
 			final String sessionId) {
 		return new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
+				LOG.info("sessionRequestInterceptor");
+
 				ISession session = AbstractSession.getSession(sessionClass, sessionId);
-				return chain.proceed(chain.request().newBuilder().header(USER_AGENT, userAgent).header(ACCEPT, accept)
-						.headers(session.getHeaders()).build());
+				Request request = chain.request();
+
+				Headers headers = headers(userAgent, accept, session, request);
+				Request.Builder requestBuilder = request.newBuilder().headers(headers);
+				if (!session.isSet().get()) {
+					LOG.info("FORCING NETWORK");
+					CacheControl cacheControl = CacheControl.FORCE_NETWORK;
+					requestBuilder.cacheControl(cacheControl).tag("Force Network");
+				} else {
+					requestBuilder.tag("Load Cache");
+				}
+				Request r = requestBuilder.build();
+				LOG.info(r +"\n"+r.headers());
+				return chain.proceed(r);
+			}
+
+			private Headers headers(final String userAgent, final String accept, ISession session,
+					Request originalRequest) {
+
+				Headers.Builder headerBuilder = new Headers.Builder();
+				headerBuilder = headerBuilder.add(USER_AGENT, userAgent);
+				headerBuilder = headerBuilder.add(ACCEPT, accept);
+				Headers headers = headerBuilder.build();
+
+				return OkHttpUtil.headers(session, originalRequest, headers);
+			}
+		};
+	}
+
+	protected static final Interceptor cacheRequestInterceptor(final ICache cache, final String sessionId) {
+		return new Interceptor() {
+			@Override
+			public Response intercept(Chain chain) throws IOException {
+				LOG.info("cacheRequestInterceptor");
+
+				Request request = chain.request();
+				Response response = chain.proceed(request);
+
+				if (response.code() == HttpStatus.SC_GATEWAY_TIMEOUT) { // Failed
+					LOG.info("RETRY WITH FORCE NETWORK (" + response.message() + ")");
+					//request = request.newBuilder().cacheControl(CacheControl.FORCE_NETWORK).build();
+					Request newRequest = request.newBuilder()
+							.cacheControl(CacheControl.FORCE_NETWORK)
+							.tag("RETRY WITH FORCE NETWORK")
+							.build();
+					LOG.info(newRequest +"\n"+newRequest.headers());
+					return response.newBuilder().request(newRequest).build();
+				}
+
+				return response;
+				/*
+				 * ISession session = AbstractSession.getSession(sessionClass,
+				 * sessionId); if (response.cacheResponse() != null) {
+				 * LOG.info("RESPONSE FROM CACHE"); //
+				 * session.cacheCounter().incrementAndGet(); //Headers headers =
+				 * headers(response); //LOG.info(headers); //response =
+				 * OkHttpUtil.cloneFromOriginal(response, headers);
+				 *//*
+					 * response = response.newBuilder()
+					 * .request(response.request())
+					 * .protocol(response.protocol()) .headers(headers)
+					 * .code(response.code()) .message(response.message())
+					 * //.body(ResponseBody.create(MediaType.parse(contentType),
+					 * body)) .body(response.body()) .build();
+					 */
+				/*
+				 * } LOG.info("returning");
+				 */
+
+			}
+
+			private Headers headers(Response response) {
+				Headers headers = new Headers.Builder().add(RM_CACHE, Boolean.TRUE.toString()).build();
+				return OkHttpUtil.headers(null, response, headers);
 			}
 		};
 	}
@@ -99,55 +143,39 @@ public abstract class AbstractInterceptor {
 		return new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
-				ISession session = AbstractSession.getSession(sessionClass, sessionId);
-				
-				Response response = chain.proceed(chain.request());// getOkttpResponse(session, chain);
-				
-				session.setRateLimit(response.header(limit));
-				session.setRateLimitReset(response.header(reset));
-				session.setRateLimitRemaining(response.header(remaining));
+				LOG.info("sessionResponseInterceptor");
 
-				LOG.info(session);
+				ISession session = AbstractSession.getSession(sessionClass, sessionId);
+				Request request = chain.request();
+				Response response = chain.proceed(request);
+
+				LOG.info(request +"\n"+request.headers());
+
+				// if (response.header(RM_CACHE) == null) {
+				//if (response.cacheResponse() == null) {
+					// Response networkResponse = response.networkResponse();
+					// if (networkResponse != null) {
+					LOG.info("Response served from the network");
+					session.setRateLimit(response.header(limit));
+					session.setRateLimitReset(response.header(reset));
+					session.setRateLimitRemaining(response.header(remaining));
+					// }
+					LOG.info(session);
+					// return networkResponse;
+				//}
 				return response;
 			}
 		};
 	}
 
-	protected static final Interceptor cacheResponseInterceptor(final ICache cache, final String sessionId) {
-		return new Interceptor() {
-			@Override
-			public Response intercept(Chain chain) throws IOException {
-
-				// TODO comment this section. This is a temporary fix
-				return chain.proceed(chain.request());
-
-				// TODO Delegate this to an entity to do this asynchronously and
-				// DONT wait until the cache persistence is finished
-
-				/*
-				 * Request request = chain.request(); Response response =
-				 * chain.proceed(request); ISession session =
-				 * AbstractSession.getSession(sessionClass, sessionId);
-				 * 
-				 * String code = String.valueOf(response.code()); if
-				 * (code.startsWith("2") || code.startsWith("3")){ if
-				 * (response.code() == SC_NOT_MODIFIED) {
-				 * LOG.info(SC_NOT_MODIFIED); return cache.load(request,
-				 * session); } else { LOG.info("PERSISTING RESPONSE IN CACHE");
-				 * Response clonedResponse = OkHttpUtil.clone(response);
-				 * cache.put(clonedResponse, session); return clonedResponse; }
-				 * } else { LOG.error("Something went wrong : " +response.code()
-				 * + " " + response.message() ) ; return response; }
-				 */
-			}
-		};
-	}
-
+	// Application Interceptor, TODO remove Authentication headers from original
+	// request
 	protected static final Interceptor sessionResponseRetryInterceptor(final String limit, final String remaining,
 			final String reset) {
 		return new Interceptor() {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
+				LOG.info("sessionResponseRetryInterceptor");
 				Response response = chain.proceed(chain.request());
 				if (response.code() == SC_FORBIDDEN && response.header(remaining).equals("0")) {
 					return chain.proceed(chain.request().newBuilder().build());
@@ -155,24 +183,6 @@ public abstract class AbstractInterceptor {
 				return response;
 			}
 		};
-	}
-	
-	protected static Response getOkttpResponse(ISession session, Chain chain){
-		Response response = null;
-		try {
-			response = chain.proceed(chain.request());
-			if (//session.isCacheable() && FIXME allow this
-					response.cacheResponse() != null){
-				response = response.cacheResponse();
-			} else {
-				response = response.networkResponse();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return response;
-		
-		
 	}
 
 }

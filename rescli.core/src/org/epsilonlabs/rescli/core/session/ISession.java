@@ -30,6 +30,7 @@ public interface ISession extends IRateLimiter {
 	
 	boolean isCacheable();
 	Cache cache();
+	void setCache(Cache cache);
 	
 	String token(String permission) throws Exception;
 	
@@ -46,6 +47,7 @@ public interface ISession extends IRateLimiter {
 		Headers header(String token){
 			switch (this){
 			case BASIC_AUTH:
+				return new Headers.Builder().add(AUTHORIZATION, header + " " + token).build();
 			case OAUTH:
 				return new Headers.Builder().add(AUTHORIZATION, header + " " + token).build();
 			case NO_AUTH:
