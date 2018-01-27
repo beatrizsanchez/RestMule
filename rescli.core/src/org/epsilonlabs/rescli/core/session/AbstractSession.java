@@ -52,7 +52,8 @@ public abstract class AbstractSession implements ISession {
 	protected Date rateLimitReset;
 	protected AtomicBoolean isSet = new AtomicBoolean(false);
 	private AtomicInteger cachedCounter = new AtomicInteger(0);
-
+	private AtomicInteger networkCounter = new AtomicInteger(0);
+	
 	protected Auth type = Auth.NO_AUTH;
 	protected boolean isHeader = true;
 	protected String token = "";
@@ -167,6 +168,16 @@ public abstract class AbstractSession implements ISession {
 	@Override
 	public AtomicInteger cacheCounter() {// FIXME
 		return cachedCounter;
+	}
+	
+	@Override
+	public AtomicInteger networkCounter() {// FIXME
+		return networkCounter;
+	}
+	
+	@Override
+	public void resetNetworkCounter() {// FIXME
+		networkCounter.set(0);
 	}
 	
 	private int hitStopAt;

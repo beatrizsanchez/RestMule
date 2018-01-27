@@ -3,6 +3,8 @@ package org.epsilonlabs.rescli.core.session;
 import static com.google.common.net.HttpHeaders.AUTHORIZATION;
 import static org.apache.http.client.config.AuthSchemes.BASIC;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import okhttp3.Cache;
 import okhttp3.Headers;
 
@@ -56,4 +58,7 @@ public interface ISession extends IRateLimiter {
 			}
 		}
 	}
+
+	AtomicInteger networkCounter();
+	void resetNetworkCounter();
 }

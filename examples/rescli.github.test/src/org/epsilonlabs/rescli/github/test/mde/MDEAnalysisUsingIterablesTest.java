@@ -29,8 +29,8 @@ public class MDEAnalysisUsingIterablesTest {
 	@Test
 	public void testEugenia() {
 
-//		MDEAnalysisUsingIterables ghSearchRunner = new MDEAnalysisUsingIterables(MDE.Eugenia);
-//		ghSearchRunner.runSearch();
+		MDEAnalysisUsingIterables ghSearchRunner = new MDEAnalysisUsingIterables(MDE.Eugenia);
+		ghSearchRunner.runSearch();
 	}
 
 }

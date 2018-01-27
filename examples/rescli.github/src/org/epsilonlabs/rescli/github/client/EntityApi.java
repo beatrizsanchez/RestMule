@@ -20,6 +20,7 @@ import org.epsilonlabs.rescli.github.page.GitHubPagination;
 import org.epsilonlabs.rescli.github.session.GitHubSession;
 import org.epsilonlabs.rescli.github.util.GitHubPropertiesUtil;
 
+import okhttp3.Cache;
 import okhttp3.OkHttpClient.Builder;
 
 public class EntityApi  {
@@ -75,11 +76,18 @@ public class EntityApi  {
 
 			Builder clientBuilder = AbstractClient.okHttp(executor);
 
-			//if (activeCaching) clientBuilder = clientBuilder.cache(GitHubCacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
-			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
+			Cache okHttpCache = null;
+			if (activeCaching) {
+				okHttpCache = GitHubCacheManager.getInstance().getOkHttpCache();
+				session.setCache(okHttpCache);
+				clientBuilder = clientBuilder.cache(okHttpCache); // FIXME Use Lucene Instead
+			} 
+			//clientBuilder = clientBuilder.addInterceptor(interceptors.forceNetworkInterceptor());
 			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
+			//if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.retryIfCacheFailsInterceptor());
+			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
+			//if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheResponseInterceptor());
 			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionResponseInterceptor());
-			//if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());
 			
 			this.client = clientBuilder.build();
 

@@ -4,13 +4,13 @@ import org.epsilonlabs.rescli.github.test.query.CodeSearchQuery;
 
 public enum MDE {
 
-	ATL("atl", "rule"), 
+/*	ATL("atl", "rule"), 
 	QVTo("qvto", "transformation"),
 	Emfatic("emf", "class" ), 
 	Acceleo(" mtl", "template"),
 	EGL("egl", "var"), 
-	IncQuery("eiq", "pattern"),
-	Eugenia("ecore", "\"gmf.diagram\""),
+	IncQuery("eiq", "pattern"),*/
+	Eugenia("ecore", "\"gmf.diagram\"")/*,
 	GMF("gmfgraph", "gure"),
 	EOL("eol", "var"), 
 	Xtext("xtext", "grammar"),
@@ -25,7 +25,7 @@ public enum MDE {
 	Xcore("xcore", "class"), 
 	JET ("javajet", "jet"),
 	EMFText("cs", "syntaxdef"), 
-	Xpand ("for", "xpt");
+	Xpand ("for", "xpt")*/;
 	
 	private String extension;
 	private String keyword;
