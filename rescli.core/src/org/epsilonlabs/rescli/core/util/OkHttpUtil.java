@@ -2,7 +2,6 @@ package org.epsilonlabs.rescli.core.util;
 
 import java.io.IOException;
 
-import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.epsilonlabs.rescli.core.session.ISession;
 
@@ -13,11 +12,9 @@ import okhttp3.Protocol;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import okhttp3.internal.http.RealResponseBody;
+//import okhttp3.internal.http.RealResponseBody;
 import okio.Buffer;
 import okio.BufferedSource;
-import okio.GzipSource;
-import okio.Okio;
 
 /**
  * 
@@ -43,11 +40,11 @@ public class OkHttpUtil {
 		return ResponseBody.create(responseBody.contentType(), responseBody.contentLength(), bufferClone);
 	}
 	
-	public static ResponseBody cloneResponseBodyOkio(final Response response) {
+	/*public static ResponseBody cloneResponseBodyOkio(final Response response) {
 		GzipSource body = new GzipSource(response.body().source());
 		String contentType = response.header(HttpHeaders.CONTENT_TYPE);
 		return new RealResponseBody(contentType, -1L, Okio.buffer(body));
-	}
+	}*/
 
 	public static Response response(Request request, String body, String contentType, Headers headers) {
 		return new Response.Builder().request(request).protocol(Protocol.HTTP_2).code(HttpStatus.SC_OK).headers(headers)
@@ -67,12 +64,11 @@ public class OkHttpUtil {
 		
 	}
 	
-	public static Response cloneOkio(Response response, Headers headers) {
+	/*public static Response cloneOkio(Response response, Headers headers) {
 		ResponseBody body = OkHttpUtil.cloneResponseBodyOkio(response);
 		return new Response.Builder().request(response.request()).protocol(response.protocol()).code(response.code())
 				.headers(headers).message(response.message()).body(body).build();
-		
-	}
+	}*/
 
 	public static Headers headers(ISession session, Request request, Headers headers) {
 		Headers.Builder headerBuilder = headers(session, headers);

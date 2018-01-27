@@ -10,5 +10,5 @@ package org.epsilonlabs.rescli.core.data;
  *
  */
 public enum Status{
-	CREATED, ADDING, AWAITING, COMPLETED;
+	CREATED, ADDING, AWAITING, COMPLETED, ERROR;
 }
