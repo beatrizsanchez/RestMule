@@ -98,7 +98,7 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
 				lastReset = getLimiter().getRateLimitReset();
 			}
-			if ((remainingRequestCounter.get() + getLimiter().cacheCounter().get()) == 0) {
+			if ((remainingRequestCounter.get() + getLimiter().cacheCounter().get()) <= 0) {
 				long timeout = getLimiter().getRateLimitResetInMilliSeconds() - System.currentTimeMillis() + jitter;
 				timeout = (timeout > 0) ? timeout : 1000; 
 				try {
@@ -111,17 +111,18 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 				awaitToSet();
 				awaiting.set(false);
 				LOG.info("RESETING COUNTER");
-				remainingRequestCounter.set(getLimiter().getRateLimit());
+				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
 			}
 			if (getLimiter().cacheCounter().get() > 0) {
+				LOG.info("USED CACHE");
 				getLimiter().cacheCounter().decrementAndGet();
 				remainingRequestCounter.incrementAndGet(); // Because we're removing the value from the cache
-				
 			} 
 			if (lastReset.before(getLimiter().getRateLimitReset())){
-				remainingRequestCounter.set(getLimiter().getRateLimit());
-			}
-			// TODO HANDLE CACHED OR FILLING UP AVAILABLE REQUESTS 
+				LOG.info("UPDATE RESET TIME + FILL UP REMAINING");
+				lastReset = getLimiter().getRateLimitReset();
+				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
+			} 
 		} else {
 			LOG.info("LIMITER HAS NOT YET BEEN SET");
 		}

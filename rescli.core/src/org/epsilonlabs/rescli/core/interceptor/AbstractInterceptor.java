@@ -97,11 +97,9 @@ public abstract class AbstractInterceptor {
 					Request loadFromCacheRequest = requestBuilder.build();
 					Response loadFromCacheResponse = chain.proceed(loadFromCacheRequest);
 					if (loadFromCacheResponse.cacheResponse() != null && loadFromCacheResponse.cacheResponse().code() != HttpStatus.SC_GATEWAY_TIMEOUT) {
-						
 						session.cacheCounter().incrementAndGet();
 						LOG.info(TAG_FROM_CACHE + ", cacheCounter="+session.cacheCounter().get());
 						LOG.info(loadFromCacheResponse.message());
-						LOG.info(loadFromCacheResponse.peekBody(100L).string());
 						return loadFromCacheResponse;
 					} else {
 						LOG.info(TAG_RETRY_WITH_FORCE_NETWORK);
@@ -122,7 +120,7 @@ public abstract class AbstractInterceptor {
 							while (code == HttpStatus.SC_FORBIDDEN) {
 								try {
 									LOG.info("RETRYING");
-									TimeUnit.SECONDS.sleep(1);
+									TimeUnit.MINUTES.sleep(1);
 									networkResponse = chain.proceed(networkRequest);
 									code = networkResponse.code();
 								} catch (InterruptedException e) {
@@ -134,11 +132,10 @@ public abstract class AbstractInterceptor {
 							session.setRateLimit(networkResponse.networkResponse().header(limit));
 							session.setRateLimitReset(networkResponse.networkResponse().header(reset)); // THis will reset the cache counter
 							session.setRateLimitRemaining(networkResponse.networkResponse().header(remaining));
-							remainingRequestCounter.set(session.getRateLimitRemaining().get());
+							remainingRequestCounter.set(session.getRateLimitRemaining().get() + 1);
 							LOG.info(session);
 						}
 						LOG.info(networkResponse.message());
-						LOG.info(networkResponse.peekBody(100L).string());
 
 						return networkResponse;
 					}

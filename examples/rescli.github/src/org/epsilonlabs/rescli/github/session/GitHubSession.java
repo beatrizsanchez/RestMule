@@ -123,7 +123,7 @@ public class GitHubSession extends AbstractSession {
 			Date newRateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
 			if (getRateLimitReset() == null || newRateLimitReset.after(getRateLimitReset())) {
 				this.rateLimitReset = newRateLimitReset;
-				this.cacheCounter().set(0);
+				resetCacheCounter();
 			}
 		}
 	}
