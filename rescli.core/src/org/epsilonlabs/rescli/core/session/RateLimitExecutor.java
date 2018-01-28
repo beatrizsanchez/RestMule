@@ -2,6 +2,7 @@ package org.epsilonlabs.rescli.core.session;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+import java.util.Date;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -28,7 +29,7 @@ import com.google.common.util.concurrent.RateLimiter;
 public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private static final Logger LOG = LogManager.getLogger(RateLimitExecutor.class);
-	private static final String COUNTER_DEBUG = "\n[{}] Total={}, Remaining={}, Dispatched={}";
+	private static final String COUNTER_DEBUG = "\n[{}] Total={}, Remaining={}, CacheCounter={}, Dispatched={}";
 	
 	private RateLimiter maxRequestsPerSecond;
 	private AtomicInteger remainingRequestCounter;
@@ -39,6 +40,8 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private long jitter = 100;
 	private String id;
+	
+	private Date lastReset = new Date();
 
 	RateLimitExecutor(int maxRequestsPerSecond, Class<? extends AbstractSession> session, String sessionId,
 			ThreadFactory factory) {
@@ -90,12 +93,12 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 		dispatchCounter.incrementAndGet();
 
 		if (getLimiter().isSet().get()) {
-			logCounterDebug("inside set");
 			if (dispatchCounter.get() == 2) {
 				LOG.info("ADJUSTING REQUEST COUNTER");
 				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
+				lastReset = getLimiter().getRateLimitReset();
 			}
-			if (remainingRequestCounter.get() == 0) {
+			if ((remainingRequestCounter.get() + getLimiter().cacheCounter().get()) == 0) {
 				long timeout = getLimiter().getRateLimitResetInMilliSeconds() - System.currentTimeMillis() + jitter;
 				timeout = (timeout > 0) ? timeout : 1000; 
 				try {
@@ -110,6 +113,14 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 				LOG.info("RESETING COUNTER");
 				remainingRequestCounter.set(getLimiter().getRateLimit());
 			}
+			if (getLimiter().cacheCounter().get() > 0) {
+				getLimiter().cacheCounter().decrementAndGet();
+				remainingRequestCounter.incrementAndGet(); // Because we're removing the value from the cache
+				
+			} 
+			if (lastReset.before(getLimiter().getRateLimitReset())){
+				remainingRequestCounter.set(getLimiter().getRateLimit());
+			}
 			// TODO HANDLE CACHED OR FILLING UP AVAILABLE REQUESTS 
 		} else {
 			LOG.info("LIMITER HAS NOT YET BEEN SET");
@@ -117,8 +128,6 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 		remainingRequestCounter.decrementAndGet();
 		logCounterDebug("beforeExec");
 		super.execute(command);
-		
-		
 	}
 
 	private void awaitToSet() {
@@ -134,6 +143,6 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private void logCounterDebug(String step) {
 		LOG.debug(COUNTER_DEBUG, sessionId, getLimiter().getRateLimit(), remainingRequestCounter.get(),
-				dispatchCounter.get());
+				getLimiter().cacheCounter().get(), dispatchCounter.get());
 	}
 }

@@ -6,6 +6,7 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -82,7 +83,7 @@ public abstract class AbstractInterceptor {
 				Request.Builder requestBuilder = request.newBuilder().headers(headers);
 				Request networkRequest = null;
 
-				if (session.isSet().get() && remainingRequestCounter.get() == 0) {
+				if (session.isSet().get() && (remainingRequestCounter.get() + session.cacheCounter().get()) == 0) {
 					LOG.info("UNSETTING SESSION");
 					session.unset();
 				}
@@ -96,7 +97,9 @@ public abstract class AbstractInterceptor {
 					Request loadFromCacheRequest = requestBuilder.build();
 					Response loadFromCacheResponse = chain.proceed(loadFromCacheRequest);
 					if (loadFromCacheResponse.cacheResponse() != null && loadFromCacheResponse.cacheResponse().code() != HttpStatus.SC_GATEWAY_TIMEOUT) {
-						LOG.info(TAG_FROM_CACHE);
+						
+						session.cacheCounter().incrementAndGet();
+						LOG.info(TAG_FROM_CACHE + ", cacheCounter="+session.cacheCounter().get());
 						LOG.info(loadFromCacheResponse.message());
 						LOG.info(loadFromCacheResponse.peekBody(100L).string());
 						return loadFromCacheResponse;
@@ -129,7 +132,7 @@ public abstract class AbstractInterceptor {
 							LOG.info("UPDATING SESSION DETAILS FROM NETWORK RESPONSE");
 							// LOG.info(networkResponse.networkResponse().headers());
 							session.setRateLimit(networkResponse.networkResponse().header(limit));
-							session.setRateLimitReset(networkResponse.networkResponse().header(reset));
+							session.setRateLimitReset(networkResponse.networkResponse().header(reset)); // THis will reset the cache counter
 							session.setRateLimitRemaining(networkResponse.networkResponse().header(remaining));
 							remainingRequestCounter.set(session.getRateLimitRemaining().get());
 							LOG.info(session);

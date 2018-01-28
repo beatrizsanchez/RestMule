@@ -121,8 +121,9 @@ public class GitHubSession extends AbstractSession {
 	public void setRateLimitReset(@Nonnull String rateLimitReset) {
 		if (rateLimitReset != null) {
 			Date newRateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
-			if (!newRateLimitReset.equals(getRateLimitReset())) {
+			if (getRateLimitReset() == null || newRateLimitReset.after(getRateLimitReset())) {
 				this.rateLimitReset = newRateLimitReset;
+				this.cacheCounter().set(0);
 			}
 		}
 	}
