@@ -153,15 +153,15 @@ public class GitHubSession extends AbstractSession {
 	public static class Factory {
 		
 		public static ISession copy(ISession session){
-			GitHubSession gitHubSession = new GitHubSession();
+			GitHubSession githubSession = new GitHubSession();
 			try {
-				gitHubSession.copy(session, TOKEN_ACCESSOR);
+				githubSession.copy(session, TOKEN_ACCESSOR);
 			} catch (Exception e) {
 				String INVALID_COPYING_PERMISSION = "Invalid permission";
 				LOG.error(INVALID_COPYING_PERMISSION);
 			}
-			GitHubSession.addSession(gitHubSession);
-			return gitHubSession;
+			GitHubSession.addSession(githubSession);
+			return githubSession;
 		}	
 	}
 	

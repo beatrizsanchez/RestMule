@@ -104,7 +104,6 @@ public class [%= R.name %]Session extends AbstractSession {
 	public void setRateLimit(@Nonnull String rateLimit) {
 		if (rateLimit != null) {
  			this.rateLimit = Integer.valueOf(rateLimit);
-			this.isSet.set(true);
 		}	
 	}
 
@@ -122,8 +121,9 @@ public class [%= R.name %]Session extends AbstractSession {
 	public void setRateLimitReset(@Nonnull String rateLimitReset) {
 		if (rateLimitReset != null) {
 			Date newRateLimitReset = new Date(Long.valueOf(rateLimitReset) * 1000);
-			if (!newRateLimitReset.equals(getRateLimitReset())) {
+			if (getRateLimitReset() == null || newRateLimitReset.after(getRateLimitReset())) {
 				this.rateLimitReset = newRateLimitReset;
+				resetCacheCounter();
 			}
 		}
 	}
@@ -153,15 +153,15 @@ public class [%= R.name %]Session extends AbstractSession {
 	public static class Factory {
 		
 		public static ISession copy(ISession session){
-			GitHubSession gitHubSession = new GitHubSession();
+			[%= R.name %]Session [%= name %]Session = new [%= R.name %]Session();
 			try {
-				gitHubSession.copy(session, TOKEN_ACCESSOR);
+				[%= name %]Session.copy(session, TOKEN_ACCESSOR);
 			} catch (Exception e) {
 				String INVALID_COPYING_PERMISSION = "Invalid permission";
 				LOG.error(INVALID_COPYING_PERMISSION);
 			}
-			GitHubSession.addSession(gitHubSession);
-			return gitHubSession;
+			[%= R.name %]Session.addSession([%= name %]Session);
+			return [%= name %]Session;
 		}	
 	}
 	

@@ -48,11 +48,8 @@ public class [%= scope %]Api  {
 			Builder clientBuilder = AbstractClient.okHttp(executor);
 			
 			if (activeCaching) clientBuilder = clientBuilder.cache([%= name %]CacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
-			if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
-			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
-			clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.sessionResponseInterceptor());
-			if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());
-			
+			clientBuilder = clientBuilder.addInterceptor(interceptors.mainInterceptor(activeCaching));
+						
 			this.client = clientBuilder.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(I[%= scope %]Endpoint.class);

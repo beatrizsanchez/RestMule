@@ -30,7 +30,7 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private static final Logger LOG = LogManager.getLogger(RateLimitExecutor.class);
 	private static final String COUNTER_DEBUG = "\n[{}] Total={}, Remaining={}, CacheCounter={}, Dispatched={}";
-	
+
 	private RateLimiter maxRequestsPerSecond;
 	private AtomicInteger remainingRequestCounter;
 	private AtomicInteger dispatchCounter;
@@ -40,7 +40,7 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private long jitter = 100;
 	private String id;
-	
+
 	private Date lastReset = new Date();
 
 	RateLimitExecutor(int maxRequestsPerSecond, Class<? extends AbstractSession> session, String sessionId,
@@ -83,11 +83,11 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	@Override
 	public void execute(Runnable command) {
-		LOG.info("["+sessionId+"] ENTERING EXECUTE");
+		LOG.info("[" + sessionId + "] ENTERING EXECUTE");
 		maxRequestsPerSecond.acquire();
 
 		// Wait for first request to return
-		if (dispatchCounter.get() == 1){
+		if (dispatchCounter.get() == 1) {
 			awaitToSet();
 		}
 		dispatchCounter.incrementAndGet();
@@ -100,7 +100,7 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 			}
 			if ((remainingRequestCounter.get() + getLimiter().cacheCounter().get()) <= 0) {
 				long timeout = getLimiter().getRateLimitResetInMilliSeconds() - System.currentTimeMillis() + jitter;
-				timeout = (timeout > 0) ? timeout : 1000; 
+				timeout = (timeout > 0) ? timeout : 1000;
 				try {
 					awaiting.set(true);
 					LOG.info("SLEEPING for " + MILLISECONDS.toSeconds(timeout) + " s");
@@ -116,13 +116,14 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 			if (getLimiter().cacheCounter().get() > 0) {
 				LOG.info("USED CACHE");
 				getLimiter().cacheCounter().decrementAndGet();
-				remainingRequestCounter.incrementAndGet(); // Because we're removing the value from the cache
-			} 
-			if (lastReset.before(getLimiter().getRateLimitReset())){
+				// Because we're removing the value from the cache and later on decreasing the remaining value
+				remainingRequestCounter.incrementAndGet(); 
+			}
+			if (lastReset.before(getLimiter().getRateLimitReset())) {
 				LOG.info("UPDATE RESET TIME + FILL UP REMAINING");
 				lastReset = getLimiter().getRateLimitReset();
 				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
-			} 
+			}
 		} else {
 			LOG.info("LIMITER HAS NOT YET BEEN SET");
 		}

@@ -6,9 +6,6 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,10 +42,7 @@ public abstract class AbstractInterceptor {
 
 	private static final Logger LOG = LogManager.getLogger(AbstractInterceptor.class);
 
-	private static final CacheControl FORCE_CACHE = new CacheControl.Builder().onlyIfCached()
-			.maxStale(365, TimeUnit.DAYS).build();
 	private static final CacheControl FORCE_NETWORK = new CacheControl.Builder().maxAge(0, TimeUnit.SECONDS).build();
-	private static final CacheControl NORMAL = new CacheControl.Builder().build();
 
 	protected static String headerLimit;
 	protected static String headerRemaining;
@@ -61,9 +55,7 @@ public abstract class AbstractInterceptor {
 	protected String sessionId;
 	protected String agent;
 
-	protected static Set<String> cacheKeys = new HashSet();
-
-	protected static final Interceptor mainInterceptor(final String userAgent, final String accept, final ICache cache,
+	protected static final Interceptor mainInterceptor(final boolean activeCaching, final String userAgent, final String accept,
 			final String sessionId, final String limit, final String remaining, final String reset) {
 		return new Interceptor() {
 
@@ -87,7 +79,6 @@ public abstract class AbstractInterceptor {
 					LOG.info("UNSETTING SESSION");
 					session.unset();
 				}
-
 				if (!session.isSet().get()) {
 					LOG.info(TAG_FORCE_NETWORK);
 					requestBuilder.cacheControl(FORCE_NETWORK).tag(TAG_FORCE_NETWORK);
@@ -96,17 +87,17 @@ public abstract class AbstractInterceptor {
 					requestBuilder.tag(TAG_FROM_CACHE);
 					Request loadFromCacheRequest = requestBuilder.build();
 					Response loadFromCacheResponse = chain.proceed(loadFromCacheRequest);
-					if (loadFromCacheResponse.cacheResponse() != null && loadFromCacheResponse.cacheResponse().code() != HttpStatus.SC_GATEWAY_TIMEOUT) {
+					if (loadFromCacheResponse.cacheResponse() != null
+							&& loadFromCacheResponse.cacheResponse().code() != HttpStatus.SC_GATEWAY_TIMEOUT) {
 						session.cacheCounter().incrementAndGet();
-						LOG.info(TAG_FROM_CACHE + ", cacheCounter="+session.cacheCounter().get());
+						LOG.info(TAG_FROM_CACHE + ", cacheCounter=" + session.cacheCounter().get());
 						LOG.info(loadFromCacheResponse.message());
 						return loadFromCacheResponse;
 					} else {
 						LOG.info(TAG_RETRY_WITH_FORCE_NETWORK);
 						networkRequest = loadFromCacheRequest.newBuilder()
-								//.cacheControl(NORMAL)
-								.cacheControl(FORCE_NETWORK)
-								.tag(TAG_RETRY_WITH_FORCE_NETWORK).build();
+								// .cacheControl(NORMAL)
+								.cacheControl(FORCE_NETWORK).tag(TAG_RETRY_WITH_FORCE_NETWORK).build();
 					}
 				}
 				if (networkRequest != null) {
@@ -130,7 +121,7 @@ public abstract class AbstractInterceptor {
 							LOG.info("UPDATING SESSION DETAILS FROM NETWORK RESPONSE");
 							// LOG.info(networkResponse.networkResponse().headers());
 							session.setRateLimit(networkResponse.networkResponse().header(limit));
-							session.setRateLimitReset(networkResponse.networkResponse().header(reset)); // THis will reset the cache counter
+							session.setRateLimitReset(networkResponse.networkResponse().header(reset)); // THis
 							session.setRateLimitRemaining(networkResponse.networkResponse().header(remaining));
 							remainingRequestCounter.set(session.getRateLimitRemaining().get() + 1);
 							LOG.info(session);

@@ -72,13 +72,8 @@ public class SearchApi {
 			Builder clientBuilder = AbstractClient.okHttp(executor);
 			
 			if (activeCaching) clientBuilder = clientBuilder.cache(GitHubCacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
-			clientBuilder = clientBuilder.addInterceptor(interceptors.mainInterceptor());
+			clientBuilder = clientBuilder.addInterceptor(interceptors.mainInterceptor(activeCaching));
 
-			/*if (activeCaching) clientBuilder = clientBuilder.addInterceptor(interceptors.cacheRequestInterceptor());
-			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionRequestInterceptor());
-			clientBuilder = clientBuilder.addInterceptor(interceptors.sessionResponseInterceptor());
-			//if (activeCaching) clientBuilder = clientBuilder.addNetworkInterceptor(interceptors.cacheResponseInterceptor());*/
-			
 			this.client = clientBuilder.build();
 
 			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(ISearchEndpoint.class);
