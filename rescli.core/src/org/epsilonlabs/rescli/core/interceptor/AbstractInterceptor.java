@@ -106,12 +106,16 @@ public abstract class AbstractInterceptor {
 					if (networkResponse.networkResponse() != null) {
 						if (!networkResponse.isSuccessful()) {
 							LOG.error(networkResponse.code() + ":" + networkResponse.message());
-							new BufferedReader(networkResponse.body().charStream()).lines().forEach(l -> LOG.info(l));
 							int code = networkResponse.code();
 							while (code == HttpStatus.SC_FORBIDDEN) {
 								try {
-									LOG.info("RETRYING");
-									TimeUnit.MINUTES.sleep(1);
+									long ms = 1000 * 60;
+									if (session.isSet().get()){
+										ms = (session.getRateLimitResetInMilliSeconds() > System.currentTimeMillis()) ? 
+												(session.getRateLimitResetInMilliSeconds() - System.currentTimeMillis()) : ms;
+								 	}
+									LOG.info("RETRYING IN "+(ms/1000)+" s");
+									TimeUnit.MILLISECONDS.sleep(ms);
 									networkResponse = chain.proceed(networkRequest);
 									code = networkResponse.code();
 								} catch (InterruptedException e) {
