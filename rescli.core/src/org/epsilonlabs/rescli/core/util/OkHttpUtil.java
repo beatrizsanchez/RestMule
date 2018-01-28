@@ -3,6 +3,7 @@ package org.epsilonlabs.rescli.core.util;
 import java.io.IOException;
 
 import org.apache.http.HttpStatus;
+import org.epsilonlabs.rescli.core.session.ISession;
 
 import okhttp3.Headers;
 import okhttp3.HttpUrl;
@@ -64,6 +65,41 @@ public class OkHttpUtil {
 		HttpUrl url = request.url();
 		String query = (url.query()!=null) ? "?" + url.encodedQuery() : "";
 		return String.valueOf(new String(url.encodedPath() + query).hashCode());
+	}
+	
+	public static Headers headers(ISession session, Request request, Headers headers) {
+		Headers.Builder headerBuilder = headers(session, headers);
+		for (String n : request.headers().names()) {
+			headerBuilder = headerBuilder.add(n, request.header(n));
+		}
+		return headerBuilder.build();
+
+	}
+
+	public static Headers headers(ISession session, Response response, Headers headers) {
+		Headers.Builder headerBuilder = headers(session, headers);
+		if (response != null) {
+			for (String n : response.headers().names()) {
+				headerBuilder = headerBuilder.add(n, response.header(n));
+			}
+		}
+		return headerBuilder.build();
+
+	}
+
+	private static Headers.Builder headers(ISession session, Headers headers) {
+		Headers.Builder headerBuilder = new Headers.Builder();
+		if (session != null) {
+			for (String n : session.getHeaders().names()) {
+				headerBuilder = headerBuilder.add(n, session.getHeaders().get(n));
+			}
+		}
+		if (headers != null) {
+			for (String n : headers.names()) {
+				headerBuilder = headerBuilder.add(n, headers.get(n));
+			}
+		}
+		return headerBuilder;
 	}
 	
 }

@@ -104,7 +104,7 @@ public abstract class AbstractDataSet<T> implements IDataSet<T>{
 			//FIXME this will call oncomplete before any of the asynchronous calls are made, 
 			//terminating the observable chain early.
 			//NB: currently no termination event is sent instead, should be fixed to be sent after the final event.
-			//subject.onComplete();
+			subject.onComplete();
 		} else {
 			this.status = Status.AWAITING;
 		}

@@ -28,7 +28,7 @@ import com.google.common.util.concurrent.RateLimiter;
 public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	private static final Logger LOG = LogManager.getLogger(RateLimitExecutor.class);
-	private static final String COUNTER_DEBUG = "\n[{}] ({}) Total={}, Remaining={}, Dispatched={}";
+	private static final String COUNTER_DEBUG = "\n[{}] Total={}, Remaining={}, Dispatched={}";
 	
 	private RateLimiter maxRequestsPerSecond;
 	private AtomicInteger remainingRequestCounter;
@@ -80,54 +80,40 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 
 	@Override
 	public void execute(Runnable command) {
-		LOG.info("ENTERING EXECUTE");
+		LOG.info("["+sessionId+"] ENTERING EXECUTE");
 		maxRequestsPerSecond.acquire();
 
 		// Wait for first request to return
-		while (!getLimiter().isSet().get() && dispatchCounter.get() == 1) {
-			try {
-				LOG.info("AWAITING (" + MILLISECONDS.toSeconds(1000) + " s) FOR FIRST REQUEST TO RETURN");
-				MILLISECONDS.sleep(100);
-			} catch (InterruptedException e) {
-				LOG.error(e.getMessage());
-			}
+		if (dispatchCounter.get() == 1){
+			awaitToSet();
 		}
 		dispatchCounter.incrementAndGet();
 
 		if (getLimiter().isSet().get()) {
 			logCounterDebug("inside set");
-			// Adjust request counter
 			if (dispatchCounter.get() == 2) {
 				LOG.info("ADJUSTING REQUEST COUNTER");
 				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
 			}
-			// Reset counter
 			if (remainingRequestCounter.get() == 0) {
 				long timeout = getLimiter().getRateLimitResetInMilliSeconds() - System.currentTimeMillis() + jitter;
 				timeout = (timeout > 0) ? timeout : 1000; 
-				LOG.info("SLEEPING for " + MILLISECONDS.toSeconds(timeout) + " s");
 				try {
 					awaiting.set(true);
+					LOG.info("SLEEPING for " + MILLISECONDS.toSeconds(timeout) + " s");
 					MILLISECONDS.sleep(timeout);
 				} catch (InterruptedException e) {
 					LOG.error(e.getMessage());
 				}
+				awaitToSet();
 				awaiting.set(false);
 				LOG.info("RESETING COUNTER");
 				remainingRequestCounter.set(getLimiter().getRateLimit());
 			}
 			// TODO HANDLE CACHED OR FILLING UP AVAILABLE REQUESTS 
-			/*
-			 * if (requestCounter.get() < getLimiter().getRateLimit() &&
-			 * System.currentTimeMillis() >
-			 * getLimiter().getRateLimitResetInMilliSeconds()){
-			 * LOG.info("FILLING UP AVAILABLE REQUESTS"); requestCounter.set(1);
-			 * }
-			 */
 		} else {
 			LOG.info("LIMITER HAS NOT YET BEEN SET");
 		}
-		logCounterDebug("after ifs");
 		remainingRequestCounter.decrementAndGet();
 		logCounterDebug("beforeExec");
 		super.execute(command);
@@ -135,8 +121,19 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 		
 	}
 
+	private void awaitToSet() {
+		while (!getLimiter().isSet().get()) {
+			try {
+				LOG.info("AWAITING (" + MILLISECONDS.toSeconds(1000) + " s) FOR SESSION TO BE SET");
+				MILLISECONDS.sleep(100);
+			} catch (InterruptedException e) {
+				LOG.error(e.getMessage());
+			}
+		}
+	}
+
 	private void logCounterDebug(String step) {
-		LOG.debug(COUNTER_DEBUG, sessionId, step, getLimiter().getRateLimit(), remainingRequestCounter.get(),
+		LOG.debug(COUNTER_DEBUG, sessionId, getLimiter().getRateLimit(), remainingRequestCounter.get(),
 				dispatchCounter.get());
 	}
 }

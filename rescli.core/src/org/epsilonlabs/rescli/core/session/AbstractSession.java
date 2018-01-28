@@ -125,6 +125,14 @@ public abstract class AbstractSession implements ISession {
 		}
 		return this.isSet;
 	}
+	
+	@Override
+	public void unset() {
+		rateLimit = -1;
+		rateLimitRemaining.set(-1);
+		rateLimitReset = null;
+		isSet.set(false);
+	}
 
 	@Override
 	public Auth type() {
@@ -162,8 +170,8 @@ public abstract class AbstractSession implements ISession {
 	}
 	
 	@Override
-	public Integer cacheCounter() {// FIXME
-		return cachedCounter.get();
+	public AtomicInteger cacheCounter() {// FIXME
+		return cachedCounter;
 	}
 	
 	@Override

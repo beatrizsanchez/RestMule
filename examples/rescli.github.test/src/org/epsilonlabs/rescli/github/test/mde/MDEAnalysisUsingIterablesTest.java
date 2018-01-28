@@ -8,7 +8,7 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MDEAnalysisUsingIterablesTest {
 
-	// @Ignore("to be executed manually")
+/*	// @Ignore("to be executed manually")
 	@Test
 	public void testGMF() {
 
@@ -22,7 +22,7 @@ public class MDEAnalysisUsingIterablesTest {
 
 		MDEAnalysisUsingIterables ghSearchRunner = new MDEAnalysisUsingIterables(MDE.Sirius);
 		ghSearchRunner.runSearch();
-	}
+	}*/
 
 	// @Ignore("to be executed manually")
 	@Test
