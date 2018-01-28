@@ -171,6 +171,9 @@ public abstract class AbstractSession implements ISession {
 	
 	@Override
 	public AtomicInteger cacheCounter() {// FIXME
+		if (cachedCounter== null){
+			this.cachedCounter = new AtomicInteger(0);
+		}
 		return cachedCounter;
 	}
 	
