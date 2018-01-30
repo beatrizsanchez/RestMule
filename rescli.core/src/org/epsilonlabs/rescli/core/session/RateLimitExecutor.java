@@ -108,7 +108,7 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 				} catch (InterruptedException e) {
 					LOG.error(e.getMessage());
 				}
-				awaitToSet();
+				//awaitToSet();
 				awaiting.set(false);
 				LOG.info("RESETING COUNTER");
 				remainingRequestCounter.set(getLimiter().getRateLimitRemaining().get());
@@ -135,7 +135,7 @@ public class RateLimitExecutor extends ThreadPoolExecutor {
 	private void awaitToSet() {
 		while (!getLimiter().isSet().get()) {
 			try {
-				LOG.info("AWAITING (" + MILLISECONDS.toSeconds(1000) + " s) FOR SESSION TO BE SET");
+				LOG.info("AWAITING (" + MILLISECONDS.toSeconds(1000) + " s) FOR SESSION ("+sessionId+") TO BE SET");
 				MILLISECONDS.sleep(100);
 			} catch (InterruptedException e) {
 				LOG.error(e.getMessage());

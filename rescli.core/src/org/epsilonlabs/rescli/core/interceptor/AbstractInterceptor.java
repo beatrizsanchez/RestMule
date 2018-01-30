@@ -6,9 +6,11 @@ import static org.apache.http.HttpStatus.SC_FORBIDDEN;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.apache.http.HttpHeaders;
 import org.apache.http.HttpStatus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,6 +25,7 @@ import okhttp3.Interceptor;
 import okhttp3.Interceptor.Chain;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 /**
  * 
@@ -55,8 +58,9 @@ public abstract class AbstractInterceptor {
 	protected String sessionId;
 	protected String agent;
 
-	protected static final Interceptor mainInterceptor(final boolean activeCaching, final String userAgent, final String accept,
-			final String sessionId, final String limit, final String remaining, final String reset) {
+	protected static final Interceptor mainInterceptor(final boolean activeCaching, final String userAgent,
+			final String accept, final String sessionId, final String limit, final String remaining,
+			final String reset) {
 		return new Interceptor() {
 
 			private AtomicInteger remainingRequestCounter = new AtomicInteger(1);
@@ -64,13 +68,11 @@ public abstract class AbstractInterceptor {
 			@Override
 			public Response intercept(Chain chain) throws IOException {
 				remainingRequestCounter.decrementAndGet();
-
-				LOG.info("INTERCEPTOR (" + remainingRequestCounter.get() + ")");
-
 				Request request = chain.request();
-
 				ISession session = AbstractSession.getSession(sessionClass, sessionId);
 				Headers headers = headers(userAgent, accept, session, request);
+
+				LOG.info(session.id() + " INTERCEPTOR (" + remainingRequestCounter.get() + ")");
 
 				Request.Builder requestBuilder = request.newBuilder().headers(headers);
 				Request networkRequest = null;
@@ -104,39 +106,80 @@ public abstract class AbstractInterceptor {
 					LOG.info("DEALING WITH NETWORK RESPONSE");
 					Response networkResponse = chain.proceed(networkRequest);
 					if (networkResponse.networkResponse() != null) {
-						if (!networkResponse.isSuccessful()) {
-							LOG.error(networkResponse.code() + ":" + networkResponse.message());
-							int code = networkResponse.code();
+						if (!networkResponse.networkResponse().isSuccessful()) {
+							int code = networkResponse.networkResponse().code();
 							while (code == HttpStatus.SC_FORBIDDEN) {
+								peakResponse(networkResponse);
 								try {
 									long ms = 1000 * 60;
-									if (session.isSet().get()){
-										ms = (session.getRateLimitResetInMilliSeconds() > System.currentTimeMillis()) ? 
-												(session.getRateLimitResetInMilliSeconds() - System.currentTimeMillis()) : ms;
-								 	}
-									LOG.info("RETRYING IN "+(ms/1000)+" s");
-									TimeUnit.MILLISECONDS.sleep(ms);
+									if (session.isSet().get()) {
+										ms = session.getRateLimitResetInMilliSeconds() - System.currentTimeMillis();
+									}
+									if (ms>0){
+										LOG.info("RETRYING IN " + (ms / 1000) + " s");
+										TimeUnit.MILLISECONDS.sleep(ms);
+									}
+									LOG.info("RETRYING NOW");
 									networkResponse = chain.proceed(networkRequest);
 									code = networkResponse.code();
 								} catch (InterruptedException e) {
+									LOG.info(e.getMessage());
+									e.printStackTrace();
 								}
 							}
-						} else {
-							LOG.info("UPDATING SESSION DETAILS FROM NETWORK RESPONSE");
-							// LOG.info(networkResponse.networkResponse().headers());
-							session.setRateLimit(networkResponse.networkResponse().header(limit));
-							session.setRateLimitReset(networkResponse.networkResponse().header(reset)); // THis
-							session.setRateLimitRemaining(networkResponse.networkResponse().header(remaining));
-							remainingRequestCounter.set(session.getRateLimitRemaining().get() + 1);
-							LOG.info(session);
-						}
-						LOG.info(networkResponse.message());
-
+							/*
+							CacheControl old = CacheControl.parse(networkResponse.headers());
+							LOG.info(old);
+							CacheControl LONG_TIME_CACHE= new CacheControl.Builder().maxStale(10, TimeUnit.DAYS).build();
+							networkResponse = networkResponse.newBuilder().addHeader(HttpHeaders.CACHE_CONTROL
+									, LONG_TIME_CACHE)*/
+						} 
+						peakResponse(networkResponse);
+						LOG.info("UPDATING SESSION DETAILS FROM NETWORK RESPONSE");
+						// LOG.info(networkResponse.networkResponse().headers());
+						session.setRateLimit(networkResponse.networkResponse().header(limit));
+						session.setRateLimitReset(networkResponse.networkResponse().header(reset)); // THis
+						session.setRateLimitRemaining(networkResponse.networkResponse().header(remaining));
+						remainingRequestCounter.set(session.getRateLimitRemaining().get() + 1);
+						LOG.info(session);
 						return networkResponse;
 					}
 				}
 				LOG.info("SOMETHING WENT WRONG");
 				return null;
+			}
+
+			private void peakResponse(Response response) throws IOException {
+				if (response.networkResponse() != null) {
+					try {
+						LOG.error(
+								"NW:" + response.networkResponse().code() + ":" + response.networkResponse().message());
+					} catch (Exception e) {
+						LOG.error(e.getMessage());
+						e.printStackTrace();
+					}
+				}
+				if (response.cacheResponse() != null) {
+					try {
+						LOG.error(
+								"CACHE:" + response.cacheResponse().code() + ":" + response.cacheResponse().message());
+					} catch (Exception e) {
+						LOG.error(e.getMessage());
+						e.printStackTrace();
+					}
+				}
+				LOG.error(response.code() + ":" + response.message());
+				
+				ResponseBody body = response.peekBody(100);
+				Reader bodyStream = body.charStream();
+
+				BufferedReader reader = new BufferedReader(bodyStream);
+				reader.lines().forEach(l -> LOG.info(l));
+
+				// Close Body and Readers
+				bodyStream.close();
+				body.close();
+				reader.close();
 			}
 
 			private Headers headers(final String userAgent, final String accept, ISession session,
