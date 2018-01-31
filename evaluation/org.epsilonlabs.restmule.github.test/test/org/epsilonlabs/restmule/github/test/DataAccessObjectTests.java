@@ -35,7 +35,7 @@ public class DataAccessObjectTests extends GitHubTestUtil {
 
 	@Before
 	public void clearCache(){
-		GitHubTestUtil.clearGitHubCache();
+		//GitHubTestUtil.clearGitHubCache();
 	}
 
 	@Test

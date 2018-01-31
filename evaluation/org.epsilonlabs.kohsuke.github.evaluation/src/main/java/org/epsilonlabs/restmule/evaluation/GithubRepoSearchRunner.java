@@ -1,4 +1,4 @@
-package org.epsilonlabs.rescli.evaluation;
+package org.epsilonlabs.restmule.evaluation;
 
 import java.io.File;
 import java.nio.file.Path;

@@ -96,7 +96,7 @@ context RatePolicyScope{
 		fix {
 			title : "Creating default scope"
 			do {
-			var main = new RESCLI!RatePolicyScope;
+			var main = new RestMule!RatePolicyScope;
 			main.scope = "Main";
 				for (r in RESCLI!Request.all){
 					r.scope = main;

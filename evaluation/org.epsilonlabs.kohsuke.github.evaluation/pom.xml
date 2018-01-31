@@ -2,12 +2,12 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>org.epsilonlabs.rescli</groupId>
-	<artifactId>org.epsilonlabs.rescli.evaluation</artifactId>
+	<groupId>org.epsilonlabs.restmule</groupId>
+	<artifactId>org.epsilonlabs.restmule.kohsuke.evaluation</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>org.epsilonlabs.rescli.evaluation</name>
+	<name>org.epsilonlabs.restmule.kohsuke.evaluation</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -56,11 +56,6 @@
 		    <version>github-api-1.92</version>
 		</dependency>
 		
-		<!-- <dependency>
-			<groupId>com.github.patrickneubauer</groupId>
-			<artifactId>github-api</artifactId>
-			<version>github-api-1.92-tryout-increased</version>
-		</dependency> -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>

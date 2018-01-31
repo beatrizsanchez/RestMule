@@ -1,4 +1,4 @@
-user.agent=EpsilonlabsRescli/1.0
+user.agent=EpsilonlabsRestMule/1.0
 api.base.url=[%= R.apiHost %]
 accept=application/vnd.[%= R.name %].[%= R.apiVersion %]+json
 

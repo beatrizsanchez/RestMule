@@ -13,8 +13,6 @@ import retrofit2.Response;
  * 
  * {@link AbstractCallback}
  * <p>
- * Copyright &copy; 2017 University of York.
- * @author Beatriz Sanchez
  * @version 1.0.0
  *
  */

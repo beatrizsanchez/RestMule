@@ -6,8 +6,6 @@ import io.reactivex.Observable;
  * 
  * {@link IData}
  * <p>
- * Copyright &copy; 2017 University of York.
- * @author Beatriz Sanchez
  * @version 1.0.0
  *
  */

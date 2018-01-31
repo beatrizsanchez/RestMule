@@ -35,7 +35,7 @@ public class RateLimitAndPaginationTests extends GitHubTestUtil {
 
 	@Before
 	public void clearCache(){
-		GitHubTestUtil.clearGitHubCache();
+		//GitHubTestUtil.clearGitHubCache();
 	}
 	
 	@Test
