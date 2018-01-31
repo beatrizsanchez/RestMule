@@ -32,6 +32,13 @@
 
 	<dependencies>
 
+		<dependency>
+			<groupId>org.epsilonlabs.restmule</groupId>
+			<artifactId>org.epsilonlabs.restmule.core</artifactId>
+			<version>1.0.0</version>
+			<scope>provided</scope>
+		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>

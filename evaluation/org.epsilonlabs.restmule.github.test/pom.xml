@@ -31,7 +31,7 @@
 
 	<dependencies>
 
-		<!--dependency>
+		<dependency>
 			<groupId>org.epsilonlabs.restmule</groupId>
 			<artifactId>org.epsilonlabs.restmule.github</artifactId>
 			<version>1.0.0</version>
@@ -42,7 +42,7 @@
 			<artifactId>org.epsilonlabs.restmule.core</artifactId>
 			<version>1.0.0</version>
 			<scope>provided</scope>
-		</dependency-->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/io.reactivex.rxjava2/rxjava -->
 		<dependency>
 			<groupId>io.reactivex.rxjava2</groupId>
@@ -86,11 +86,11 @@
 			<artifactId>okhttp</artifactId>
 			<version>3.8.0</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/com.google.collections/google-collections -->
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
 		<dependency>
-			<groupId>com.google.collections</groupId>
-			<artifactId>google-collections</artifactId>
-			<version>1.0</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>22.0</version>
 		</dependency>
 		
 	</dependencies>

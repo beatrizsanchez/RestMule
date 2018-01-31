@@ -33,7 +33,6 @@ import okhttp3.Headers;
  * 
  * {@link AbstractSession}
  * <p>
- * @author Beatriz Sanchez
  * @version 1.0.0
  *
  */
