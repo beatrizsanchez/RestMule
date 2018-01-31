@@ -1,0 +1,12 @@
+{
+  "definitions": {
+  	"paths": {...},
+    "pathItem": {
+        "get": {...},
+        "put": {...},
+        "post": {...},
+        "delete": {...}
+      }
+    },
+    "response": {...}
+}

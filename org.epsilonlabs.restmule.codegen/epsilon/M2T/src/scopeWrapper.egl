@@ -1,0 +1,14 @@
+[% import "../../util/restmule.eol"; %]
+[% import "../templates/templates.egl"; %]
+package org.epsilonlabs.restmule.[%= name.toLowerCase() %].client;
+
+import org.epsilonlabs.restmule.core.data.IData;
+import org.epsilonlabs.restmule.core.data.IDataSet;
+import org.epsilonlabs.restmule.[%= name.toLowerCase() %].model.*;
+
+public interface I[%= scope %]Api {
+	[% for (response in responses) { %]	
+	[%= response.wrappedRequestInterface() %]
+	[% } %]
+	
+}

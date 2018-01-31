@@ -1,0 +1,18 @@
+{
+   "host": "api.github.com",
+   "paths": {
+      "/search/code": {
+         "get": {
+            "description": "Search code",
+            "parameters": [...],
+            "responses": {
+               "200": {
+                  //"type": "object"
+               }
+            }
+         }
+      }
+   }...
+}
+
+

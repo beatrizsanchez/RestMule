@@ -1,0 +1,12 @@
+package org.epsilonlabs.restmule.[%= name %].data;
+
+import org.epsilonlabs.restmule.core.data.AbstractDataSet;
+import org.epsilonlabs.restmule.[%= name %].page.[%= R.name %]Pagination;
+
+public class [%= R.name %]DataSet<T> extends AbstractDataSet<T> {
+
+	public [%= R.name %]DataSet(){
+		super([%= R.name %]Pagination.get());
+	}
+	
+}

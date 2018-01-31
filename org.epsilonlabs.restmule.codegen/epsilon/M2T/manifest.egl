@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: restmule.[%= name %]
+Bundle-SymbolicName: org.epsilonlabs.restmule.[%= name %]
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.epsilonlabs.restmule.core;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: org.epsilonlabs.restmule.[%= name %].cache,
+ org.epsilonlabs.restmule.[%= name %].api,
+ org.epsilonlabs.restmule.[%= name %].client,
+ org.epsilonlabs.restmule.[%= name %].data,
+ org.epsilonlabs.restmule.[%= name %].model,
+ org.epsilonlabs.restmule.[%= name %].session
+ 
