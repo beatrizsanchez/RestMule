@@ -1,0 +1,68 @@
+[% import "../templates/templates.egl"; %]
+package restmule.[%= name.toLowerCase() %].client;
+
+import static restmule.core.util.PropertiesUtil.API_BASE_URL;
+
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+
+import restmule.core.client.AbstractClient;
+import restmule.core.client.IClientBuilder;
+import restmule.core.data.IData;
+import restmule.core.data.Data;
+import restmule.core.data.IDataSet;
+import restmule.core.session.ISession;
+import restmule.core.session.RateLimitExecutor;
+import restmule.[%= name.toLowerCase() %].cache.[%= name %]CacheManager;
+import restmule.[%= name.toLowerCase() %].interceptor.[%= name %]Interceptor;
+import restmule.[%= name.toLowerCase() %].model.*;
+import restmule.[%= name.toLowerCase() %].page.[%= name %]Paged;
+import restmule.[%= name.toLowerCase() %].page.[%= name %]Pagination;
+import restmule.[%= name.toLowerCase() %].session.[%= name %]Session;
+import restmule.[%= name.toLowerCase() %].util.[%= name %]PropertiesUtil;
+
+import okhttp3.OkHttpClient.Builder;
+
+public class [%= scope %]Api  {
+
+	[%= creators(scope, name) %]
+	
+	/** BUILDER */
+	[%= builder(scope) %]
+	
+	/** CLIENT */
+	private static class [%= scope %]Client extends AbstractClient<I[%= scope %]Endpoint> 
+	implements I[%= scope %]Api 
+	{
+		private [%= name %]Pagination paginationPolicy;
+		
+		[%= scope %]Client(ISession session, boolean activeCaching) {
+			super();
+
+			ExecutorService executor = RateLimitExecutor.create(30, [%= name %]Session.class, session.id());
+			[%= name %]Interceptor interceptors = new [%= name %]Interceptor(session.id());
+			String baseurl = [%= name %]PropertiesUtil.get(API_BASE_URL);
+
+			if (!baseurl.endsWith("/")) baseurl += "/"; // FIXME Validate in Model with EVL 
+
+			Builder clientBuilder = AbstractClient.okHttp(executor);
+			
+			if (activeCaching) clientBuilder = clientBuilder.cache([%= name %]CacheManager.getInstance().getOkHttpCache()); // FIXME Use Lucene Instead
+			clientBuilder = clientBuilder.addInterceptor(interceptors.mainInterceptor(activeCaching));
+						
+			this.client = clientBuilder.build();
+
+			this.callbackEndpoint = AbstractClient.retrofit(client, baseurl).create(I[%= scope %]Endpoint.class);
+			this.paginationPolicy = [%= name %]Pagination.get();
+		}
+
+		/** WRAPED METHODS FOR PAGINATION */
+	
+		[% for (r in responses) { %]
+		@Override
+		[%= r.wrappedRequest(name, scope) %]
+		
+		[% } %]
+		
+	}
+}

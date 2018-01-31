@@ -1,0 +1,14 @@
+[% import "../../util/restmule.eol"; %]
+[% import "../templates/templates.egl"; %]
+package restmule.[%= name.toLowerCase() %].client;
+
+import restmule.core.data.IData;
+import restmule.core.data.IDataSet;
+import restmule.[%= name.toLowerCase() %].model.*;
+
+public interface I[%= scope %]Api {
+	[% for (response in responses) { %]	
+	[%= response.wrappedRequestInterface() %]
+	[% } %]
+	
+}

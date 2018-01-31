@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: restmule.[%= name %]
+Bundle-SymbolicName: restmule.[%= name %]
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: restmule.core;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: restmule.[%= name %].cache,
+ restmule.[%= name %].api,
+ restmule.[%= name %].client,
+ restmule.[%= name %].data,
+ restmule.[%= name %].model,
+ restmule.[%= name %].session
+ 

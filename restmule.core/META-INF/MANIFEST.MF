@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: restmule.core
+Bundle-SymbolicName: restmule.core
+Bundle-Version: 1.0.0.qualifier
+Require-Bundle: org.eclipse.core.runtime
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: restmule.core.cache,
+ restmule.core.callback,
+ restmule.core.client,
+ restmule.core.data,
+ restmule.core.interceptor,
+ restmule.core.page,
+ restmule.core.session,
+ restmule.core.util

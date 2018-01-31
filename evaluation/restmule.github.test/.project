@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>restmule.github</name>
+	<name>restmule.github.test</name>
 	<comment>NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
 	<projects>
-		<project>org.epsilonlabs.restmule.core</project>
+		<project>restmule.github</project>
+		<project>restmule.core</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

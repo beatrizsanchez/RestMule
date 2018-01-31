@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: restmule.github.test
+Bundle-SymbolicName: restmule.github.test
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: restmule.core,
+ restmule.github
+Bundle-ActivationPolicy: lazy
+Import-Package: com.google.common.collect

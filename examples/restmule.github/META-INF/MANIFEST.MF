@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: restmule.github
+Bundle-SymbolicName: restmule.github
+Bundle-Version: 1.0.0
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: restmule.core;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Export-Package: restmule.github.api,
+ restmule.github.cache,
+ restmule.github.client,
+ restmule.github.data,
+ restmule.github.model,
+ restmule.github.session

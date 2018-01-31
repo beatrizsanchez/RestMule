@@ -1,0 +1,12 @@
+package restmule.[%= name %].data;
+
+import restmule.core.data.AbstractDataSet;
+import restmule.[%= name %].page.[%= R.name %]Pagination;
+
+public class [%= R.name %]DataSet<T> extends AbstractDataSet<T> {
+
+	public [%= R.name %]DataSet(){
+		super([%= R.name %]Pagination.get());
+	}
+	
+}
