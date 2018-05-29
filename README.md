@@ -1,3 +1,5 @@
+This code has been migrated to: https://github.com/patrickneubauer/CROSSMINER-WORKFLOW as part of its integration with CROSSMINER.
+
 # RestMule #
 
 A framework for handling various service policies, such as limited number of requests within a period of time and multi-page responses, by generating resilient clients that are able to handle request rate limits, network failures, response caching, and paging in a graceful and transparent manner.
